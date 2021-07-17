@@ -15,6 +15,10 @@ import org.springframework.stereotype.Component;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.util.StopWatch;
 
+//import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import com.uga.book_catalog_service.response.*;
+
 @Aspect
 @Component
 public class LoggingAspect {
@@ -32,7 +36,10 @@ public class LoggingAspect {
 
 	@AfterReturning(value = "pointcutforController()", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
-		log.info("{} returned with value {}", joinPoint, result);
+		
+		@SuppressWarnings("unchecked") // result will always be ResponseEntity<CatalogResponse>
+		ResponseEntity<CatalogResponse> newResult = (ResponseEntity<CatalogResponse>) result;
+		log.info("{} returned with status {}", joinPoint, newResult.getStatusCode());
 	}
 
 	@AfterThrowing(pointcut = "pointcutforController()", throwing = "e")

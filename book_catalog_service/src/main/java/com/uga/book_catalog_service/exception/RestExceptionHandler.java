@@ -33,8 +33,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("Media type is not supported");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
 	@ExceptionHandler(HttpClientErrorException.BadRequest.class)
@@ -43,8 +43,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service bad request");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.BAD_REQUEST);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpClientErrorException.NotFound.class)
@@ -53,8 +53,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service is down");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(DataAccessException.class)
@@ -63,8 +63,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error- Failed to access/query/perform transaction in DB");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(MissingRequestHeaderException.class)
@@ -73,8 +73,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("One or more mandatory http request headers not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.BAD_REQUEST);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(Exception.class)
@@ -83,8 +83,8 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
@@ -93,22 +93,13 @@ public class RestExceptionHandler {
 		apiError.setMessage("The required HTTP request body was not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.BAD_REQUEST);
+		CatalogResponse catalogResponse = new CatalogResponse("Failure", apiError);
+		return new ResponseEntity<CatalogResponse>(catalogResponse, HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	/**------------------HANDLING OF CUSTOM EXCEPTIONS------------------*/
 	
-	@ExceptionHandler(CatalogFetchFailedException.class)
-	protected ResponseEntity<CatalogResponse> handleCatalogFetchFailedException(CatalogFetchFailedException ex) {
-		ApiError apiError = new ApiError(HttpStatus.OK);
-		apiError.setMessage(ex.getMessage());
-		apiError.setTimestamp(LocalDateTime.now());
-		
-		CatalogResponse CatalogResponse = new CatalogResponse("Failure", apiError);
-		return new ResponseEntity<CatalogResponse>(CatalogResponse, HttpStatus.OK);
-	}
 	
 	
 }
