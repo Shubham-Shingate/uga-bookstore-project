@@ -1,0 +1,55 @@
+{
+	"configurations": [
+
+		{
+			"type": "java",
+			"name": "Spring Boot-EmailServiceApplication<email_service>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.uga.email_service.EmailServiceApplication",
+			"projectName": "email_service",
+			"args": ""
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-DiscoveryServiceEurekaApplication<discovery-service-eureka>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.uga.discoveryserviceeureka.DiscoveryServiceEurekaApplication",
+			"projectName": "discovery-service-eureka",
+			"args": ""
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-BookCatalogServiceApplication<book_catalog_service>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.uga.book_catalog_service.BookCatalogServiceApplication",
+			"projectName": "book_catalog_service",
+			"args": ""
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-ForwordsApplication<forwords>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.uga.forwords.ForwordsApplication",
+			"projectName": "forwords",
+			"args": ""
+		},
+		{
+			"type": "java",
+			"name": "Spring Boot-SearchBookServiceApplication<search_book_service>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.uga.search_book_service.SearchBookServiceApplication",
+			"projectName": "search_book_service",
+			"args": ""
+		}
+	]
+}
