@@ -2,8 +2,6 @@ package com.uga.shipping_detail_service.service;
 
 import java.util.List;
 
-import javax.persistence.Column;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import com.uga.shipping_detail_service.model.*;

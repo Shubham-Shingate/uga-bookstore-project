@@ -1,8 +1,5 @@
 package com.uga.shipping_detail_service.request;
 
-import javax.persistence.Column;
-import javax.validation.constraints.NotBlank;
-
 public class AddressRequest {
 	
 	// if not provided -> new address will be generated
