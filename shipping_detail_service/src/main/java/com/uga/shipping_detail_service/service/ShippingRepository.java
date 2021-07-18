@@ -14,7 +14,7 @@ public interface ShippingRepository extends CrudRepository<ShippingEntry, Intege
 	// Each account should have one address, modify this if functionality expanded
 	public List<ShippingEntry> findByAccountId(String account_id);
 	
-	public List<ShippingEntry> findAll();
+	//public List<ShippingEntry> findAll();
 	
 	//public ShippingEntry update(ShippingEntry address);
 }
