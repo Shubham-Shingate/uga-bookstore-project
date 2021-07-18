@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy M." />
+
+    <title>forWORDS - Shopping Cart</title>
+
+    <!-- jQuery -->
+    <script src="../js/jquery-2.0.0.min.js" type="text/javascript"></script>
+
+    <!-- Bootstrap4 files-->
+    <script src="../js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <!-- Fonticons -->
+    <link
+      href="../fonts/fontawesome/css/all.min.css"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link
+      href="../fonts/feathericons/css/iconfont.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="../fonts/material-icons/css/materialdesignicons.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- custom style -->
+    <link href="../css/ui.css" rel="stylesheet" type="text/css" />
+    <link href="../css/responsive.css" rel="stylesheet" />
+    <link href="../css/cart.css" rel="stylesheet" />
+
+    <!-- custom javascript -->
+    <script src="../js/script.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <header class="section-header">
+      <section class="header-main border-bottom">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-3 col-4">
+				<a href="http://bootstrap-ecommerce.com" class="brand-wrap">
+					<img class="logo" src="../images/forwords-logo.png">
+				</a> <!-- brand-wrap.// -->
+			</div>
+			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+				<form action="#" class="search">
+					<div class="input-group w-100">
+						<select class="custom-select"  name="category_name">
+								<option value="">Search By</option><option value="codex">ISBN</option>
+								<option value="comments">Author </option>
+								<option value="content">Title</option>
+                                <option value="content">Category</option>
+						</select>
+					    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+					    
+					    <div class="input-group-append">
+					      <button class="btn btn-primary" type="submit">
+					        <i class="fa fa-search"></i>
+					      </button>
+					    </div>
+				    </div>
+				</form> <!-- search-wrap .end// -->
+			</div> <!-- col.// -->
+			<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					
+					<a href="#" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+						<span class="badge badge-pill badge-danger notify">3</span>
+					</a>
+                
+                    <a href="#" class="widget-header mr-3">
+				    <div class="icon">
+					    <i class="icon-sm rounded-circle border fa fa-heart heart-icon-mg"></i>
+				    </div>
+			        </a>
+
+			        <div class="widget-header dropdown">
+				<a href="#" data-toggle="dropdown" class="dropdown-toggle"  data-offset="20,10">
+					<div class="icon icon-sm rounded-circle border ">
+						<i class="fa fa-user"></i>
+					</div>
+					<span class="sr-only">Profile actions</span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right">
+					<a class="dropdown-item" href="#">Profile setting</a>
+					<a class="dropdown-item" href="#">My orders</a>
+					<hr class="dropdown-divider">
+					<a class="dropdown-item" href="#">Log out</a>
+				</div> <!--  dropdown-menu .// -->
+			</div>
+
+                    
+				</div> <!-- widgets-wrap.// -->
+
+                
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+	</div> <!-- container.// -->
+
+    </header>
+    <!-- section-header.// -->
+
+    <section class="section-content padding-y bg">
+      <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+
+        <div class="row">
+          <aside class="col-lg-9">
+            <div class="card">
+              <table class="table table-borderless table-shopping-cart">
+                <thead class="text-muted">
+                  <tr class="small text-uppercase">
+                    <th scope="col">Product</th>
+                    <th scope="col" width="120">Quantity</th>
+                    <th scope="col" width="120">Price</th>
+                    <th scope="col" class="text-right" width="200"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <figure class="itemside align-items-center">
+                        <div class="aside">
+                          <img src="../images/books/book7.jpg" class="img-sm" />
+                        </div>
+                        <figcaption class="info">
+                          <a href="#" class="title text-dark"
+                            >Lewis W. Hine.America at WORK(Multilingual and Fench Edition)</a
+                          >
+                          <p class="text-muted small">
+                            By Peter walther <br />
+                            Hardcover
+                          </p>
+                        </figcaption>
+                      </figure>
+                    </td>
+                    <td>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="price-wrap">
+                        <var class="price">$15.99</var>
+                        <small class="text-muted"> $15.99 each </small>
+                      </div>
+                      <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                      <a
+                        data-original-title="Save to Wishlist"
+                        title=""
+                        href=""
+                        class="btn btn-light"
+                        data-toggle="tooltip"
+                      >
+                        <i class="fa fa-heart"></i
+                      ></a>
+                      <a href="" class="btn btn-light"> Remove</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <figure class="itemside align-items-center">
+                        <div class="aside">
+                          <img src="../images/books/book8.jpg" class="img-sm" />
+                        </div>
+                        <figcaption class="info">
+                          <a href="#" class="title text-dark"
+                            >Harry Potter and the Goblet of Fire</a
+                          >
+                          <p class="text-muted small">
+                            By J.K. Rowling<br />
+                            Paperback
+                          </p>
+                        </figcaption>
+                      </figure>
+                    </td>
+                    <td>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="price-wrap">
+                        <var class="price">$12</var>
+                        <small class="text-muted"> $12 each </small>
+                      </div>
+                      <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                      <a
+                        data-original-title="Save to Wishlist"
+                        title=""
+                        href=""
+                        class="btn btn-light"
+                        data-toggle="tooltip"
+                      >
+                        <i class="fa fa-heart"></i
+                      ></a>
+                      <a href="" class="btn btn-light btn-round"> Remove</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <figure class="itemside align-items-center">
+                        <div class="aside">
+                          <img src="../images/books/book10.jpg" class="img-sm" />
+                        </div>
+                        <figcaption class="info">
+                          <a href="#" class="title text-dark"
+                            >Unfinished : A Memoir</a
+                          >
+                          <p class="small text-muted">
+                            By Priyanka Chopra <br />
+                            Hardcover
+                          </p>
+                        </figcaption>
+                      </figure>
+                    </td>
+                    <td>
+                      <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div class="price-wrap">
+                        <var class="price">$19</var>
+                        <small class="text-muted"> $19 each</small>
+                      </div>
+                      <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                      <a
+                        data-original-title="Save to Wishlist"
+                        title=""
+                        href=""
+                        class="btn btn-light"
+                        data-toggle="tooltip"
+                      >
+                        <i class="fa fa-heart"></i
+                      ></a>
+                      <a href="" class="btn btn-light btn-round"> Remove</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="card-body border-top">
+                <p class="icontext">
+                  <i class="icon text-success fa fa-truck"></i> Free Delivery
+                  within 1-2 weeks
+                </p>
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+          </aside>
+          <!-- col.// -->
+          <aside class="col-lg-3">
+            <div class="card mb-3">
+              <div class="card-body">
+                <form>
+                  <div class="form-group">
+                    <label>Have coupon?</label>
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name=""
+                        placeholder="Coupon code"
+                      />
+                      <span class="input-group-append">
+                        <button class="btn btn-primary">Apply</button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+
+            <div class="card">
+              <div class="card-body">
+                <dl class="dlist-align">
+                  <dt>Total price:</dt>
+                  <dd class="text-right">$46.99</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Discount:</dt>
+                  <dd class="text-right text-danger">- $3.99</dd>
+                </dl>
+                <dl class="dlist-align">
+                  <dt>Total:</dt>
+                  <dd class="text-right text-dark b">
+                    <strong>$43</strong>
+                  </dd>
+                </dl>
+                <hr />
+                <p class="text-center mb-3">
+                  <img src="../images/misc/payments.png" height="26" />
+                </p>
+                <a href="#" class="btn btn-primary btn-block">
+                  Procees to checkout
+                </a>
+                <a href="#" class="btn btn-light btn-block"
+                  >Continue Shopping</a
+                >
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+          </aside>
+          <!-- col.// -->
+        </div>
+        <!-- row.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+        <br /><br />
+       
+
+        <br /><br />
+
+          </aside>
+          <!-- col.// -->
+        </div>
+        <!-- row.// -->
+      </div>
+      <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+    <!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top">
+	<div class="container">
+		<section class="footer-top padding-y">
+			<div class="row">
+				
+				<aside class="col-md">
+					<h6 class="title">forWORDS</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">About us</a></li>
+						<!-- <li> <a href="#">Career</a></li>
+						<li> <a href="#">Find a store</a></li> -->
+						<li> <a href="#">Rules and terms</a></li>
+						<!-- <li> <a href="#">Sitemap</a></li> -->
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Help</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">Contact us</a></li>
+						<li> <a href="#">Cart Items</a></li>
+						<li> <a href="#">Order status</a></li>
+						<li> <a href="#">Shipping info</a></li>
+						<!-- <li> <a href="#">Open dispute</a></li> -->
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Account</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#"> User Login </a></li>
+						<li> <a href="#"> User register </a></li>
+						<li> <a href="#"> Account Setting </a></li>
+						<li> <a href="#"> My Orders </a></li>
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Social</h6>
+					<ul class="list-unstyled">
+						<li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
+						<li><a href="#"> <i class="fab fa-twitter"></i> Twitter </a></li>
+						<li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
+						<li><a href="#"> <i class="fab fa-youtube"></i> Youtube </a></li>
+					</ul>
+				</aside>
+			</div> <!-- row.// -->
+		</section>	<!-- footer-top.// -->
+
+		<section class="footer-bottom border-top row">
+			<div class="col-md-2">
+				<p class="text-muted"> &copy 2021 forWORDS.com </p>
+			</div>
+			<div class="col-md-8 text-md-center">
+				<span  class="px-2">info@emailservis.com</span>
+				<span  class="px-2">+12037157177</span>
+				<span  class="px-2">1000 Lakeside Drive, Athens</span>
+			</div>
+			<div class="col-md-2 text-md-right text-muted">
+				<i class="fab fa-lg fa-cc-visa"></i>
+				<i class="fab fa-lg fa-cc-paypal"></i>
+				<i class="fab fa-lg fa-cc-mastercard"></i>
+			</div>
+		</section>
+	</div><!-- //container -->
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+
+ 
+
+  </body>
+</html>
