@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.uga.book_manage_service.exception.BookNotFoundException;
 import com.uga.book_manage_service.model.Book;
 import com.uga.book_manage_service.request.ManageBookRequest;
 import com.uga.book_manage_service.response.BookResponse;
@@ -43,7 +44,7 @@ public class BookManagementController {
 				request.getCoverPicture(), 
 				request.getPublicationYear(), 
 				request.getEdition(), 
-				request.getPublisher(), 
+				request.getPublisher(),
 				book_status, 
 				request.getQuantity(), 
 				request.getMinimumThreshold(), 
@@ -61,6 +62,11 @@ public class BookManagementController {
 	// View book by id
 	@GetMapping("/viewBook")
 	public ResponseEntity<BookResponse> viewBook(@RequestParam(value = "id") int id) {
+		Book book = bookRepository.findById(id);
+		
+		if(book == null)
+			throw new BookNotFoundException("This book isn't in our system");
+		
 		BookResponse response = new BookResponse("Success", null, bookRepository.findById(id));
 		return new ResponseEntity<BookResponse>(response, HttpStatus.OK);
 	}	
@@ -68,7 +74,12 @@ public class BookManagementController {
 	// Delete Book endpoint
 	@GetMapping("/deleteBook")
 	public ResponseEntity<BookResponse> deleteBook(@RequestParam(value = "id") int id) {
-		bookRepository.delete(bookRepository.findById(id));
+		Book book = bookRepository.findById(id);
+		
+		if(book == null)
+			throw new BookNotFoundException("This book isn't in our system");
+				
+		bookRepository.delete(book);
 		BookResponse response = new BookResponse("Success", null);
 		return new ResponseEntity<BookResponse>(response, HttpStatus.OK);
 	}

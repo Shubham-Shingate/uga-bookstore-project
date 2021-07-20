@@ -1,34 +1,49 @@
 package com.uga.book_manage_service.request;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 public class ManageBookRequest {
 	
 	private int id;
 	
+	@NotBlank(message="{title.notblank}")
 	private String title;
 	
+	@NotBlank(message="{isbn.notblank}")
 	private String isbn;
 	
+	@NotBlank(message="{author.notblank}")
 	private String author;
 	
+	@NotBlank(message="{category.notblank}")
 	private String category;
 	
+
 	private String description;
-	
+		
 	private byte[] coverPicture;
-
-	private int publicationYear;
+    
+	@NotNull(message="{publicationYear.notblank}")
+    private Integer publicationYear;
 	
+
 	private String edition;
-
-	private String publisher;
+   
+	@NotBlank(message="{publisher.notblank}")
+    private String publisher;
 	
+    
 	private String bookStatus;
 	
-	private int quantity;
+	@NotNull(message="{quantity.notblank}")
+	private Integer quantity;
 	
-	private int minimumThreshold;
+	@NotNull(message="{minimumThreshold.notblank}")
+	private Integer minimumThreshold;
 	
-	private double price;
+	@NotNull(message="{price.notblank}")
+	private Double price;
 
 	public ManageBookRequest() {
 	}
@@ -41,7 +56,7 @@ public class ManageBookRequest {
 	
 
 	public ManageBookRequest(String title, String isbn, String author, String category, String description,
-			int publicationYear, String edition, String publisher, int quantity, int minimumThreshold, double price) {
+			Integer publicationYear, String edition, String publisher, Integer quantity, Integer minimumThreshold, Double price) {
 		this.title = title;
 		this.isbn = isbn;
 		this.author = author;
@@ -57,8 +72,8 @@ public class ManageBookRequest {
 
 	// For adding a new book, ID auto-generated
 	public ManageBookRequest(String title, String isbn, String author, String category, String description,
-			byte[] coverPicture, int publicationYear, String edition, String publisher, String bookStatus, int quantity,
-			int minimumThreshold, double price) {
+			byte[] coverPicture, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
+			Integer minimumThreshold, Double price) {
 		this.title = title;
 		this.isbn = isbn;
 		this.author = author;
@@ -75,8 +90,8 @@ public class ManageBookRequest {
 	}
 	
 	// No id, no cover picture
-		public ManageBookRequest(String title, String isbn, String author, String category, String description, int publicationYear, String edition, String publisher, String bookStatus, int quantity,
-				int minimumThreshold, double price) {
+		public ManageBookRequest(String title, String isbn, String author, String category, String description, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
+				Integer minimumThreshold, Double price) {
 			this.title = title;
 			this.isbn = isbn;
 			this.author = author;
@@ -93,8 +108,8 @@ public class ManageBookRequest {
 
 	// For updating an existing book
 	public ManageBookRequest(int id, String title, String isbn, String author, String category, String description,
-			byte[] coverPicture, int publicationYear, String edition, String publisher, String bookStatus, int quantity,
-			int minimumThreshold, double price) {
+			byte[] coverPicture, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
+			Integer minimumThreshold, Double price) {
 		this.id = id;
 		this.title = title;
 		this.isbn = isbn;
@@ -112,8 +127,8 @@ public class ManageBookRequest {
 	}
 	
 	// no cover picture
-		public ManageBookRequest(int id, String title, String isbn, String author, String category, String description, int publicationYear, String edition, String publisher, String bookStatus, int quantity,
-				int minimumThreshold, double price) {
+		public ManageBookRequest(int id, String title, String isbn, String author, String category, String description, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
+				Integer minimumThreshold, Double price) {
 			this.id = id;
 			this.title = title;
 			this.isbn = isbn;
@@ -189,7 +204,7 @@ public class ManageBookRequest {
 		return publicationYear;
 	}
 
-	public void setPublicationYear(int publicationYear) {
+	public void setPublicationYear(Integer publicationYear) {
 		this.publicationYear = publicationYear;
 	}
 
@@ -221,7 +236,7 @@ public class ManageBookRequest {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
 
@@ -229,7 +244,7 @@ public class ManageBookRequest {
 		return minimumThreshold;
 	}
 
-	public void setMinimumThreshold(int minimumThreshold) {
+	public void setMinimumThreshold(Integer minimumThreshold) {
 		this.minimumThreshold = minimumThreshold;
 	}
 
@@ -237,7 +252,7 @@ public class ManageBookRequest {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	
