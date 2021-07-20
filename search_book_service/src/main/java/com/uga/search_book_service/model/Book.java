@@ -1,6 +1,7 @@
 package com.uga.search_book_service.model;
 
 import java.util.Arrays;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +14,8 @@ public class Book {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int book_id;
+	@Column(name = "BOOK_ID")
+	private Long bookId;
 	
 	private String title;
 	
@@ -41,12 +43,12 @@ public class Book {
 	
 	private double price;
 
-	public int getBook_id() {
-		return book_id;
+	public Long getBookId() {
+		return bookId;
 	}
 
-	public void setBook_id(int book_id) {
-		this.book_id = book_id;
+	public void setBookId(Long bookId) {
+		this.bookId = bookId;
 	}
 
 	public String getTitle() {
@@ -153,10 +155,10 @@ public class Book {
 		this.price = price;
 	}
 
-	public Book(int book_id, String title, String isbn, String author, String category, String description,
+	public Book(Long bookId, String title, String isbn, String author, String category, String description,
 			byte[] cover_picture, int publication_year, String edition, String publisher, String book_status,
 			int quantity_in_stock, int minimum_threshold, double price) {
-		this.book_id = book_id;
+		this.bookId = bookId;
 		this.title = title;
 		this.isbn = isbn;
 		this.author = author;
@@ -171,19 +173,18 @@ public class Book {
 		this.minimum_threshold = minimum_threshold;
 		this.price = price;
 	}
-	
+
 	public Book() {
 		
 	}
 
 	@Override
 	public String toString() {
-		return "Book [book_id=" + book_id + ", title=" + title + ", isbn=" + isbn + ", author=" + author + ", category="
+		return "Book [bookId=" + bookId + ", title=" + title + ", isbn=" + isbn + ", author=" + author + ", category="
 				+ category + ", description=" + description + ", cover_picture=" + Arrays.toString(cover_picture)
 				+ ", publication_year=" + publication_year + ", edition=" + edition + ", publisher=" + publisher
 				+ ", book_status=" + book_status + ", quantity_in_stock=" + quantity_in_stock + ", minimum_threshold="
 				+ minimum_threshold + ", price=" + price + "]";
-	}	
-	
+	}
 
 }

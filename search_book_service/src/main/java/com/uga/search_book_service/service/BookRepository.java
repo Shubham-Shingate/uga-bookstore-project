@@ -8,9 +8,20 @@ import org.springframework.stereotype.Repository;
 import com.uga.search_book_service.model.Book;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Integer> {
+public interface BookRepository extends CrudRepository<Book, Long> {
+	
+	public List<Book> findByIsbnContaining(String isbn);
+	
+	public List<Book> findByAuthorContaining(String author);
 	
 	public List<Book> findByTitleContaining(String title);
 	
-	List<Book> findAll();
+	public List<Book> findByCategoryContaining(String category);
+	
+	public List<Book> findByBookId(Long bookId);
+	
+	public List<Book> findAll();
+	
+	
+	
 }
