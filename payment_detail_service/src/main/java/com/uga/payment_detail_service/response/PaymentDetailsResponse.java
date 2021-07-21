@@ -4,30 +4,13 @@ import java.util.List;
 
 import com.uga.payment_detail_service.model.PaymentCard;
 
-public class PaymentResponse {
+public class PaymentDetailsResponse {
 	
 	private String message;
 	
 	private Object apiError;
 	
 	private List<PaymentCard> cards;
-
-	public PaymentResponse(String message, Object apiError, List<PaymentCard> cards) {
-		this.message = message;
-		this.apiError = apiError;
-		this.cards = cards;
-	}
-	
-	public PaymentResponse(String message, Object apiError) {
-		this.message = message;
-		this.apiError = apiError;
-		this.cards = null;
-	}
-
-	@Override
-	public String toString() {
-		return "PaymentResponse [message=" + message + ", apiError=" + apiError + ", cards=" + cards + "]";
-	}
 
 	public String getMessage() {
 		return message;
@@ -52,5 +35,21 @@ public class PaymentResponse {
 	public void setCards(List<PaymentCard> cards) {
 		this.cards = cards;
 	}
+
+	public PaymentDetailsResponse(String message, Object apiError, List<PaymentCard> cards) {
+		this.message = message;
+		this.apiError = apiError;
+		this.cards = cards;
+	}
+	
+	public PaymentDetailsResponse() {
+		
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentDetailsResponse [message=" + message + ", apiError=" + apiError + ", cards=" + cards + "]";
+	}
+	
 
 }

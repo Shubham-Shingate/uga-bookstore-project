@@ -23,7 +23,7 @@ public class RestExceptionHandler {
 		apiError.setTimestamp(LocalDateTime.now());
 		apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.BAD_REQUEST);
 	}
 
@@ -33,7 +33,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Media type is not supported");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
@@ -43,7 +43,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service bad request");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.BAD_REQUEST);
 	}
 
@@ -53,7 +53,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service is down");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -63,7 +63,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error- Failed to access/query/perform transaction in DB");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -73,7 +73,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("One or more mandatory http request headers not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.BAD_REQUEST);
 	}
 	
@@ -83,7 +83,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -93,7 +93,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("The required HTTP request body was not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.BAD_REQUEST);
 	}
 	
@@ -105,7 +105,7 @@ public class RestExceptionHandler {
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Failure", apiError, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.OK);
 	}
 	

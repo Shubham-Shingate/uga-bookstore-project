@@ -26,28 +26,29 @@ public class ShippingDetailController {
 	
 	/* ---------------------------Retrieve all addresses for user--------------------------- */
 	
-	@GetMapping("/fetchShippingDetails")
-	public ResponseEntity<ShippingInfoResponse> fetchShippingDetails(@RequestHeader("accountId") String accountId) {
+	@GetMapping("/getShippingDetails")
+	public ResponseEntity<ShippingInfoResponse> getShippingDetails(@RequestHeader String accountId) {
 		List<ShippingEntry> addresses = shippingRepository.findByAccountId(accountId);
 		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Success", null, addresses);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.OK);
 	}
 	
-	/* -------Create or update address If no address_id provided, new address created If address_id is provided, overwrites address at that ID-------- */
+	/* -------Create or update address. If no address_id provided, new address created If address_id is provided, overwrites address at that ID-------- */
 	
-	@PostMapping("/updateAddress")
-	public ResponseEntity<ShippingInfoResponse> updateAddress(@RequestHeader("accountId") String accountId, @RequestBody @Validated ShippingInfoRequest shippingInfoRequest) {
+	@PostMapping("/updateShippingDetails")
+	public ResponseEntity<ShippingInfoResponse> updateShippingDetails(@RequestHeader String accountId, @RequestBody @Validated ShippingInfoRequest shippingInfoRequest) {
 		ShippingEntry address = new ShippingEntry(shippingInfoRequest.getAddress_id(), shippingInfoRequest.getStreet(),
 										shippingInfoRequest.getCity(), shippingInfoRequest.getState(), shippingInfoRequest.getZip_code(),
 										shippingInfoRequest.getStatus(), accountId);
 		shippingRepository.save(address);
-		return new ResponseEntity<ShippingInfoResponse>(new ShippingInfoResponse("Success", null), HttpStatus.OK);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Success", null, null);
+		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.OK);
 	}
 	
 	/* ---------------------------Delete a given addresses for user--------------------------- */
 	
-	@PostMapping("/deleteAddress/{addressId}")
-	public ResponseEntity<ShippingInfoResponse> deleteAddress(@RequestHeader String accountId, @PathVariable Long addressId)
+	@PostMapping("/deleteShippingDetails/{addressId}")
+	public ResponseEntity<ShippingInfoResponse> deleteShippingDetails(@RequestHeader String accountId, @PathVariable Long addressId)
 	{  // Delete address for user based on requestbody = addressId
 		List<ShippingEntry> addresses = shippingRepository.findByAccountIdAndAddressId(accountId, addressId);
 		
@@ -55,8 +56,8 @@ public class ShippingDetailController {
 			throw new AddressNotFoundException("No address found for given accountId and addressId combination");
 		}
 		shippingRepository.deleteById(addressId);
-		ShippingInfoResponse response = new ShippingInfoResponse("Success", null);
-		return new ResponseEntity<ShippingInfoResponse>(response, HttpStatus.OK);
+		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Success", null, null);
+		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.OK);
 	}
 	
 }

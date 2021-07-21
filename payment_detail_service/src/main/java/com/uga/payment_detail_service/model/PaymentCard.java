@@ -1,10 +1,10 @@
 package com.uga.payment_detail_service.model;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name = "PAYMENT_DETAILS_MASTER")
@@ -23,33 +23,12 @@ public class PaymentCard {
 	private String cvv;
 	
 	@Column(name="CARD_EXPIRY")
-	private Timestamp cardExpiry;
+	private Date cardExpiry;
 	
 	private String status;
 	
 	@Column(name="ACCOUNT_ID")
 	private String accountId;
-
-	public PaymentCard(String cardNumber, String name, String type, String cvv, Timestamp cardExpiry, String status,
-			String accountId) {
-		this.cardNumber = cardNumber;
-		this.name = name;
-		this.type = type;
-		this.cvv = cvv;
-		this.cardExpiry = cardExpiry;
-		this.status = status;
-		this.accountId = accountId;
-	}
-	
-	public PaymentCard() {
-		
-	}
-
-	@Override
-	public String toString() {
-		return "PaymentCard [cardNumber=" + cardNumber + ", name=" + name + ", type=" + type + ", cvv=" + cvv
-				+ ", cardExpiry=" + cardExpiry + ", status=" + status + ", accountId=" + accountId + "]";
-	}
 
 	public String getCardNumber() {
 		return cardNumber;
@@ -83,11 +62,11 @@ public class PaymentCard {
 		this.cvv = cvv;
 	}
 
-	public Timestamp getCardExpiry() {
+	public Date getCardExpiry() {
 		return cardExpiry;
 	}
 
-	public void setCardExpiry(Timestamp cardExpiry) {
+	public void setCardExpiry(Date cardExpiry) {
 		this.cardExpiry = cardExpiry;
 	}
 
@@ -105,6 +84,27 @@ public class PaymentCard {
 
 	public void setAccountId(String accountId) {
 		this.accountId = accountId;
+	}
+
+	public PaymentCard(String cardNumber, String name, String type, String cvv, Date cardExpiry, String status,
+			String accountId) {
+		this.cardNumber = cardNumber;
+		this.name = name;
+		this.type = type;
+		this.cvv = cvv;
+		this.cardExpiry = cardExpiry;
+		this.status = status;
+		this.accountId = accountId;
+	}
+	
+	public PaymentCard() {
+		
+	}
+
+	@Override
+	public String toString() {
+		return "PaymentCard [cardNumber=" + cardNumber + ", name=" + name + ", type=" + type + ", cvv=" + cvv
+				+ ", cardExpiry=" + cardExpiry + ", status=" + status + ", accountId=" + accountId + "]";
 	}
 	
 	

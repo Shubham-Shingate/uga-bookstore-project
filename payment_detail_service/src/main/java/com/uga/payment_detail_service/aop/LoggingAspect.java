@@ -9,15 +9,11 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.util.StopWatch;
-
-//import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import com.uga.payment_detail_service.response.*;
 
 @Aspect
 @Component
@@ -36,10 +32,7 @@ public class LoggingAspect {
 
 	@AfterReturning(value = "pointcutforController()", returning = "result")
 	public void afterReturning(JoinPoint joinPoint, Object result) {
-		
-		@SuppressWarnings("unchecked") // result will always be ResponseEntity<PaymentResponse>
-		ResponseEntity<PaymentResponse> newResult = (ResponseEntity<PaymentResponse>) result;
-		log.info("{} returned with status {}", joinPoint, newResult.getStatusCode());
+		log.info("{} returned with value {}", joinPoint, result);
 	}
 
 	@AfterThrowing(pointcut = "pointcutforController()", throwing = "e")

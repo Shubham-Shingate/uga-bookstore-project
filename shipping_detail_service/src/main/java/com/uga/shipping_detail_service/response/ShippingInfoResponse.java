@@ -2,7 +2,7 @@ package com.uga.shipping_detail_service.response;
 
 import java.util.List;
 
-import com.uga.shipping_detail_service.model.*;
+import com.uga.shipping_detail_service.model.ShippingEntry;
 
 public class ShippingInfoResponse {
 	private String message;
@@ -10,23 +10,6 @@ public class ShippingInfoResponse {
 	private Object apiError;
 	
 	private List<ShippingEntry> addresses;
-
-	public ShippingInfoResponse(String message, Object apiError, List<ShippingEntry> addresses) {
-		this.message = message;
-		this.apiError = apiError;
-		this.addresses = addresses;
-	}
-	
-	public ShippingInfoResponse(String message, Object apiError) {
-		this.message = message;
-		this.apiError = apiError;
-		this.addresses = null;
-	}
-
-	@Override
-	public String toString() {
-		return "ShippingResponse [message=" + message + ", apiError=" + apiError + ", addresses=" + addresses + "]";
-	}
 
 	public String getMessage() {
 		return message;
@@ -51,5 +34,20 @@ public class ShippingInfoResponse {
 	public void setAddresses(List<ShippingEntry> addresses) {
 		this.addresses = addresses;
 	}
+
+	public ShippingInfoResponse(String message, Object apiError, List<ShippingEntry> addresses) {
+		this.message = message;
+		this.apiError = apiError;
+		this.addresses = addresses;
+	}
+	
+	public ShippingInfoResponse() {
+		
+	}
+
+	@Override
+	public String toString() {
+		return "ShippingInfoResponse [message=" + message + ", apiError=" + apiError + ", addresses=" + addresses + "]";
+	}	
 	
 }
