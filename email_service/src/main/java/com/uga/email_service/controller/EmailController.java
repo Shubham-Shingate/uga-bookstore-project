@@ -14,22 +14,20 @@ import com.uga.email_service.service.EmailService;
 @RestController
 public class EmailController {
 
-	
 	@Autowired
 	private EmailService emailService;
-	
+
 	@PostMapping("/emailService")
-	public ResponseEntity<EmailResponse> emailService (@RequestBody @Validated EmailRequest emailRequest) {
-		
-		//Send the email
+	public ResponseEntity<EmailResponse> emailService(@RequestBody @Validated EmailRequest emailRequest) {
+
+		// Send the email
 		emailService.sendEmail(emailRequest.getEmailAddress(), emailRequest.getSubject(), emailRequest.getEmailBody());
-		
-		//Log the email to the DB to store all the emails send by this service
-		
-		
-		//Return a response from the service
+
+		// Log the email to the DB to store all the emails send by this service
+
+		// Return a response from the service
 		EmailResponse emailResponse = new EmailResponse("Success", null);
-		return new ResponseEntity<EmailResponse>(emailResponse, HttpStatus.OK);	
+		return new ResponseEntity<EmailResponse>(emailResponse, HttpStatus.OK);
 	}
 
 }

@@ -107,7 +107,7 @@ public class RegistrationController {
 			HttpEntity<ShippingInfoRequest> entity = new HttpEntity<ShippingInfoRequest>(shippingInfoRequest, headers);
 			
 			ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = 
-					restTemplate.postForEntity("http://shipping_detail_service/updateShippingDetails", entity, ShippingInfoResponse.class);
+					restTemplate.postForEntity("http://shipping-detail-service/updateShippingDetails", entity, ShippingInfoResponse.class);
 		}
 		
 		//Save users card details if provided (API call- payment_details_service)
@@ -125,7 +125,7 @@ public class RegistrationController {
 			HttpEntity<AddPaymentDetailsRequest> entity = new HttpEntity<AddPaymentDetailsRequest>(addPaymentDetailsRequest, headers);
 			
 			ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = 
-					restTemplate.postForEntity("http://payment_detail_service/addPaymentDetails", entity, PaymentDetailsResponse.class);
+					restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
 		}
 		
 		//Create a verification SHA-256 token
@@ -142,7 +142,7 @@ public class RegistrationController {
 													createAccountRequest.getEmailId());
 		HttpEntity<EmailRequest> entity = new HttpEntity<EmailRequest>(emailRequest, headers);
 		ResponseEntity<EmailResponse> emailServiceResponse = 
-					restTemplate.postForEntity("http://email_service/emailService", entity, EmailResponse.class);
+					restTemplate.postForEntity("http://email-service/emailService", entity, EmailResponse.class);
 		
 		
 		//On Success response from email_service we store verification token in DB VERICATION_TOKEN table
