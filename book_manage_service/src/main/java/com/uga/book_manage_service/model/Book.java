@@ -16,7 +16,7 @@ public class Book {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BOOK_ID")
-	private int id;
+	private Long id;
 	
 	private String title;
 	
@@ -70,7 +70,7 @@ public class Book {
 		this.price = price;
 	}
 
-	public Book(int id, String title, String isbn, String author, String category, String description,
+	public Book(Long id, String title, String isbn, String author, String category, String description,
 			byte[] coverPicture, int publicationYear, String edition, String publisher, String bookStatus, int quantity,
 			int minimumThreshold, double price) {
 		this.id = id;
@@ -98,11 +98,11 @@ public class Book {
 				+ ", price=" + price + "]";
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

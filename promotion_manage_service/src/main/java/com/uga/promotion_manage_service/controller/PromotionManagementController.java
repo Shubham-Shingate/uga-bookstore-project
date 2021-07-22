@@ -35,8 +35,8 @@ public class PromotionManagementController {
 	}
 	
 	/* Create a promotion */
-	@PostMapping("/updatePromotion")
-	public ResponseEntity<PromotionInfoResponse> updatePromotion(@RequestBody @Validated PromotionInfoRequest request) {
+	@PostMapping("/createPromotion")
+	public ResponseEntity<PromotionInfoResponse> createPromotion(@RequestBody @Validated PromotionInfoRequest request) {
 		
 		// Check if promoID already exists		
 		if(repository.findByPromoId(request.getPromoId()) != null)
@@ -55,7 +55,7 @@ public class PromotionManagementController {
 	}
 	
 	/*View a promotion*/
-	@PostMapping("/viewPromotion/{promoId}")
+	@GetMapping("/viewPromotion/{promoId}")
 	public ResponseEntity<PromotionInfoResponse> viewPromotion(@PathVariable String promoId) {
 		Promotion promo = repository.findByPromoId(promoId);
 		
@@ -68,7 +68,7 @@ public class PromotionManagementController {
 	}
 	
 	/* Delete a promotion */
-	@PostMapping("/deletePromotion/{promoId}")
+	@GetMapping("/deletePromotion/{promoId}")
 	public ResponseEntity<PromotionInfoResponse> deletePromotion(@PathVariable String promoId) {
 		Promotion promo = repository.findByPromoId(promoId);
 		

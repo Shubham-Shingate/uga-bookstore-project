@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.uga.book_manage_service.exception.BookNotFoundException;
 import com.uga.book_manage_service.model.Book;
@@ -60,8 +60,8 @@ public class BookManagementController {
 	}
 	
 	// View book by id
-	@GetMapping("/viewBook")
-	public ResponseEntity<BookResponse> viewBook(@RequestParam(value = "id") int id) {
+	@GetMapping("/viewBook/{id}")
+	public ResponseEntity<BookResponse> viewBook(@PathVariable long id) {
 		Book book = bookRepository.findById(id);
 		
 		if(book == null)
@@ -72,8 +72,8 @@ public class BookManagementController {
 	}	
 	 
 	// Delete Book endpoint
-	@GetMapping("/deleteBook")
-	public ResponseEntity<BookResponse> deleteBook(@RequestParam(value = "id") int id) {
+	@GetMapping("/deleteBook/{id}")
+	public ResponseEntity<BookResponse> deleteBook(@PathVariable long id) {
 		Book book = bookRepository.findById(id);
 		
 		if(book == null)

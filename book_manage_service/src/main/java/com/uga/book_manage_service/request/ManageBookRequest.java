@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 public class ManageBookRequest {
 	
-	private int id;
+	private long id;
 	
 	@NotBlank(message="{title.notblank}")
 	private String title;
@@ -49,7 +49,7 @@ public class ManageBookRequest {
 	}
 
 	// For deleting a book by ID
-	public ManageBookRequest(int id) {
+	public ManageBookRequest(long id) {
 		this.id = id;
 	}
 	
@@ -107,7 +107,7 @@ public class ManageBookRequest {
 		}
 
 	// For updating an existing book
-	public ManageBookRequest(int id, String title, String isbn, String author, String category, String description,
+	public ManageBookRequest(long id, String title, String isbn, String author, String category, String description,
 			byte[] coverPicture, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
 			Integer minimumThreshold, Double price) {
 		this.id = id;
@@ -127,7 +127,7 @@ public class ManageBookRequest {
 	}
 	
 	// no cover picture
-		public ManageBookRequest(int id, String title, String isbn, String author, String category, String description, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
+		public ManageBookRequest(long id, String title, String isbn, String author, String category, String description, Integer publicationYear, String edition, String publisher, String bookStatus, Integer quantity,
 				Integer minimumThreshold, Double price) {
 			this.id = id;
 			this.title = title;
@@ -144,11 +144,11 @@ public class ManageBookRequest {
 			this.price = price;
 		}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
