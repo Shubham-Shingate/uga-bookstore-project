@@ -1,5 +1,6 @@
 package com.uga.forwords.controller;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,19 +20,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Config;
+import com.uga.forwords.model.Role;
+import com.uga.forwords.model.User;
 import com.uga.forwords.model.VerificationToken;
 import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.CreateAccountRequest;
 import com.uga.forwords.request.EmailRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
+import com.uga.forwords.request.ValidateTokenRequest;
 import com.uga.forwords.response.EmailResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
+import com.uga.forwords.response.ValidateTokenResponse;
 import com.uga.forwords.service.ActiveUserRepository;
 import com.uga.forwords.service.ConfigRepository;
+import com.uga.forwords.service.RoleRepository;
 import com.uga.forwords.service.UserRepository;
 import com.uga.forwords.service.VerificationTokenRepository;
 import com.uga.forwords.util.SHAFactory;
@@ -56,6 +63,9 @@ public class RegistrationController {
 	private VerificationTokenRepository verificationRepository;
 	
 	@Autowired
+	private RoleRepository roleRepository;
+	
+	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder; 
 	
 	private Map<String, String> applicationConfig = new HashMap<String, String>();
@@ -68,12 +78,16 @@ public class RegistrationController {
 		}
 	}
 	
+	/** -----------------------------------Service Endpoint for showing registration form----------------------------------- */
+	
 	@GetMapping("/showRegistrationForm")
 	public String showRegistrationForm(Model theModel) {
 		
 		theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
 		return "registration-form";
 	}
+	
+	/** -----------------------------------Service Endpoint for Processing User Registration----------------------------------- */
 	
 	@PostMapping("/processRegistrationForm")
 	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest,
@@ -138,7 +152,7 @@ public class RegistrationController {
 		EmailRequest emailRequest = new EmailRequest("ACCOUNT VERIFICATION LINK",
 													applicationConfig.get("ACCOUNT_VERIFICATION_EMAIL") 
 													+ applicationConfig.get("ACCOUNT_VERIFICATION_LINK")
-													+"/"+verificationToken,
+													+"?verificationToken="+verificationToken+"&accountId="+accountId,
 													createAccountRequest.getEmailId());
 		HttpEntity<EmailRequest> entity = new HttpEntity<EmailRequest>(emailRequest, headers);
 		ResponseEntity<EmailResponse> emailServiceResponse = 
@@ -155,10 +169,52 @@ public class RegistrationController {
 			VerificationToken verificationTokenEntity = new VerificationToken(null, verificationToken, now, expDate, accountId, "ACTIVE");
 			verificationRepository.save(verificationTokenEntity);
 		}
-		
 		return "registration-confirmation";
 	}
+	
+	
+	
+	/** -----------------------------------Service Endpoint for Account Verification----------------------------------- */
+
+	@GetMapping("/accountVerification")
+	public String accountVerification (@RequestParam String verificationToken, @RequestParam String accountId) {
 		
+		//API call to the validate_token_service
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", accountId);
+		
+		ValidateTokenRequest validateTokenRequest = new ValidateTokenRequest(verificationToken);
+		HttpEntity<ValidateTokenRequest> entity = new HttpEntity<ValidateTokenRequest>(validateTokenRequest, headers);
+		
+		ResponseEntity<ValidateTokenResponse> validateTokenServiceResponse = restTemplate.postForEntity("http://validate-token-service/validateToken", entity, ValidateTokenResponse.class);
+		
+		if (validateTokenServiceResponse.getStatusCode().equals(HttpStatus.OK)
+				&& validateTokenServiceResponse.getBody().getMessage().equals("Success")) {
+			//Change the status of the user as active ("A")
+			User verifiedUser = userRepository.findByAccountId(accountId);
+			verifiedUser.setAccountStatus("A");
+			userRepository.save(verifiedUser);
+			
+			//Now save the user in actual authentication/session related table ACTIVE_USER_MASTER. And create a User-Role Mapping
+			Role role = roleRepository.findByRoleName("ROLE_CUSTOMER");
+			
+			ActiveUser activeUser = new ActiveUser(verifiedUser.getFullName(), verifiedUser.getPhoneNo(), verifiedUser.getEmailId(), verifiedUser.getPassword(),
+					verifiedUser.getAccountId(), verifiedUser.getCreatedDatetime(), verifiedUser.getAccountStatus(), Arrays.asList(role));
+			
+			activeUserRepository.save(activeUser);
+			
+			return "account-verification-confirmation";
+		} else {
+			return "account-verification-failed";
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	

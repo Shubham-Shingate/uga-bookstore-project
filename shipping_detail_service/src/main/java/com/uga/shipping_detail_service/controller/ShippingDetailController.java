@@ -6,16 +6,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import com.uga.shipping_detail_service.exception.AddressNotFoundException;
 import com.uga.shipping_detail_service.model.ShippingEntry;
+import com.uga.shipping_detail_service.request.DeleteShipppingDetailsRequest;
 import com.uga.shipping_detail_service.request.ShippingInfoRequest;
+import com.uga.shipping_detail_service.response.ShippingInfoResponse;
 import com.uga.shipping_detail_service.service.ShippingRepository;
-import com.uga.shipping_detail_service.response.*;
 
 @RestController
 public class ShippingDetailController {
@@ -47,15 +47,15 @@ public class ShippingDetailController {
 	
 	/* ---------------------------Delete a given addresses for user--------------------------- */
 	
-	@PostMapping("/deleteShippingDetails/{addressId}")
-	public ResponseEntity<ShippingInfoResponse> deleteShippingDetails(@RequestHeader String accountId, @PathVariable Long addressId)
-	{  // Delete address for user based on requestbody = addressId
-		List<ShippingEntry> addresses = shippingRepository.findByAccountIdAndAddressId(accountId, addressId);
+	@PostMapping("/deleteShippingDetails")
+	public ResponseEntity<ShippingInfoResponse> deleteShippingDetails(@RequestHeader String accountId, @RequestBody @Validated DeleteShipppingDetailsRequest deleteShipppingDetailsRequest)
+	{  // Delete address for user based on requestbody = addressId and accounId combination
+		List<ShippingEntry> addresses = shippingRepository.findByAccountIdAndAddressId(accountId, deleteShipppingDetailsRequest.getAddressId());
 		
 		if (addresses.isEmpty()) {
 			throw new AddressNotFoundException("No address found for given accountId and addressId combination");
 		}
-		shippingRepository.deleteById(addressId);
+		shippingRepository.deleteById(deleteShipppingDetailsRequest.getAddressId());
 		ShippingInfoResponse shippingInfoResponse = new ShippingInfoResponse("Success", null, null);
 		return new ResponseEntity<ShippingInfoResponse>(shippingInfoResponse, HttpStatus.OK);
 	}
