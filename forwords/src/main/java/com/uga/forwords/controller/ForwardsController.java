@@ -1,5 +1,10 @@
 package com.uga.forwords.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +21,35 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
+import com.uga.forwords.model.Config;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
 import com.uga.forwords.request.EmailRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.response.ShippingInfoResponse;
+import com.uga.forwords.service.ConfigRepository;
 
 @Controller
 public class ForwardsController {
 	
 	@Autowired RestTemplate restTemplate;
 	
+	@Autowired
+	private ConfigRepository configRepository;
+	
+	private Map<String, String> applicationConfig = new HashMap<String, String>();
+	
 	@GetMapping("/home")
 	public String showHome() {
 		
 		return "home";
+	}
+	
+	@PostConstruct
+	private void loadConfig() {
+		List<Config> configs = (List<Config>) configRepository.findAll();
+		for (Config config : configs) {
+			applicationConfig.put(config.getConfigKey(), config.getConfigValue());
+		}
 	}
 	
 	/*----------------- Shipping details ----------------------*/
@@ -103,16 +123,21 @@ public class ForwardsController {
 		return "shipping-form";
 	}
 	
-	public void sendProfileChangeConfirmationEmail(String accountId) {
+	/* Send notification email whenever profile has been changed */
+	/* --------------------------------- MUST BE MODIFIED ONCE PROFILE DETAIL SERVICE IS COMPLETE ----------------------------------------*/
+	public void sendProfileChangeConfirmationEmail(Principal principal, String accountId) {
 		// Find email associated with this account
-		// String emailAddress = 
+//		HttpHeaders getEmailHeader = new HttpHeaders();
+//		getEmailHeader.setContentType(MediaType.APPLICATION_JSON);
+//		getEmailHeader.add("accountId", principal.getName());
+		
+//		 String emailAddress = 
 		
 		// Send confirmation email
-		EmailRequest email = new EmailRequest();
-//		email.setEmailAddress(emailAddress);
-		email.setSubject("Account information has been updated");
-		email.setEmailBody("Your account information has been changed. If you did not request this change, please contact customer support.");
-		
+//		EmailRequest email = new EmailRequest(
+//				"Account information has been updated", 
+//				applicationConfig.get("ACCOUNT_DETAIL_CHANGE_EMAIL"),
+//				emailAddress);
 		
 	}
 	
