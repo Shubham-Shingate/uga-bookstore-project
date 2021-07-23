@@ -9,10 +9,8 @@ import com.uga.forwords.model.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
 	
-//	@Transactional
-//	@Procedure("SP_CREATE_USER_ACCOUNT")
-//	public String saveUser(String in_FULL_NAME, String in_PHONE_NO, String in_EMAIL_ID, String in_PASSWORD, String in_ACCOUNT_STATUS, String in_ROLE);
-	 
+
+	public User findByAccountId(String accountId);
 	
 	@Query(value = "CALL SP_CREATE_USER_ACCOUNT(:in_FULL_NAME, :in_PHONE_NO, :in_EMAIL_ID, :in_PASSWORD, :in_ACCOUNT_STATUS, :in_ROLE);", nativeQuery = true)
 	public String saveUser(
@@ -22,6 +20,8 @@ public interface UserRepository extends CrudRepository<User, String> {
 			@Param("in_PASSWORD") String in_PASSWORD,
 			@Param("in_ACCOUNT_STATUS") String in_ACCOUNT_STATUS,
 			@Param("in_ROLE") String in_ROLE);
+	
+	
 	
 	
 }
