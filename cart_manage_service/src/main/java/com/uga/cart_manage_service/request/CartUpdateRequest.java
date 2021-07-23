@@ -1,7 +1,6 @@
 package com.uga.cart_manage_service.request;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotNull;
 
 public class CartUpdateRequest {
 	
