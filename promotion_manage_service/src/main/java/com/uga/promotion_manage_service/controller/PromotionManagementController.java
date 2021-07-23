@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+import com.uga.promotion_manage_service.exception.InvalidDatesException;
 import com.uga.promotion_manage_service.exception.PromoExistsException;
 import com.uga.promotion_manage_service.exception.PromotionNotFoundException;
 import com.uga.promotion_manage_service.model.Promotion;
@@ -38,11 +39,15 @@ public class PromotionManagementController {
 	@PostMapping("/createPromotion")
 	public ResponseEntity<PromotionInfoResponse> createPromotion(@RequestBody @Validated PromotionInfoRequest request) {
 		
-		// Check if promoID already exists		
+		/* Check if promoID already exists */		
 		if(repository.findByPromoId(request.getPromoId()) != null)
 			throw new PromoExistsException("A promotion with this ID already exists!");
 		
-		// Convert Strings to Timestamps for storage		
+		/* Check valid date span */
+		if(request.getStartTimestamp().after(request.getEndTimestamp()) == true)
+			throw new InvalidDatesException("Start date cannot be after expiration date");
+		
+		/* Create and initialize Promotion object for database storage */		
 		Promotion promo = new Promotion(
 				request.getPromoId(),
 				request.getStartTimestamp(),
@@ -72,9 +77,10 @@ public class PromotionManagementController {
 	public ResponseEntity<PromotionInfoResponse> deletePromotion(@PathVariable String promoId) {
 		Promotion promo = repository.findByPromoId(promoId);
 		
-		if(promo == null) {
+		/* Ensure promotion exists before attempting deletion */
+		if(promo == null) 
 			throw new PromotionNotFoundException("There is no promotion with this id");
-		}
+		
 		repository.delete(promo);
 		PromotionInfoResponse response = new PromotionInfoResponse("Success", null);
 		return new ResponseEntity<PromotionInfoResponse>(response, HttpStatus.OK);

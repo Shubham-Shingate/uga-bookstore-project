@@ -100,7 +100,7 @@ public class RestExceptionHandler {
 	
 	/**------------------HANDLING OF CUSTOM EXCEPTIONS------------------*/
 	@ExceptionHandler(PromoExistsException.class)
-	protected ResponseEntity<PromotionInfoResponse> handleEmailFailedException(PromoExistsException ex) {
+	protected ResponseEntity<PromotionInfoResponse> handlePromoExistsException(PromoExistsException ex) {
 		ApiError apiError = new ApiError(HttpStatus.OK);
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
@@ -108,8 +108,19 @@ public class RestExceptionHandler {
 		PromotionInfoResponse promotionInfoResponse = new PromotionInfoResponse("Failure", apiError);
 		return new ResponseEntity<PromotionInfoResponse>(promotionInfoResponse, HttpStatus.OK);
 	}
+	
 	@ExceptionHandler(PromotionNotFoundException.class)
-	protected ResponseEntity<PromotionInfoResponse> handleEmailFailedException(PromotionNotFoundException ex) {
+	protected ResponseEntity<PromotionInfoResponse> handlePromotionNotFoundException(PromotionNotFoundException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		PromotionInfoResponse promotionInfoResponse = new PromotionInfoResponse("Failure", apiError);
+		return new ResponseEntity<PromotionInfoResponse>(promotionInfoResponse, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(InvalidDatesException.class)
+	protected ResponseEntity<PromotionInfoResponse> handleInvalidDatesException(InvalidDatesException ex) {
 		ApiError apiError = new ApiError(HttpStatus.OK);
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
