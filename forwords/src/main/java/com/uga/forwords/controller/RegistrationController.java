@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -90,8 +91,14 @@ public class RegistrationController {
 	/** -----------------------------------Service Endpoint for Processing User Registration----------------------------------- */
 	
 	@PostMapping("/processRegistrationForm")
-	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest,
+	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest, BindingResult theBindingResult,
 											 Model theModel) {
+		
+		//Check if Field Match generates any error for pasword and matchingPassword
+		if (theBindingResult.hasErrors()) {
+			return "registration-form";
+		}
+		
 		/*
 		 * Check the username (i.e email id) if already present in the database ACTIVE_USER_MASTER table. If emailId is present in USER_MASTER then but
 		 *  not in ACTIVE_USER_MASTER still allow him to register with same email Id (new accounID will be generated).
