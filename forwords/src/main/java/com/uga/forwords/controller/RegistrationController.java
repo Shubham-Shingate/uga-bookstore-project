@@ -176,7 +176,7 @@ public class RegistrationController {
 			VerificationToken verificationTokenEntity = new VerificationToken(null, verificationToken, now, expDate, accountId, "ACTIVE");
 			verificationRepository.save(verificationTokenEntity);
 		}
-		return "registration-confirmation";
+		return "forWORDS-registrationConfirm";
 	}
 	
 	

@@ -48,8 +48,8 @@
     <header class="section-header">
       <section class="header-main border-bottom">
         <div class="container">
-          <a href="http://bootstrap-ecommerce.com" class="brand-wrap"
-            ><img class="logo" th:src="@{../static/images/forwords-logo.png}"
+          <a href="@{http://forWORDS.com}" class="brand-wrap"
+            ><img class="logo" th:src="@{/images/forwords-logo.png}"
           /></a>
         </div>
         <!-- container.// -->
@@ -84,7 +84,7 @@
 					
                     <label>Email</label>
                     <input
-                      name=""
+                      name="username"
                       class="form-control"
                       placeholder="ex. name@gmail.com"
                       type="email"
@@ -95,23 +95,12 @@
                     <a class="float-right" href="#">Forgot</a>
                     <label>Password</label>
                     <input
+                      name="password"
                       class="form-control"
                       placeholder="******"
                       type="password"
                     />
                   </div>
-                  <!-- form-group// -->
-                  <div class="form-group">
-                    <label class="custom-control custom-checkbox">
-                      <input
-                        type="checkbox"
-                        class="custom-control-input"
-                        checked=""
-                      />
-                      <div class="custom-control-label">Remember</div>
-                    </label>
-                  </div>
-                  <!-- form-group form-check .// -->
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block">
                       Login
