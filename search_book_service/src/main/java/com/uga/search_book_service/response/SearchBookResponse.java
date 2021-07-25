@@ -2,7 +2,7 @@ package com.uga.search_book_service.response;
 
 import java.util.List;
 
-import com.uga.search_book_service.model.Book;
+import com.uga.search_book_service.model.SearchBook;
 
 public class SearchBookResponse {
 	
@@ -10,7 +10,7 @@ public class SearchBookResponse {
 	
 	private Object apiError;
 	
-	private List<Book> books;
+	private List<SearchBook> books;
 
 	public String getMessage() {
 		return message;
@@ -28,15 +28,15 @@ public class SearchBookResponse {
 		this.apiError = apiError;
 	}
 
-	public List<Book> getBooks() {
+	public List<SearchBook> getBooks() {
 		return books;
 	}
 
-	public void setBooks(List<Book> books) {
+	public void setBooks(List<SearchBook> books) {
 		this.books = books;
 	}
 
-	public SearchBookResponse(String message, Object apiError, List<Book> books) {
+	public SearchBookResponse(String message, Object apiError, List<SearchBook> books) {
 		this.message = message;
 		this.apiError = apiError;
 		this.books = books;
