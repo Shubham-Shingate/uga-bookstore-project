@@ -11,7 +11,7 @@ public class ForwardsController {
 	@GetMapping("/home")
 	public String showHome() {
 		
-		return "home";
+		return "forWORDS-main-signed";
 	}
 	
 	
