@@ -85,7 +85,7 @@ public class RegistrationController {
 	public String showRegistrationForm(Model theModel) {
 		
 		theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
-		return "registration-form";
+		return "forWORDS-createAccount";
 	}
 	
 	/** -----------------------------------Service Endpoint for Processing User Registration----------------------------------- */
@@ -94,9 +94,9 @@ public class RegistrationController {
 	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest, BindingResult theBindingResult,
 											 Model theModel) {
 		
-		//Check if Field Match generates any error for pasword and matchingPassword
+		//Check if Field Match generates any error for password and matchingPassword
 		if (theBindingResult.hasErrors()) {
-			return "registration-form";
+			return "forWORDS-createAccount";
 		}
 		
 		/*
@@ -107,7 +107,7 @@ public class RegistrationController {
 		if (existingUser != null) {
 			theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
 			theModel.addAttribute("registrationError", "User name already exists.");
-			return "registration-form";
+			return "forWORDS-createAccount";
 		}
 		
 		//Save the new user to the database with inactive status
