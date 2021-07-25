@@ -83,26 +83,33 @@
 					        </div>
 					    </div>
                   <div class="form-group form-row" >
-                    <label class="col-md-3 col-form-label">Full name</label>
+                    <label class="col-md-3 col-form-label">Full name *</label>
                     <div class="col">
                       <input
                         type="text"
                         th:field="*{fullName}"
                         class="form-control"
-                        placeholder="First name"
+                        placeholder="Full name"
+                        
                       />
                     </div>
                   </div>
+                  <div th:if="${#fields.hasErrors('fullName')}"
+							style="margin-bottom: 25px" class="text-danger">
+					<ul>
+					  <li th:each="err : ${#fields.errors('fullName')}" th:text="'Full Name: ' + ${err}" />
+					</ul>						
+				  </div>
                   
 
                   <div class="form-group form-row">
-                    <label class="col-md-3 col-form-label">Phone</label>
+                    <label class="col-md-3 col-form-label">Phone *</label>
                     <div class="col-9">
                       <div class="input-group">
                         <select class="custom-select" style="max-width: 120px">
-                          <option selected="">UZ +971</option>
+                          <option selected="">US +1</option>
                           <option value="1">AE +971</option>
-                          <option value="2">US +1</option>
+                          <option value="2">UZ +971</option>
                           <option value="3">RU +7</option>
                         </select>
                         <input
@@ -119,12 +126,12 @@
                   <div th:if="${#fields.hasErrors('phoneNumber')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Phone Number ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('phoneNumber')}" th:text="'Phone Number: ' + ${err}" />
 					</ul>						
 				  </div>
 
                   <div class="form-group form-row">
-                    <label class="col-md-3 col-form-label">Email</label>
+                    <label class="col-md-3 col-form-label">Email *</label>
                     <div class="col-sm-9">
                       <input
                         type="email"
@@ -137,7 +144,7 @@
                   <div th:if="${#fields.hasErrors('emailId')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('emailId')}" th:text="'Email Id ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('emailId')}" th:text="'Email Id: ' + ${err}" />
 					</ul>						
 				  </div>
 
@@ -150,14 +157,6 @@
                         class="form-control"
                         placeholder="City"
                       />
-                    </div>
-                    <div class="col">
-                      <select class="custom-select form-control">
-                        <option>Country</option>
-                        <option>United states</option>
-                        <option>Germany</option>
-                        <option>Canada</option>
-                      </select>
                     </div>
                   </div>
 
@@ -184,24 +183,24 @@
                   <div th:if="${#fields.hasErrors('city')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('city')}" th:text="'City ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('city')}" th:text="'City: ' + ${err}" />
 					</ul>						
 				  </div>
 				  <div th:if="${#fields.hasErrors('street')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('street')}" th:text="'Street ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('street')}" th:text="'Street: ' + ${err}" />
 					</ul>						
 				  </div>
 				  <div th:if="${#fields.hasErrors('zipcode')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('zipcode')}" th:text="'Zip Code ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('zipcode')}" th:text="'Zip Code: ' + ${err}" />
 					</ul>						
 				  </div>
 
                   <div class="form-group form-row">
-                    <label class="col-md-3 col-form-label">Password</label>
+                    <label class="col-md-3 col-form-label">Password *</label>
                     <div class="col-6">
                       <input
                         type="password"
@@ -220,13 +219,13 @@
                   <div th:if="${#fields.hasErrors('password')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('password')}" th:text="'Password ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('password')}" th:text="'Password: ' + ${err}" />
 					</ul>						
 				  </div>
 				  <div th:if="${#fields.hasErrors('matchingPassword')}"
 							style="margin-bottom: 25px" class="text-danger">
 					<ul>
-					  <li th:each="err : ${#fields.errors('matchingPassword')}" th:text="'Password ' + ${err}" />
+					  <li th:each="err : ${#fields.errors('matchingPassword')}" th:text="'Match Password: ' + ${err}" />
 					</ul>						
 				  </div>
 
@@ -246,7 +245,7 @@
                         <div th:if="${#fields.hasErrors('nameOnCard')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('nameOnCard')}" th:text="'Name on Card ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('nameOnCard')}" th:text="'Name on Card: ' + ${err}" />
 							</ul>						
 				  		</div>
                         <!-- form-group.// -->
@@ -274,7 +273,7 @@
                         <div th:if="${#fields.hasErrors('cardNumber')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('cardNumber')}" th:text="'Card Number ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('cardNumber')}" th:text="'Card Number: ' + ${err}" />
 							</ul>						
 				  		</div>
                         <!-- form-group.// -->
@@ -313,13 +312,13 @@
                           <div th:if="${#fields.hasErrors('cardExpiry')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('cardExpiry')}" th:text="'Card Expiry ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('cardExpiry')}" th:text="'Card Expiry: ' + ${err}" />
 							</ul>						
 				  		</div>
                           <div th:if="${#fields.hasErrors('cvv')}"
 							style="margin-bottom: 25px" class="text-danger">
 							<ul>
-							  <li th:each="err : ${#fields.errors('cvv')}" th:text="'CVV ' + ${err}" />
+							  <li th:each="err : ${#fields.errors('cvv')}" th:text="'CVV: ' + ${err}" />
 							</ul>						
 				  		</div>
                         </div>
