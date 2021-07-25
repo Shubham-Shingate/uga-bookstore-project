@@ -67,8 +67,8 @@
                 <form 
                 	th:action="@{/register/processRegistrationForm}" 
                 	th:object="${createAccountRequest}"
-						  	    method="POST"
-						  	   class="block-register">
+					method="POST"
+					class="block-register">
                    <!-- Place for messages: error, alert etc ... -->
 					    <div class="form-group">
 					        <div class="col-xs-15">
@@ -241,7 +241,6 @@
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title mb-4">Payment info</h4>
-                      <form role="form">
                         <div class="form-group">
                           <label for="username">Name on card</label>
                           <input
@@ -250,7 +249,6 @@
                             class="form-control"
                             name="username"
                             placeholder="Ex. John Smith"
-                            required=""
                           />
                         </div>
                         <div th:if="${#fields.hasErrors('nameOnCard')}"
@@ -321,9 +319,9 @@
                                   class="form-control"
                                   style="width: 100px"
                                 >
-                                  <option>YY</option>
-                                  <option>2018</option>
-                                  <option>2019</option>
+                                  <option value="">YY</option>
+                                  <option value="2018">2018</option>
+                                  <option value="2019">2019</option>
                                 </select>
                               </div>
                             </div>
@@ -339,7 +337,6 @@
                               <input
                                 class="form-control"
                                 th:field="*{cvv}"
-                                required=""
                                 type="text"
                               />
                             </div>
@@ -359,7 +356,6 @@
 				  		</div>
                         </div>
                         <!-- row.// -->
-                      </form>
                     </div>
                     <!-- card-body.// -->
                   </div>
