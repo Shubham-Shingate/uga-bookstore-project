@@ -120,4 +120,24 @@ public class RestExceptionHandler {
 		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
 	}
 	
+	@ExceptionHandler(ImageException.class)
+	protected ResponseEntity<BookResponse> handleImageException(ImageException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(InvalidFieldException.class)
+	protected ResponseEntity<BookResponse> handleInvalidFieldException(InvalidFieldException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
+	
 }

@@ -80,7 +80,7 @@ public class CartManagementController {
 		return new ResponseEntity<CartResponse>(response, HttpStatus.OK);
 	}
 	
-//	/* Remove book from cart */
+	/* Remove book from cart */
 	@GetMapping("/removeBook/{bookId}")
 	public ResponseEntity<CartResponse> removeBook(@RequestHeader int cartId, @PathVariable long bookId) {
 		CartedBook book = cartContents.findByCartIdAndBookId(cartId, bookId);
@@ -96,5 +96,19 @@ public class CartManagementController {
 		return new ResponseEntity<CartResponse>(response, HttpStatus.OK);
 	}
 	
+	/*
+	 * Empty user's cart
+	 * To be used after an order has been completed, and the cart needs to be reset
+	 */	
+	@GetMapping("/emptyCart")
+	public ResponseEntity<CartResponse> emptyCart(@RequestHeader long cartId) {
+		
+		List<CartedBook> booksInCart = cartContents.findByCartId(cartId);
+		cartContents.deleteAll(booksInCart);
+		
+		
+		CartResponse response = new CartResponse("Success", null);
+		return new ResponseEntity<CartResponse>(response, HttpStatus.OK);
+	}
 	
 }
