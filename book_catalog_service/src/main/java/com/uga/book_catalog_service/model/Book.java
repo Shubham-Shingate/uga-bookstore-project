@@ -13,7 +13,7 @@ public class Book {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int book_id;
+	private Long book_id;
 	
 	private String title;
 	
@@ -25,9 +25,9 @@ public class Book {
 	
 	private String description;
 	
-	private byte[] cover_picture;
+	private Byte[] cover_picture;
 	
-	private int publication_year;
+	private Long publication_year;
 	
 	private String edition;
 
@@ -35,17 +35,19 @@ public class Book {
 	
 	private String book_status;
 	
-	private int quantity_in_stock;
+	private Long quantity_in_stock;
 	
-	private int minimum_threshold;
+	private Long minimum_threshold;
 	
-	private double price;
+	private Double price;
+	
+	private String sub_category;
 
-	public int getBook_id() {
+	public Long getBook_id() {
 		return book_id;
 	}
 
-	public void setBook_id(int book_id) {
+	public void setBook_id(Long book_id) {
 		this.book_id = book_id;
 	}
 
@@ -89,19 +91,19 @@ public class Book {
 		this.description = description;
 	}
 
-	public byte[] getCover_picture() {
+	public Byte[] getCover_picture() {
 		return cover_picture;
 	}
 
-	public void setCover_picture(byte[] cover_picture) {
+	public void setCover_picture(Byte[] cover_picture) {
 		this.cover_picture = cover_picture;
 	}
 
-	public int getPublication_year() {
+	public Long getPublication_year() {
 		return publication_year;
 	}
 
-	public void setPublication_year(int publication_year) {
+	public void setPublication_year(Long publication_year) {
 		this.publication_year = publication_year;
 	}
 
@@ -129,33 +131,42 @@ public class Book {
 		this.book_status = book_status;
 	}
 
-	public int getQuantity_in_stock() {
+	public Long getQuantity_in_stock() {
 		return quantity_in_stock;
 	}
 
-	public void setQuantity_in_stock(int quantity_in_stock) {
+	public void setQuantity_in_stock(Long quantity_in_stock) {
 		this.quantity_in_stock = quantity_in_stock;
 	}
 
-	public int getMinimum_threshold() {
+	public Long getMinimum_threshold() {
 		return minimum_threshold;
 	}
 
-	public void setMinimum_threshold(int minimum_threshold) {
+	public void setMinimum_threshold(Long minimum_threshold) {
 		this.minimum_threshold = minimum_threshold;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Book(int book_id, String title, String isbn, String author, String category, String description,
-			byte[] cover_picture, int publication_year, String edition, String publisher, String book_status,
-			int quantity_in_stock, int minimum_threshold, double price) {
+	public String getSub_category() {
+		return sub_category;
+	}
+
+	public void setSub_category(String sub_category) {
+		this.sub_category = sub_category;
+	}
+	
+	public Book(Long book_id, String title, String isbn, String author, String category, String description,
+			Byte[] cover_picture, Long publication_year, String edition, String publisher, String book_status,
+			Long quantity_in_stock, Long minimum_threshold, Double price, String sub_category) {
+		
 		this.book_id = book_id;
 		this.title = title;
 		this.isbn = isbn;
@@ -170,8 +181,9 @@ public class Book {
 		this.quantity_in_stock = quantity_in_stock;
 		this.minimum_threshold = minimum_threshold;
 		this.price = price;
+		this.sub_category = sub_category;
 	}
-	
+
 	public Book() {
 		
 	}
@@ -182,8 +194,9 @@ public class Book {
 				+ category + ", description=" + description + ", cover_picture=" + Arrays.toString(cover_picture)
 				+ ", publication_year=" + publication_year + ", edition=" + edition + ", publisher=" + publisher
 				+ ", book_status=" + book_status + ", quantity_in_stock=" + quantity_in_stock + ", minimum_threshold="
-				+ minimum_threshold + ", price=" + price + "]";
-	}	
-	
+				+ minimum_threshold + ", price=" + price + ", sub_category=" + sub_category + "]";
+	}
 
+	
+	
 }
