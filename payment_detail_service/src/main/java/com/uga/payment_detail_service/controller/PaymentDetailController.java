@@ -23,7 +23,7 @@ import com.uga.payment_detail_service.response.PaymentDetailsResponse;
 import com.uga.payment_detail_service.service.CardRepository;
 
 @RestController
-public class PaymentStorageController {
+public class PaymentDetailController {
 	
 	@Autowired
 	private CardRepository cardRepository;
