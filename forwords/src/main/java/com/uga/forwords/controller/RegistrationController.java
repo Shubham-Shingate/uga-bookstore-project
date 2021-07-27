@@ -85,7 +85,7 @@ public class RegistrationController {
 	public String showRegistrationForm(Model theModel) {
 		
 		theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
-		return "forWORDS-createAccount";
+		return "sign-up";
 	}
 	
 	/** -----------------------------------Service Endpoint for Processing User Registration----------------------------------- */
@@ -94,9 +94,9 @@ public class RegistrationController {
 	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest, BindingResult theBindingResult,
 											 Model theModel) {
 		
-		//Check if Field Match generates any error for password and matchingPassword
+		//Check if Field Match generates any error for pasword and matchingPassword
 		if (theBindingResult.hasErrors()) {
-			return "forWORDS-createAccount";
+			return "sign-up";
 		}
 		
 		/*
@@ -107,7 +107,7 @@ public class RegistrationController {
 		if (existingUser != null) {
 			theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
 			theModel.addAttribute("registrationError", "User name already exists.");
-			return "forWORDS-createAccount";
+			return "sign-up";
 		}
 		
 		//Save the new user to the database with inactive status
@@ -115,8 +115,10 @@ public class RegistrationController {
 				createAccountRequest.getEmailId(), bcryptPasswordEncoder.encode(createAccountRequest.getPassword()), "NA", "ROLE_CUSTOMER");
 		
 		//Save users shipping details if provided (API call - shipping_details_service)
-		if ((createAccountRequest.getStreet() != null) && (createAccountRequest.getCity() != null)
-				&& (createAccountRequest.getState() != null) && (createAccountRequest.getZipcode() != null)) {
+		if ((createAccountRequest.getStreet() != null && !createAccountRequest.getStreet().isEmpty()) &&
+		    (createAccountRequest.getCity() != null && !createAccountRequest.getCity().isEmpty()) &&
+		    (createAccountRequest.getState() != null && !createAccountRequest.getState().isEmpty()) &&
+		    (createAccountRequest.getZipcode() != null && !createAccountRequest.getZipcode().isEmpty())) {
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -132,8 +134,11 @@ public class RegistrationController {
 		}
 		
 		//Save users card details if provided (API call- payment_details_service)
-		if((createAccountRequest.getCardNumber() != null) && (createAccountRequest.getNameOnCard() != null) && (createAccountRequest.getCardType() != null)
-				&& (createAccountRequest.getCvv() != null) && (createAccountRequest.getCardExpiry() != null)) {
+		if((createAccountRequest.getCardNumber() != null && !createAccountRequest.getCardNumber().isEmpty())
+				&& (createAccountRequest.getNameOnCard() != null && !createAccountRequest.getNameOnCard().isEmpty())
+				&& (createAccountRequest.getCardType() != null && !createAccountRequest.getCardType().isEmpty())
+				&& (createAccountRequest.getCvv() != null && !createAccountRequest.getCvv().isEmpty())
+				&& (createAccountRequest.getCardExpiry() != null && !createAccountRequest.getCardExpiry().isEmpty())) {
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -176,7 +181,7 @@ public class RegistrationController {
 			VerificationToken verificationTokenEntity = new VerificationToken(null, verificationToken, now, expDate, accountId, "ACTIVE");
 			verificationRepository.save(verificationTokenEntity);
 		}
-		return "forWORDS-registrationConfirm";
+		return "registration-confirmation";
 	}
 	
 	

@@ -9,7 +9,7 @@ public class LoginController {
 	@GetMapping("/showMyLoginPage")
 	public String showMyLoginPage() {
 		
-		return "forWORDS-login";
+		return "login";
 		
 	}
 	

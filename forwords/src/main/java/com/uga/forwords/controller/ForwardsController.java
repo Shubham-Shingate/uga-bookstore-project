@@ -39,30 +39,35 @@ public class ForwardsController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	@GetMapping("/home")
-	public String showHome() {
-		
-		return "forWORDS-main-signed";
-	}
 	
-	@GetMapping("/leaders")
-	public String showLeaders() {
-		
-		return "leaders";
-	}
-	
-	// add request mapping for /systems
-	
-	@GetMapping("/systems")
-	public String showSystems() {
-		
-		return "systems";
-	}
-	
-	/** -----------------------------------Service Endpoint for showing landing page----------------------------------- */
+	/** -----------------------------------Service Endpoint for showing landing page (FOR NORMAL VISITOR)----------------------------------- */
 	
 	@GetMapping("/landingPage")
 	public String landingPage(Model model) {
+		
+		// HTTP call to the backend service- book_catalog_service
+		ResponseEntity<CatalogResponse> bookCatalogServiceResponse = restTemplate
+				.getForEntity("http://book-catalog-service/showCatalog", CatalogResponse.class);
+
+		List<Base64EncodedBook> featuredBooks = new ArrayList<Base64EncodedBook>();
+		List<Base64EncodedBook> topSellerBooks = new ArrayList<Base64EncodedBook>();
+		for (Book book : bookCatalogServiceResponse.getBody().getBooks()) {
+			if (book.getSub_category().equals("Featured")) {
+				featuredBooks.add(BooksBase64Encoder.getBase64Encoded(book));
+			} else {
+				topSellerBooks.add(BooksBase64Encoder.getBase64Encoded(book));
+			}
+		}
+		model.addAttribute("featuredBooks", featuredBooks);
+		model.addAttribute("topSellerBooks", topSellerBooks);
+		return "landing";
+	}
+	
+	
+	/** -----------------------------------Service Endpoint for showing landing page (FOR CUSTOMER)----------------------------------- */
+	
+	@GetMapping("/customer/landingPage")
+	public String customerlandingPage(Model model) {
 		
 		//HTTP call to the backend service- book_catalog_service
 		ResponseEntity<CatalogResponse> bookCatalogServiceResponse = restTemplate.getForEntity("http://book-catalog-service/showCatalog", CatalogResponse.class);
@@ -79,6 +84,14 @@ public class ForwardsController {
 		model.addAttribute("featuredBooks", featuredBooks);
 		model.addAttribute("topSellerBooks", topSellerBooks);
 		return "landing";
+	}
+	
+	/** -----------------------------------Service Endpoint for showing shopping cart page (FOR CUSTOMER)----------------------------------- */
+	
+	@GetMapping("/customer/viewCart")
+	public String customerCart() {
+		
+		return "customer-cart";
 	}
 	
 	/** -----------------------------------Service Endpoint for showing particular book details----------------------------------- */
@@ -158,7 +171,7 @@ public class ForwardsController {
 	
 	/** -----------------------------------Service Endpoint for showing Edit Profile Pages----------------------------------- */
 	
-	@GetMapping("/showSettingsPage")
+	@GetMapping("/customer/showSettingsPage")
 	public String showSettingsPage(Principal principal, Model model) {
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -177,8 +190,8 @@ public class ForwardsController {
 	}
 	
 	
-	@PostMapping("/updateProfileDetails")
-	public String updateProfileDetails(Principal principal, Model model, @Valid @ModelAttribute("updateProfile") UpdateProfileDetailsRequest updateProfileDetailsRequest) {
+	@PostMapping("/customer/updateProfileDetails")
+	public String updateProfileDetails(@Valid @ModelAttribute("updateProfile") UpdateProfileDetailsRequest updateProfileDetailsRequest, Principal principal, Model model) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -194,12 +207,12 @@ public class ForwardsController {
 //		model.addAttribute("activeUserDetails", profileDetailsServiceResponse2.getBody().getUserDetails());
 //		return "customer-settings";
 		
-		return "redirect:/showSettingsPage";
+		return "redirect:/customer/showSettingsPage";
 		
 	}
 	
 	
-	@GetMapping("/togglePromotions/{toggleValue}")
+	@GetMapping("/customer/togglePromotions/{toggleValue}")
 	public String togglePromotions(Principal principal, Model model, @PathVariable String toggleValue) {
 		
 		HttpHeaders headers = new HttpHeaders();
@@ -210,13 +223,13 @@ public class ForwardsController {
 		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = 
 				restTemplate.exchange("http://profile-detail-service/togglePromotionSubscription/" + toggleValue, HttpMethod.GET, entity, PersonalDetailsResponse.class);
 
-		return "redirect:/showSettingsPage";
+		return "redirect:/customer/showSettingsPage";
 	}
 	
 	
 	
-	@PostMapping("/changePassword")
-	public String changePassword(Principal principal, Model model, @Valid @ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest) {
+	@PostMapping("/customer/changePassword")
+	public String changePassword(@Valid @ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -230,7 +243,7 @@ public class ForwardsController {
 		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.postForEntity("http://profile-detail-service/changePassword", entity, PersonalDetailsResponse.class);
 		
 		
-		return "redirect:/showSettingsPage";
+		return "redirect:/customer/showSettingsPage";
 	}
 	
 	
