@@ -16,10 +16,15 @@
 <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
 <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
 
-<!-- Fonticons -->
+<!-- Fonticons and Fonts -->
 <link th:href="@{/fonts/fontawesome/css/all.min.css}" type="text/css" rel="stylesheet">
 <link th:href="@{/fonts/feathericons/css/iconfont.css}" rel="stylesheet" type="text/css" />
 <link th:href="@{/fonts/material-icons/css/materialdesignicons.css}" rel="stylesheet" type="text/css" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap" rel="stylesheet">
+
 
 <!-- custom style -->
 <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css"/>
@@ -135,7 +140,7 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-3 col-4">
-				<a href="" class="brand-wrap">forWORDS</a> <!-- brand-wrap.// -->
+				<a th:href="@{/landingPage}" class="brand-wrap" style="font-family: 'Exo 2', sans-serif; font-size: xx-large;">FORWORDS</a> <!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
 				<form action="#" class="search">
@@ -158,19 +163,46 @@
 				    </div>
 				</form> <!-- search-wrap .end// -->
 			</div> <!-- col.// -->
-			<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+			<div sec:authorize="!isAuthenticated()" class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
 				<div class="d-flex justify-content-end mb-3 mb-lg-0">
 					<div class="widget-header">
 						<small class="title text-muted">Welcome guest!</small>
 						<div> 
-							<a href="#">Log in</a> <span class="dark-transp"> | </span>
-							<a href="#"> Sign Up</a>
+							<a th:href="@{/customer/landingPage}">Log in</a> <span class="dark-transp"> | </span>
+							<a th:href="@{/register/showRegistrationForm}"> Sign Up</a>
 						</div>
 					</div>
-					<a href="#" class="widget-header pl-3 ml-3">
+					<a th:href="@{/customer/viewCart}" class="widget-header pl-3 ml-3">
 						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
 						<span class="badge badge-pill badge-danger notify">0</span>
 					</a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+			<div sec:authorize="isAuthenticated()" class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					<a th:href="@{/customer/viewCart}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+						<span class="badge badge-pill badge-danger notify">0</span>
+					</a>
+					<div class="widget-header dropdown pl-2 ml-2">
+						<a href="#" data-toggle="dropdown" class="dropdown-toggle" data-offset="20,10">
+							<div class="icon icon-sm rounded-circle border ">
+								<i class="fa fa-user"></i>
+							</div>
+							<span class="sr-only">Profile actions</span>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a class="dropdown-item" href="#">My Profile</a>
+							<a class="dropdown-item" href="#">Shipping</a>
+							<a class="dropdown-item" href="#">Payment</a>
+							<a class="dropdown-item" href="#">Order History</a>
+							<hr class="dropdown-divider">
+							<form th:action="@{/logout}" method="POST">
+								<input type="submit" class="dropdown-item" value="Logout">
+							</form>	
+						</div>
+						<!--  dropdown-menu .// -->
+					</div>
 				</div> <!-- widgets-wrap.// -->
 			</div> <!-- col.// -->
 		</div> <!-- row.// -->
@@ -180,7 +212,7 @@
 
 <nav class="navbar navbar-expand-md navbar-main border-bottom">
 	<div class="container">
-			<form class="d-md-none my-2">
+		  <form class="d-md-none my-2">
 			  <div class="input-group">
 				  <input type="search" name="search" class="form-control" placeholder="Search" required="">
 				  <div class="input-group-append">
@@ -215,7 +247,7 @@
 <section class="section-intro">
 
 	<div >
-		<img src="" width="100%" height="400">
+		<img th:src="@{/images/banners/forwords-banner.png}" width="100%" height="400">
 	</div>
 	
 </section>

@@ -30,10 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
-		 .antMatchers("/home").hasRole("CUSTOMER") // allow public access to landing page
-		 .antMatchers("/leaders/**").hasRole("CUSTOMER")
-		 .antMatchers("/systems/**").hasRole("ADMIN")
-		 .anyRequest().permitAll()
+		 .antMatchers("/customer/**").hasRole("CUSTOMER") // allow authenticated access to customer pages
+		 .antMatchers("/administrator/**").hasRole("ADMIN")
+		 .anyRequest().permitAll() //allow public access to all other pages
 		 .and()
 			.formLogin()
 			.loginPage("/showMyLoginPage")
@@ -41,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 		 .and()
 		 	.logout().permitAll()
-		 	//.logoutSuccessUrl("/")
-		 	//.permitAll()
+		 	.logoutSuccessUrl("/landingPage")
+		 	.permitAll()
 		 .and()
 		 	.exceptionHandling()
 		 	.accessDeniedPage("/access-denied");
