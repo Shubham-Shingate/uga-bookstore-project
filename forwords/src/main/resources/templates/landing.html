@@ -161,10 +161,11 @@
 			<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
 				<div class="d-flex justify-content-end mb-3 mb-lg-0">
 					<div class="widget-header">
-						<small class="title text-muted">Welcome guest!</small>
-						<div> 
-							<a href="#">Log in</a> <span class="dark-transp"> | </span>
-							<a href="#"> Sign Up</a>
+						<div sec:authorize="isAuthenticated()"> 
+							<a th:href="@{/showMyLoginPage}" >Log in</a>
+						</div>
+						<div sec:authorize="!isAuthenticated()">
+							<a th:href="@{/register/showRegistrationForm}"> Sign Up</a>
 						</div>
 					</div>
 					<a href="#" class="widget-header pl-3 ml-3">
