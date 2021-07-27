@@ -100,7 +100,44 @@ public class RestExceptionHandler {
 	
 	
 	/**------------------HANDLING OF CUSTOM EXCEPTIONS------------------*/
+	@ExceptionHandler(DBAccessFailedException.class)
+	protected ResponseEntity<BookResponse> handleDBAccessFailedException(DBAccessFailedException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
 	
+	@ExceptionHandler(BookNotFoundException.class)
+	protected ResponseEntity<BookResponse> handleBookNotFoundException(BookNotFoundException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
 	
+	@ExceptionHandler(ImageException.class)
+	protected ResponseEntity<BookResponse> handleImageException(ImageException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(InvalidFieldException.class)
+	protected ResponseEntity<BookResponse> handleInvalidFieldException(InvalidFieldException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		BookResponse bookResponse = new BookResponse("Failure", apiError);
+		return new ResponseEntity<BookResponse>(bookResponse, HttpStatus.OK);
+	}
 	
 }
