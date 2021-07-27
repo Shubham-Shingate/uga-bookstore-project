@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -84,14 +85,20 @@ public class RegistrationController {
 	public String showRegistrationForm(Model theModel) {
 		
 		theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
-		return "registration-form";
+		return "sign-up";
 	}
 	
 	/** -----------------------------------Service Endpoint for Processing User Registration----------------------------------- */
 	
 	@PostMapping("/processRegistrationForm")
-	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest,
+	public String processRegistrationForm(@Valid @ModelAttribute("createAccountRequest") CreateAccountRequest createAccountRequest, BindingResult theBindingResult,
 											 Model theModel) {
+		
+		//Check if Field Match generates any error for pasword and matchingPassword
+		if (theBindingResult.hasErrors()) {
+			return "sign-up";
+		}
+		
 		/*
 		 * Check the username (i.e email id) if already present in the database ACTIVE_USER_MASTER table. If emailId is present in USER_MASTER then but
 		 *  not in ACTIVE_USER_MASTER still allow him to register with same email Id (new accounID will be generated).
@@ -100,7 +107,7 @@ public class RegistrationController {
 		if (existingUser != null) {
 			theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
 			theModel.addAttribute("registrationError", "User name already exists.");
-			return "registration-form";
+			return "sign-up";
 		}
 		
 		//Save the new user to the database with inactive status
@@ -108,8 +115,10 @@ public class RegistrationController {
 				createAccountRequest.getEmailId(), bcryptPasswordEncoder.encode(createAccountRequest.getPassword()), "NA", "ROLE_CUSTOMER");
 		
 		//Save users shipping details if provided (API call - shipping_details_service)
-		if ((createAccountRequest.getStreet() != null) && (createAccountRequest.getCity() != null)
-				&& (createAccountRequest.getState() != null) && (createAccountRequest.getZipcode() != null)) {
+		if ((createAccountRequest.getStreet() != null && !createAccountRequest.getStreet().isEmpty()) &&
+		    (createAccountRequest.getCity() != null && !createAccountRequest.getCity().isEmpty()) &&
+		    (createAccountRequest.getState() != null && !createAccountRequest.getState().isEmpty()) &&
+		    (createAccountRequest.getZipcode() != null && !createAccountRequest.getZipcode().isEmpty())) {
 
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
@@ -125,8 +134,11 @@ public class RegistrationController {
 		}
 		
 		//Save users card details if provided (API call- payment_details_service)
-		if((createAccountRequest.getCardNumber() != null) && (createAccountRequest.getNameOnCard() != null) && (createAccountRequest.getCardType() != null)
-				&& (createAccountRequest.getCvv() != null) && (createAccountRequest.getCardExpiry() != null)) {
+		if((createAccountRequest.getCardNumber() != null && !createAccountRequest.getCardNumber().isEmpty())
+				&& (createAccountRequest.getNameOnCard() != null && !createAccountRequest.getNameOnCard().isEmpty())
+				&& (createAccountRequest.getCardType() != null && !createAccountRequest.getCardType().isEmpty())
+				&& (createAccountRequest.getCvv() != null && !createAccountRequest.getCvv().isEmpty())
+				&& (createAccountRequest.getCardExpiry() != null && !createAccountRequest.getCardExpiry().isEmpty())) {
 			
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);

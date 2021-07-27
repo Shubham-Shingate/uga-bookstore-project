@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uga.search_book_service.exception.NoBooksFoundException;
-import com.uga.search_book_service.model.Book;
+import com.uga.search_book_service.model.SearchBook;
 import com.uga.search_book_service.response.SearchBookResponse;
 import com.uga.search_book_service.service.BookRepository;
 
@@ -22,7 +22,7 @@ public class SearchBookController {
 	
 	@GetMapping("/searchBooksTitle/{title}")
 	public ResponseEntity<SearchBookResponse> searchBooksTitle(@PathVariable String title) {
-		List<Book> foundBooks = bookRepository.findByTitleContaining(title);
+		List<SearchBook> foundBooks = bookRepository.findByTitleContaining(title);
 		if (foundBooks.isEmpty()) {
 			throw new NoBooksFoundException("No book found for given title- "+title);
 		}
@@ -33,7 +33,7 @@ public class SearchBookController {
 	
 	@GetMapping("/searchBooksISBN/{isbn}")
 	public ResponseEntity<SearchBookResponse> searchBooksISBN(@PathVariable String isbn) {
-		List<Book> foundBooks = bookRepository.findByIsbnContaining(isbn);
+		List<SearchBook> foundBooks = bookRepository.findByIsbnContaining(isbn);
 		if (foundBooks.isEmpty()) {
 			throw new NoBooksFoundException("No book found for given isbn- "+isbn);
 		}
@@ -44,7 +44,7 @@ public class SearchBookController {
 	
 	@GetMapping("/searchBooksAuthor/{author}")
 	public ResponseEntity<SearchBookResponse> searchBooksAuthor(@PathVariable String author) {
-		List<Book> foundBooks = bookRepository.findByAuthorContaining(author);
+		List<SearchBook> foundBooks = bookRepository.findByAuthorContaining(author);
 		if (foundBooks.isEmpty()) {
 			throw new NoBooksFoundException("No book found for given author- "+author);
 		}
@@ -55,7 +55,7 @@ public class SearchBookController {
 	
 	@GetMapping("/searchBooksCategory/{category}")
 	public ResponseEntity<SearchBookResponse> searchBooksCategory(@PathVariable String category) {
-		List<Book> foundBooks = bookRepository.findByCategoryContaining(category);
+		List<SearchBook> foundBooks = bookRepository.findByCategoryContaining(category);
 		if (foundBooks.isEmpty()) {
 			throw new NoBooksFoundException("No book found for given category- "+category);
 		}
@@ -67,7 +67,7 @@ public class SearchBookController {
 	
 	@GetMapping("/searchBooksBookId/{bookId}")
 	public ResponseEntity<SearchBookResponse> searchBooksBookId(@PathVariable Long bookId) {
-		List<Book> foundBooks = bookRepository.findByBookId(bookId);
+		List<SearchBook> foundBooks = bookRepository.findByBookId(bookId);
 		if (foundBooks.isEmpty()) {
 			throw new NoBooksFoundException("No book found for given bookId- "+bookId);
 		}

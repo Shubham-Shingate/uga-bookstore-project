@@ -10,8 +10,10 @@ import com.uga.shipping_detail_service.model.*;
 
 @Repository
 public interface ShippingRepository extends CrudRepository<ShippingEntry, Long> {
+	
 	@Transactional
 	public List<ShippingEntry> findByAccountId(String accountId);
+	
 	@Transactional
 	public List<ShippingEntry> findByAccountIdAndAddressId(String accountId, Long addressId);
 	

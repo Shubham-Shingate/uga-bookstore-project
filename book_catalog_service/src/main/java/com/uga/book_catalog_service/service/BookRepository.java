@@ -9,9 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uga.book_catalog_service.model.Book;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Integer> {
+
+public interface BookRepository extends CrudRepository<Book, Long> {
+	
 	@Transactional
 	public List<Book> findByTitleContaining(String title);
+	
 	@Transactional
-	List<Book> findAll();
+	public List<Book> findAll();
 }

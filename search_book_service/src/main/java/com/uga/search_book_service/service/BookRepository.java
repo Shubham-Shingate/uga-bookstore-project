@@ -4,23 +4,30 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.uga.search_book_service.model.Book;
+import com.uga.search_book_service.model.SearchBook;
 
 @Repository
-public interface BookRepository extends CrudRepository<Book, Long> {
+public interface BookRepository extends CrudRepository<SearchBook, Long> {
 	
-	public List<Book> findByIsbnContaining(String isbn);
+	@Transactional
+	public List<SearchBook> findByIsbnContaining(String isbn);
 	
-	public List<Book> findByAuthorContaining(String author);
+	@Transactional
+	public List<SearchBook> findByAuthorContaining(String author);
 	
-	public List<Book> findByTitleContaining(String title);
+	@Transactional
+	public List<SearchBook> findByTitleContaining(String title);
 	
-	public List<Book> findByCategoryContaining(String category);
+	@Transactional
+	public List<SearchBook> findByCategoryContaining(String category);
 	
-	public List<Book> findByBookId(Long bookId);
+	@Transactional
+	public List<SearchBook> findByBookId(Long bookId);
 	
-	public List<Book> findAll();
+	@Transactional
+	public List<SearchBook> findAll();
 	
 	
 	

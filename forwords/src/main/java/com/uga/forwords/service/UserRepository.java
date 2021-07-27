@@ -4,14 +4,17 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.uga.forwords.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
 	
-
+	@Transactional
 	public User findByAccountId(String accountId);
 	
+	@Transactional
 	@Query(value = "CALL SP_CREATE_USER_ACCOUNT(:in_FULL_NAME, :in_PHONE_NO, :in_EMAIL_ID, :in_PASSWORD, :in_ACCOUNT_STATUS, :in_ROLE);", nativeQuery = true)
 	public String saveUser(
 			@Param("in_FULL_NAME") String in_FULL_NAME,

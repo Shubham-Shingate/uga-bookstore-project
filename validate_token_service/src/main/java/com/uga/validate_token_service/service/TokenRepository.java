@@ -9,6 +9,7 @@ import com.uga.validate_token_service.model.VerificationToken;
 
 @Repository
 public interface TokenRepository extends CrudRepository <VerificationToken, Long> {
+
 	@Transactional
 	public VerificationToken findByAccountIdAndVerificationToken(String accountId, String verificationToken);
 	

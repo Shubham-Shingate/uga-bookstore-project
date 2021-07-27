@@ -1,18 +1,211 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy M." />
 
-<head>
-	<title>Registration Confirmation</title>
-</head>
+    <title>forWORDS - Registration Confirmation</title>
 
-<body>
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery-2.0.0.min.js}" type="text/javascript"></script>
 
-	<h2>User registered successfully!</h2>
+    <!-- Bootstrap4 files-->
+    <script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    
 
-	<hr>
-	
-	<a th:href="@{/showMyLoginPage}">Login with new user</a>
-	
-</body>
+    <!-- Fonticons -->
+    <link
+      th:href="@{/fonts/fontawesome/css/all.min.css}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/fonts/feathericons/css/iconfont.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      th:href="@{/fonts/material-icons/css/materialdesignicons.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
 
+    <!-- custom style -->
+    <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+
+    <!-- custom javascript -->
+    <script th:src="@{/js/script.js}" type="text/javascript"></script>
+  </head>
+  <body>
+    <header class="section-header">
+      <section class="header-main border-bottom">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-3 col-4">
+				<a th:href="@{http://forWORDS.com}" class="brand-wrap">
+					<img class="logo" th:src="@{/images/forwords-logo.png}">
+				</a> <!-- brand-wrap.// -->
+			</div>
+			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+				<form action="#" class="search">
+					<div class="input-group w-100">
+						<select class="custom-select"  name="category_name">
+								<option value="">Search By</option><option value="codex">ISBN</option>
+								<option value="comments">Author </option>
+								<option value="content">Title</option>
+                                <option value="content">Category</option>
+						</select>
+					    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+					    
+					    <div class="input-group-append">
+					      <button class="btn btn-primary" type="submit">
+					        <i class="fa fa-search"></i>
+					      </button>
+					    </div>
+				    </div>
+				</form> <!-- search-wrap .end// -->
+			</div> <!-- col.// -->
+			<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					<div class="widget-header">
+						<small class="title text-muted">Welcome guest!</small>
+						<div> 
+							<a th:href="@{/showMyLoginPage}">Sign in</a> <span class="dark-transp"> | </span>
+							<a th:href="@{/register/showRegistrationForm}"> Register</a>
+						</div>
+					</div>
+					<a th:href="@{/showMyLoginPage}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+						<span class="badge badge-pill badge-danger notify">0</span>
+					</a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+
+                    
+				</div> <!-- widgets-wrap.// -->
+
+                
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+	</div> <!-- container.// -->
+
+    </header>
+    <!-- section-header.// -->
+    <!-- ========================= SECTION PAGETOP ========================= -->
+    <section class="section-pagetop bg">
+      <div class="container">
+        <h2 class="title-page">Thank You for your Registration!</h2>
+      </div>
+      <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION INTRO END// ========================= -->
+    <section class="section-content padding-y ">
+      <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+        <tbody>
+            <div class="cards"></div>
+          <p>
+            We have sent an confirmation email . Please confirm your email
+            address to activate your account.
+          </p>
+          <p>
+            <a th:href="@{/customer/landingPage}" class="btn btn-primary float-md-left">
+              Continue <i class="fa fa-chevron-right"></i>
+            </a>
+          </p>
+        </tbody>
+            
+
+             
+            
+       
+        <!-- row.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+        <br /><br />
+       <br /><br />
+       <br /><br />
+       <br /><br />
+
+         
+      </div>
+      <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+    <!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top ">
+	<div class="container">
+		<section class="footer-top padding-y">
+			<div class="row">
+				
+				<aside class="col-md">
+					<h6 class="title">forWORDS</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">About us</a></li>
+						
+						<li> <a href="#">Rules and terms</a></li>
+						
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Help</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#">Contact us</a></li>
+						<li> <a href="#">Cart Items</a></li>
+						<li> <a href="#">Order status</a></li>
+						<li> <a href="#">Shipping info</a></li>
+						
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Account</h6>
+					<ul class="list-unstyled">
+						<li> <a href="#"> User Login </a></li>
+						<li> <a href="#"> User register </a></li>
+						<li> <a href="#"> Account Setting </a></li>
+						<li> <a href="#"> My Orders </a></li>
+					</ul>
+				</aside>
+				<aside class="col-md">
+					<h6 class="title">Social</h6>
+					<ul class="list-unstyled">
+						<li><a href="#"> <i class="fab fa-facebook"></i> Facebook </a></li>
+						<li><a href="#"> <i class="fab fa-twitter"></i> Twitter </a></li>
+						<li><a href="#"> <i class="fab fa-instagram"></i> Instagram </a></li>
+						<li><a href="#"> <i class="fab fa-youtube"></i> Youtube </a></li>
+					</ul>
+				</aside>
+			</div> <!-- row.// -->
+		</section>	<!--footer-top -->
+
+		<section class="footer-bottom border-top row ">
+			<div class="col-md-2">
+				<p class="text-muted"> &copy 2021 forWORDS.com </p>
+			</div>
+			<div class="col-md-8 text-md-center">
+				<span  class="px-2">info@emailservis.com</span>
+				<span  class="px-2">+12037157177</span>
+				<span  class="px-2">1000 Lakeside Drive, Athens</span>
+			</div>
+			<div class="col-md-2 text-md-right text-muted">
+				<i class="fab fa-lg fa-cc-visa"></i>
+				<i class="fab fa-lg fa-cc-paypal"></i>
+				<i class="fab fa-lg fa-cc-mastercard"></i>
+			</div>
+		</section>
+	</div><!-- //container -->
+</footer>
+<!-- ========================= FOOTER END // ========================= -->
+
+ 
+
+  </body>
 </html>
