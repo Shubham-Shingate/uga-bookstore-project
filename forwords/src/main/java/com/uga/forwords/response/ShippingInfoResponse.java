@@ -1,6 +1,7 @@
 package com.uga.forwords.response;
 
 import java.util.List;
+
 import com.uga.forwords.model.ShippingEntry;
 
 public class ShippingInfoResponse {

@@ -23,11 +23,18 @@ import org.springframework.web.client.RestTemplate;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
 import com.uga.forwords.model.SearchBook;
+import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.ChangePasswordRequest;
+import com.uga.forwords.request.DeletePaymentDetailsRequest;
+import com.uga.forwords.request.DeleteShipppingDetailsRequest;
+import com.uga.forwords.request.ShippingInfoRequest;
+import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
 import com.uga.forwords.response.CatalogResponse;
+import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
 import com.uga.forwords.response.SearchBookResponse;
+import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.util.BooksBase64Encoder;
 
 @Controller
@@ -169,7 +176,7 @@ public class ForwardsController {
 		return "search";
 	}
 	
-	/** -----------------------------------Service Endpoint for showing Edit Profile Pages----------------------------------- */
+	/** -----------------------------------Services for showing Profile Settings and related services (calls go to profile_detail_service)----------------------------------- */
 	
 	@GetMapping("/customer/showSettingsPage")
 	public String showSettingsPage(Principal principal, Model model) {
@@ -191,7 +198,7 @@ public class ForwardsController {
 	
 	
 	@PostMapping("/customer/updateProfileDetails")
-	public String updateProfileDetails(@Valid @ModelAttribute("updateProfile") UpdateProfileDetailsRequest updateProfileDetailsRequest, Principal principal, Model model) {
+	public String updateProfileDetails(@ModelAttribute("updateProfile") UpdateProfileDetailsRequest updateProfileDetailsRequest, Principal principal, Model model) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -229,7 +236,7 @@ public class ForwardsController {
 	
 	
 	@PostMapping("/customer/changePassword")
-	public String changePassword(@Valid @ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
+	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -246,6 +253,145 @@ public class ForwardsController {
 		return "redirect:/customer/showSettingsPage";
 	}
 	
+	
+	/** -----------------------------------Services for showing Shipping Details and related services (calls go to shipping_detail_service)----------------------------------- */
+	
+	
+	@GetMapping("/customer/getShippingDetails")
+	public String getShippingDetails(Principal principal, Model theModel) {
+		
+		// Set account ID in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
+																						HttpMethod.GET, entity, ShippingInfoResponse.class);
+		
+		// Add information to model
+		theModel.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
+		theModel.addAttribute("updateShippingDetails", new ShippingInfoRequest());
+		return "customer-addresses";
+	}
+	
+	
+	@PostMapping("/customer/processShippingForm")
+	public String processShippingForm(Principal principal, Model theModel, @ModelAttribute("updateShippingDetails") ShippingInfoRequest shippingRequest) {
+		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Set up Http entity with request body
+		HttpEntity<ShippingInfoRequest> entity = new HttpEntity<ShippingInfoRequest>(shippingRequest, headers);
+		
+		// Send request to backend service
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.postForEntity("http://shipping-detail-service/updateShippingDetails", entity, ShippingInfoResponse.class);
+		
+//		sendProfileChangeConfirmationEmail(principal.getName());
+				
+		return "redirect:/customer/getShippingDetails";
+	}
+	
+	@PostMapping("/customer/deleteShippingDetails/{addressId}")
+	public String deleteShippingDetails(Principal principal, @PathVariable long addressId) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		DeleteShipppingDetailsRequest request = new DeleteShipppingDetailsRequest(addressId);
+		HttpEntity<DeleteShipppingDetailsRequest> entity = new HttpEntity<DeleteShipppingDetailsRequest>(request, headers);
+		
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.postForEntity("http://shipping-detail-service/deleteShippingDetails", entity, ShippingInfoResponse.class);
+		
+//		sendProfileChangeConfirmationEmail(principal.getName());
+		
+		return "redirect:/customer/getShippingDetails";
+	}
+	
+	
+	/** -----------------------------------Services for showing Payment Details and related services (calls go to payment_detail_service)----------------------------------- */
+	
+	
+	@GetMapping("/customer/getPaymentDetails")
+	public String getPaymentDetails(Principal principal, Model theModel) {
+		
+		// Set account ID in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.exchange("http://payment-detail-service/getPaymentDetails",
+																						HttpMethod.GET, entity, PaymentDetailsResponse.class);
+		
+		// Add information to model
+		theModel.addAttribute("userPaymentInfo", paymentDetailsServiceResponse.getBody().getCards());
+		theModel.addAttribute("updatePaymentDetails", new UpdatePaymentDetailsRequest());
+		theModel.addAttribute("addPaymentDetails", new AddPaymentDetailsRequest());
+		
+		return "customer-payments";
+	}
+	
+	@PostMapping("/customer/addPaymentDetails")
+	public String addPaymentDetails(Principal principal, Model theModel, @ModelAttribute("addPaymentDetails") AddPaymentDetailsRequest addPaymentDetailsRequest) {
+		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Set up Http entity with request body
+		HttpEntity<AddPaymentDetailsRequest> entity = new HttpEntity<AddPaymentDetailsRequest>(addPaymentDetailsRequest, headers);
+		
+		// Send request to backend service
+		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
+		
+//		sendProfileChangeConfirmationEmail(principal.getName());
+				
+		return "redirect:/customer/getPaymentDetails";
+	}
+	
+	@PostMapping("/customer/updatePaymentDetails")
+	public String updatePaymentDetails(Principal principal, Model theModel, @ModelAttribute("updatePaymentDetails") UpdatePaymentDetailsRequest updatePaymentDetailsRequest) {
+		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Set up Http entity with request body
+		HttpEntity<UpdatePaymentDetailsRequest> entity = new HttpEntity<UpdatePaymentDetailsRequest>(updatePaymentDetailsRequest, headers);
+		
+		// Send request to backend service
+		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/updatePaymentDetails", entity, PaymentDetailsResponse.class);
+		
+//		sendProfileChangeConfirmationEmail(principal.getName());
+				
+		return "redirect:/customer/getPaymentDetails";
+	}
+	
+	@PostMapping("/customer/deletePaymentDetails/{cardNumber}")
+	public String deletePaymentDetails(Principal principal, @PathVariable String cardNumber) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		DeletePaymentDetailsRequest deletePaymentDetailsRequest = new DeletePaymentDetailsRequest(cardNumber);
+		HttpEntity<DeletePaymentDetailsRequest> entity = new HttpEntity<DeletePaymentDetailsRequest>(deletePaymentDetailsRequest, headers);
+		
+		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/deletePaymentDetails", entity, PaymentDetailsResponse.class);
+		
+//		sendProfileChangeConfirmationEmail(principal.getName());
+		
+		return "redirect:/customer/getPaymentDetails";
+	}
 	
 	
 	

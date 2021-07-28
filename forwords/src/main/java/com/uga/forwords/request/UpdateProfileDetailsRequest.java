@@ -1,13 +1,9 @@
 package com.uga.forwords.request;
 
-import javax.validation.constraints.NotBlank;
-
 public class UpdateProfileDetailsRequest {
 	
-	@NotBlank(message = "{fullName.notblank}")
 	private String fullName;
 	
-	@NotBlank(message = "{phoneNo.notblank}")
 	private String phoneNo;
 
 	public String getFullName() {
