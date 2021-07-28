@@ -71,10 +71,7 @@ public class ProfileDetailController {
 	@PostMapping("/changePassword")  //Note: This endpoint accepts the oldPassword in encoded form. So sent it directly in encoded form
 	public ResponseEntity<PersonalDetailsResponse> changePassword(@RequestHeader String accountId, @Validated @RequestBody ChangePasswordRequest changePasswordRequest) {
 		
-		ActiveUserDetails activeUser = activeUserRepository.findByAccountIdAndPassword(accountId, changePasswordRequest.getOldPassword());		
-		if (activeUser == null) {
-			throw new AccountNotFoundException("No account found for given accountId and Password combination");
-		}
+		ActiveUserDetails activeUser = activeUserRepository.findByAccountId(accountId);
 		activeUser.setPassword(changePasswordRequest.getNewPassword());
 		activeUserRepository.save(activeUser);
 	
