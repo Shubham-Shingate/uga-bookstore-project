@@ -271,3 +271,105 @@ java.sql.SQLNonTransientConnectionException: Too many connections
 2021-07-28 14:54:36.196  INFO 19248 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2021-07-28 14:59:36.393  INFO 19248 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2021-07-28 15:04:36.403  INFO 19248 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 15:48:33.611  INFO 8712 --- [main] c.u.s.ShippingDetailServiceApplication   : No active profile set, falling back to default profiles: default
+2021-07-28 15:48:35.961  INFO 8712 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2021-07-28 15:48:36.069  INFO 8712 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95ms. Found 1 JPA repository interfaces.
+2021-07-28 15:48:36.243  WARN 8712 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-28 15:48:36.509  INFO 8712 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=ba0c396c-5fa1-354a-b8f4-046bb89537ad
+2021-07-28 15:48:37.501  INFO 8712 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8086 (http)
+2021-07-28 15:48:37.515  INFO 8712 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-28 15:48:37.515  INFO 8712 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-07-28 15:48:37.718  INFO 8712 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-28 15:48:37.718  INFO 8712 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4063 ms
+2021-07-28 15:48:37.965  WARN 8712 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-28 15:48:37.965  INFO 8712 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-28 15:48:37.984  INFO 8712 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@2d24cdd9
+2021-07-28 15:48:38.342  INFO 8712 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-28 15:48:38.379  INFO 8712 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-28 15:48:39.831  INFO 8712 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-28 15:48:39.916  INFO 8712 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-28 15:48:40.156  INFO 8712 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2021-07-28 15:48:40.656  INFO 8712 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-07-28 15:48:40.734  WARN 8712 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-28 15:48:40.981  INFO 8712 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-07-28 15:48:42.059  INFO 8712 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2021-07-28 15:48:42.412  INFO 8712 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-28 15:48:42.551  WARN 8712 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-28 15:48:42.552  INFO 8712 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-28 15:48:43.420  INFO 8712 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-28 15:48:43.445  INFO 8712 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-28 15:48:43.726  INFO 8712 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-07-28 15:48:44.399  INFO 8712 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-28 15:48:44.401  INFO 8712 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-28 15:48:44.449  WARN 8712 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2021-07-28 15:48:44.472  INFO 8712 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 69 ms
+2021-07-28 15:48:44.766  INFO 8712 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2021-07-28 15:48:44.813  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2021-07-28 15:48:44.879  INFO 8712 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2021-07-28 15:48:44.880  INFO 8712 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2021-07-28 15:48:45.195  INFO 8712 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2021-07-28 15:48:45.196  INFO 8712 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2021-07-28 15:48:45.509  INFO 8712 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-28 15:48:45.721  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2021-07-28 15:48:45.722  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-28 15:48:45.955  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-28 15:48:45.959  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2021-07-28 15:48:45.963  INFO 8712 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-28 15:48:45.974  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627501725968 with initial instances count: 1
+2021-07-28 15:48:45.987  INFO 8712 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application SHIPPING-DETAIL-SERVICE with eureka with status UP
+2021-07-28 15:48:45.988  INFO 8712 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627501725988, current=UP, previous=STARTING]
+2021-07-28 15:48:45.991  INFO 8712 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SHIPPING-DETAIL-SERVICE/192.168.1.187:shipping-detail-service:8086: registering service...
+2021-07-28 15:48:46.047  INFO 8712 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_SHIPPING-DETAIL-SERVICE/192.168.1.187:shipping-detail-service:8086 - registration status: 204
+2021-07-28 15:48:46.117  INFO 8712 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8086 (http) with context path ''
+2021-07-28 15:48:46.120  INFO 8712 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8086
+2021-07-28 15:48:46.381  INFO 8712 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-28 15:48:46.414  INFO 8712 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-28 15:48:46.471  INFO 8712 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-28 15:48:46.656  INFO 8712 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2021-07-28 15:48:47.200  INFO 8712 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2021-07-28 15:48:47.203  INFO 8712 --- [main] c.u.s.ShippingDetailServiceApplication   : Started ShippingDetailServiceApplication in 15.359 seconds (JVM running for 16.77)
+2021-07-28 15:48:47.293  INFO 8712 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as db959c516382
+2021-07-28 15:49:46.349  INFO 8712 --- [http-nio-8086-exec-5] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:49:49.617  INFO 8712 --- [http-nio-8086-exec-5] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=1000 Lakeside Dr, city=Athens, state=GA, zipCode=30605, status=DEFAULT, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:49:49.618  INFO 8712 --- [http-nio-8086-exec-5] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:49:49.619  INFO 8712 --- [http-nio-8086-exec-5] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 3270 ms
+2021-07-28 15:53:45.741  INFO 8712 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 15:54:34.716  INFO 8712 --- [http-nio-8086-exec-7] c.u.s.aop.LoggingAspect                  : Before method execution updateShippingDetails
+2021-07-28 15:54:37.721  INFO 8712 --- [http-nio-8086-exec-7] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.updateShippingDetails(String,ShippingInfoRequest)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=null],[]>
+2021-07-28 15:54:37.721  INFO 8712 --- [http-nio-8086-exec-7] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.updateShippingDetails(String,ShippingInfoRequest))
+2021-07-28 15:54:37.721  INFO 8712 --- [http-nio-8086-exec-7] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.updateShippingDetails :: 3005 ms
+2021-07-28 15:55:04.374  INFO 8712 --- [http-nio-8086-exec-8] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:55:09.286  INFO 8712 --- [http-nio-8086-exec-8] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:55:09.288  INFO 8712 --- [http-nio-8086-exec-8] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:55:09.289  INFO 8712 --- [http-nio-8086-exec-8] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 4915 ms
+2021-07-28 15:55:32.496  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : Before method execution updateShippingDetails
+2021-07-28 15:55:33.712  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.updateShippingDetails(String,ShippingInfoRequest)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=null],[]>
+2021-07-28 15:55:33.713  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.updateShippingDetails(String,ShippingInfoRequest))
+2021-07-28 15:55:33.714  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.updateShippingDetails :: 1217 ms
+2021-07-28 15:55:34.491  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:55:35.285  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB], ShippingEntry [addressId=20, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:55:35.286  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:55:35.286  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 796 ms
+2021-07-28 15:57:53.033  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : Before method execution deleteShippingDetails
+2021-07-28 15:57:54.912  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.deleteShippingDetails(String,DeleteShipppingDetailsRequest)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=null],[]>
+2021-07-28 15:57:54.915  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.deleteShippingDetails(String,DeleteShipppingDetailsRequest))
+2021-07-28 15:57:54.916  INFO 8712 --- [http-nio-8086-exec-1] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.deleteShippingDetails :: 1883 ms
+2021-07-28 15:58:04.356  INFO 8712 --- [http-nio-8086-exec-3] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:58:06.341  INFO 8712 --- [http-nio-8086-exec-3] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:58:06.343  INFO 8712 --- [http-nio-8086-exec-3] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:58:06.344  INFO 8712 --- [http-nio-8086-exec-3] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 1987 ms
+2021-07-28 15:58:45.746  INFO 8712 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 15:58:55.225  INFO 8712 --- [http-nio-8086-exec-9] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:58:55.873  INFO 8712 --- [http-nio-8086-exec-9] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:58:55.873  INFO 8712 --- [http-nio-8086-exec-9] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:58:55.873  INFO 8712 --- [http-nio-8086-exec-9] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 648 ms
+2021-07-28 15:59:36.453  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : Before method execution getShippingDetails
+2021-07-28 15:59:37.338  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String)) returned with value <200 OK OK,ShippingInfoResponse [message=Success, apiError=null, addresses=[ShippingEntry [addressId=19, street=2000 Lakeside Dr, city=Mumbai, state=GA, zipCode=400042, status=null, accountId=DF38B079EFCA11EB]]],[]>
+2021-07-28 15:59:37.338  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.shipping_detail_service.controller.ShippingDetailController.getShippingDetails(String))
+2021-07-28 15:59:37.339  INFO 8712 --- [http-nio-8086-exec-2] c.u.s.aop.LoggingAspect                  : Execution time of ShippingDetailController.getShippingDetails :: 885 ms
+2021-07-28 16:03:45.752  INFO 8712 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
