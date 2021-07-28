@@ -2,9 +2,11 @@ package com.uga.forwords.controller;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.validation.Valid;
+import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -20,21 +22,28 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
+
+import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
+import com.uga.forwords.model.Config;
 import com.uga.forwords.model.SearchBook;
 import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.ChangePasswordRequest;
 import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
+import com.uga.forwords.request.EmailRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
 import com.uga.forwords.response.CatalogResponse;
+import com.uga.forwords.response.EmailResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
 import com.uga.forwords.response.SearchBookResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
+import com.uga.forwords.service.ActiveUserRepository;
+import com.uga.forwords.service.ConfigRepository;
 import com.uga.forwords.util.BooksBase64Encoder;
 
 @Controller
@@ -45,6 +54,39 @@ public class ForwardsController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	@Autowired
+	private ActiveUserRepository activeUserRepository;
+	
+	@Autowired
+	private ConfigRepository configRepository;
+	
+	private Map<String, String> applicationConfig = new HashMap<String, String>();
+	
+	@PostConstruct
+	private void loadConfig() {
+		List<Config> configs = (List<Config>) configRepository.findAll();
+		for (Config config : configs) {
+			applicationConfig.put(config.getConfigKey(), config.getConfigValue());
+		}
+	}
+	
+	public String sendEmail(String accountId, String emailPurposeBody) { // Utility method to trigger emails via email_service
+		
+		//Get authenticated users email ID from the DB (This can be done by also calling profile_detail_service, but just to avoid 1 network call we fetch it here) This is not good practise!
+		ActiveUser activeUser = activeUserRepository.findByAccountId(accountId);
+		
+		//Make an API call to email_service to send email
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		EmailRequest emailRequest = new EmailRequest("UPDATE CONFIRMATION EMAIL", applicationConfig.get(emailPurposeBody), activeUser.getEmailId());
+		HttpEntity<EmailRequest> entity = new HttpEntity<EmailRequest>(emailRequest, headers);
+		ResponseEntity<EmailResponse> emailServiceResponse = 
+					restTemplate.postForEntity("http://email-service/emailService", entity, EmailResponse.class);
+				
+		return emailServiceResponse.getBody().getMessage();
+	}
 	
 	
 	/** -----------------------------------Service Endpoint for showing landing page (FOR NORMAL VISITOR)----------------------------------- */
@@ -114,7 +156,7 @@ public class ForwardsController {
 	}
 	
 	
-	/** -----------------------------------Service Endpoint for showing Search Page With Filtered Books----------------------------------- */
+	/** -----------------------------------Service Endpoint for showing Search Page With Filtered Books (calls go to search-book-service)----------------------------------- */
 	
 	@GetMapping("/searchBooksByTitle/{title}")
 	public String searchBookByTitle(@PathVariable String title, Model model) {
@@ -193,9 +235,7 @@ public class ForwardsController {
 		model.addAttribute("updateProfile", new UpdateProfileDetailsRequest());
 		model.addAttribute("changePassword", new ChangePasswordRequest());
 		return "customer-settings";
-
 	}
-	
 	
 	@PostMapping("/customer/updateProfileDetails")
 	public String updateProfileDetails(@ModelAttribute("updateProfile") UpdateProfileDetailsRequest updateProfileDetailsRequest, Principal principal, Model model) {
@@ -207,17 +247,9 @@ public class ForwardsController {
 		HttpEntity<UpdateProfileDetailsRequest> entity = new HttpEntity<UpdateProfileDetailsRequest>(updateProfileDetailsRequest, headers);
 		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse1 = restTemplate.postForEntity("http://profile-detail-service/updatePersonalDetails", entity, PersonalDetailsResponse.class);
 		
-//		HttpEntity<Object> entity2 = new HttpEntity<Object>(headers);
-//		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse2 = restTemplate.exchange("http://profile-detail-service/getPersonalDetails",
-//																						HttpMethod.GET, entity2, PersonalDetailsResponse.class);
-//		
-//		model.addAttribute("activeUserDetails", profileDetailsServiceResponse2.getBody().getUserDetails());
-//		return "customer-settings";
-		
+		sendEmail(principal.getName(), "PERSONAL_DETAIL_CHANGE_EMAIL");	
 		return "redirect:/customer/showSettingsPage";
-		
 	}
-	
 	
 	@GetMapping("/customer/togglePromotions/{toggleValue}")
 	public String togglePromotions(Principal principal, Model model, @PathVariable String toggleValue) {
@@ -229,28 +261,38 @@ public class ForwardsController {
 		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
 		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = 
 				restTemplate.exchange("http://profile-detail-service/togglePromotionSubscription/" + toggleValue, HttpMethod.GET, entity, PersonalDetailsResponse.class);
-
+		
+		sendEmail(principal.getName(), "PROMOTION_SUBSCRIPTION_CHANGE_EMAIL");
 		return "redirect:/customer/showSettingsPage";
 	}
 	
-	
-	
 	@PostMapping("/customer/changePassword")
 	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
+				
+		//Fetch old password
+		ActiveUser activeUser = activeUserRepository.findByAccountId(principal.getName());
 		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.add("accountId", principal.getName());
+		//Check if old password matches
+		if (bcryptPasswordEncoder.matches(changePasswordRequest.getOldPassword(), activeUser.getPassword())) {
+			
+			//Encode the new password
+			changePasswordRequest.setNewPassword(bcryptPasswordEncoder.encode(changePasswordRequest.getNewPassword()));
+			
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			headers.add("accountId", principal.getName());
+			
+			HttpEntity<ChangePasswordRequest> entity = new HttpEntity<ChangePasswordRequest>(changePasswordRequest, headers);
+			ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.postForEntity("http://profile-detail-service/changePassword", entity, PersonalDetailsResponse.class);
+			
+			sendEmail(principal.getName(), "PASSWORD_CHANGE_EMAIL");
+			
+			return "redirect:/customer/showSettingsPage";
+		} else {
+			model.addAttribute("changePasswordErr", "Old password provided was incorrect");
+			return "redirect:/customer/showSettingsPage";
+		}
 		
-		//Encode the old password
-		String encryptedOldPassword = bcryptPasswordEncoder.encode(changePasswordRequest.getOldPassword());
-		changePasswordRequest.setOldPassword(encryptedOldPassword);
-		
-		HttpEntity<ChangePasswordRequest> entity = new HttpEntity<ChangePasswordRequest>(changePasswordRequest, headers);
-		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.postForEntity("http://profile-detail-service/changePassword", entity, PersonalDetailsResponse.class);
-		
-		
-		return "redirect:/customer/showSettingsPage";
 	}
 	
 	
@@ -291,7 +333,7 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.postForEntity("http://shipping-detail-service/updateShippingDetails", entity, ShippingInfoResponse.class);
 		
-//		sendProfileChangeConfirmationEmail(principal.getName());
+		sendEmail(principal.getName(), "SHIPPING_DETAILS_UPDATE_EMAIL");
 				
 		return "redirect:/customer/getShippingDetails";
 	}
@@ -308,7 +350,7 @@ public class ForwardsController {
 		
 		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.postForEntity("http://shipping-detail-service/deleteShippingDetails", entity, ShippingInfoResponse.class);
 		
-//		sendProfileChangeConfirmationEmail(principal.getName());
+		sendEmail(principal.getName(), "SHIPPING_DETAILS_UPDATE_EMAIL");
 		
 		return "redirect:/customer/getShippingDetails";
 	}
@@ -352,7 +394,7 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
 		
-//		sendProfileChangeConfirmationEmail(principal.getName());
+		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 				
 		return "redirect:/customer/getPaymentDetails";
 	}
@@ -371,7 +413,7 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/updatePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-//		sendProfileChangeConfirmationEmail(principal.getName());
+		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 				
 		return "redirect:/customer/getPaymentDetails";
 	}
@@ -388,7 +430,7 @@ public class ForwardsController {
 		
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/deletePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-//		sendProfileChangeConfirmationEmail(principal.getName());
+		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 		
 		return "redirect:/customer/getPaymentDetails";
 	}
