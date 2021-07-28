@@ -1,8 +1,8 @@
-package com.uga.promotion_manage_service.response;
+package com.uga.forwords.response;
 
 import java.util.List;
 
-import com.uga.promotion_manage_service.model.Promotion;
+import com.uga.forwords.model.Promotion;
 
 public class FetchAllPromotionsResponse {
 	
@@ -11,9 +11,9 @@ public class FetchAllPromotionsResponse {
 	private Object apiError;
 	
 	private List<Promotion> promotions;
+	
+	
 
-	
-	
 	/**
 	 * 
 	 */

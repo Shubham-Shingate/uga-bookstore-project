@@ -1,25 +1,37 @@
 package com.uga.forwords.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
+
+import com.uga.forwords.response.BookResponse;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
 import com.uga.forwords.model.SearchBook;
@@ -27,12 +39,15 @@ import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.ChangePasswordRequest;
 import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
+import com.uga.forwords.request.PromotionInfoRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
 import com.uga.forwords.response.CatalogResponse;
+import com.uga.forwords.response.FetchAllPromotionsResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
+import com.uga.forwords.response.PromotionInfoResponse;
 import com.uga.forwords.response.SearchBookResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.util.BooksBase64Encoder;
@@ -45,6 +60,65 @@ public class ForwardsController {
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	
+	/** -----------------------------------Service Endpoint for View Promotions page -------------------------------------------------------------*/
+	
+	@GetMapping("/admin/viewPromotions")
+	public String viewPromotions(Model model) {
+		
+		// Obtain promotions list
+		ResponseEntity<FetchAllPromotionsResponse> allPromotions = restTemplate.getForEntity("http://promotion-manage-service/fetchAllPromotions", FetchAllPromotionsResponse.class);
+		
+		// Add list to model
+		model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
+		model.addAttribute("addPromotion", new PromotionInfoRequest());
+		
+		return "admin/viewPromotions";	
+	}
+	
+	@PostMapping("/admin/processPromotionAddition")
+	public String processPromotionAddition(Model model, @ModelAttribute("addPromotion") PromotionInfoRequest promotionRequest) {
+		
+		// Set up request body
+		
+		// Set up Http entity with request body
+		HttpEntity<PromotionInfoRequest> entity = new HttpEntity<PromotionInfoRequest>(promotionRequest);
+		
+		// Send request to backend service
+		ResponseEntity<PromotionInfoResponse> promotionServiceResponse = restTemplate.postForEntity("http://promotion-manage-service/createPromotion", entity, PromotionInfoResponse.class);
+		
+		
+		return "redirect:/admin/viewPromotions";
+	}
+	
+	/** -------------------------------------Service Endpoint for Add Book----------------------------------------------------------------*/
+	@GetMapping("/admin/viewBookInventory")
+	public String viewBookInventory(Model model) {
+		
+		// Fetch book list using book_catalog_service (don't need images)
+		ResponseEntity<CatalogResponse> catalogResponse = restTemplate.getForEntity("http://book-catalog-service/showCatalog", CatalogResponse.class);
+		
+		List<Base64EncodedBook> inventory = new ArrayList<Base64EncodedBook>();
+		
+		// Initializes inventory list
+		for(Book book : catalogResponse.getBody().getBooks()) {
+			inventory.add(BooksBase64Encoder.getBase64Encoded(book));
+		}
+		
+		model.addAttribute("bookInventory", inventory);
+		
+		return "admin-dashboard";		
+	}
+	
+	@PostMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	public String addBook(HttpServletRequest request) {
+		
+		// Forward request to backend service
+		ResponseEntity<BookResponse> bookResponse = restTemplate.postForEntity("http://book-manage-service/updateBook", request, BookResponse.class);
+		
+		return "redirect:/admin-dashboard";
+	}
+	
 	
 	
 	/** -----------------------------------Service Endpoint for showing landing page (FOR NORMAL VISITOR)----------------------------------- */
