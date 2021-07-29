@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import com.uga.forwords.model.ActiveUser;
+import com.uga.forwords.model.Cart;
 import com.uga.forwords.model.Config;
 import com.uga.forwords.model.Role;
 import com.uga.forwords.model.User;
@@ -38,6 +39,7 @@ import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.response.ValidateTokenResponse;
 import com.uga.forwords.service.ActiveUserRepository;
+import com.uga.forwords.service.CartRepository;
 import com.uga.forwords.service.ConfigRepository;
 import com.uga.forwords.service.RoleRepository;
 import com.uga.forwords.service.UserRepository;
@@ -65,6 +67,9 @@ public class RegistrationController {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private CartRepository cartRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder; 
@@ -215,6 +220,19 @@ public class RegistrationController {
 					verifiedUser.getAccountId(), verifiedUser.getCreatedDatetime(), verifiedUser.getAccountStatus(), Arrays.asList(role));
 			
 			activeUserRepository.save(activeUser);
+			
+			//Now create the cart for the User
+			Cart userCart = new Cart(accountId);
+			cartRepository.save(userCart);
+			
+			//Send the ACCOUNT_ID to the user via email trigger -email_service
+			HttpHeaders headers2 = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			
+			EmailRequest emailRequest = new EmailRequest("UPDATE CONFIRMATION EMAIL", applicationConfig.get("ACCOUNT_ID_CONFIRMATION")+accountId, activeUser.getEmailId());
+			HttpEntity<EmailRequest> entity2 = new HttpEntity<EmailRequest>(emailRequest, headers2);
+			ResponseEntity<EmailResponse> emailServiceResponse = 
+						restTemplate.postForEntity("http://email-service/emailService", entity2, EmailResponse.class);
 			
 			return "account-verification-confirmation";
 		} else {
