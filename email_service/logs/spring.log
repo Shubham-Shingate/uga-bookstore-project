@@ -201,3 +201,90 @@
 2021-07-28 15:07:48.515  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
 2021-07-28 15:07:48.525  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
 2021-07-28 15:07:48.581  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2021-07-28 18:53:04.877  INFO 10232 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
+2021-07-28 18:53:06.233  WARN 10232 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-28 18:53:06.366  INFO 10232 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
+2021-07-28 18:54:13.481  INFO 14736 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
+2021-07-28 18:54:14.684  WARN 14736 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-28 18:54:14.822  INFO 14736 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
+2021-07-28 18:54:15.360  INFO 14736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2021-07-28 18:54:15.367  INFO 14736 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-28 18:54:15.367  INFO 14736 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-07-28 18:54:15.488  INFO 14736 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-28 18:54:15.489  INFO 14736 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1992 ms
+2021-07-28 18:54:15.708  WARN 14736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-28 18:54:15.709  INFO 14736 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-28 18:54:15.718  INFO 14736 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@ef718de
+2021-07-28 18:54:16.854  INFO 14736 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2021-07-28 18:54:16.983  INFO 14736 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-28 18:54:17.008  WARN 14736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-28 18:54:17.009  INFO 14736 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-28 18:54:17.248  INFO 14736 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-28 18:54:17.889  INFO 14736 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-07-28 18:54:18.274  WARN 14736 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2021-07-28 18:54:18.393  INFO 14736 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2021-07-28 18:54:18.421  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2021-07-28 18:54:18.471  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2021-07-28 18:54:18.471  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2021-07-28 18:54:18.572  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2021-07-28 18:54:18.572  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2021-07-28 18:54:18.722  INFO 14736 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 18:54:18.904  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-28 18:54:18.904  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-28 18:54:19.023  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-28 18:54:19.025  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2021-07-28 18:54:19.027  INFO 14736 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-28 18:54:19.031  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627512859029 with initial instances count: 0
+2021-07-28 18:54:19.040  INFO 14736 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EMAIL-SERVICE with eureka with status UP
+2021-07-28 18:54:19.041  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627512859041, current=UP, previous=STARTING]
+2021-07-28 18:54:19.043  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
+2021-07-28 18:54:19.072  INFO 14736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2021-07-28 18:54:19.073  INFO 14736 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
+2021-07-28 18:54:19.170  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
+2021-07-28 18:54:19.352  INFO 14736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-28 18:54:19.365  INFO 14736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-28 18:54:19.409  INFO 14736 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-28 18:54:19.548  INFO 14736 --- [main] c.u.e.EmailServiceApplication            : Started EmailServiceApplication in 7.381 seconds (JVM running for 8.306)
+2021-07-28 18:54:20.327  INFO 14736 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as c0b596d15039
+2021-07-28 18:54:20.433  INFO 14736 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-28 18:54:20.433  INFO 14736 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-28 18:54:20.444  INFO 14736 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application version is -1: false
+2021-07-28 18:54:49.035  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-28 18:54:49.083  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-28 18:59:18.920  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:04:18.935  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:09:18.944  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:14:18.957  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:19:18.975  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:24:18.979  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:29:18.981  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:34:18.997  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:39:19.008  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:44:19.012  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:49:19.022  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:54:19.030  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 19:59:19.032  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 20:04:19.035  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-28 20:07:15.278  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-28 20:07:15.320  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EMAIL-SERVICE with eureka with status DOWN
+2021-07-28 20:07:15.324  WARN 14736 --- [RMI TCP Connection(82)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627517235324, current=DOWN, previous=UP]
+2021-07-28 20:07:15.324  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
+2021-07-28 20:07:15.336  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
+2021-07-28 20:07:15.479  INFO 14736 --- [RMI TCP Connection(84)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-28 20:07:15.652  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-07-28 20:07:15.672  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2021-07-28 20:07:15.675  INFO 14736 --- [RMI TCP Connection(85)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-28 20:07:15.798  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2021-07-28 20:07:15.808  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-07-28 20:07:15.868  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...

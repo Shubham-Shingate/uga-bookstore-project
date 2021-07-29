@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -289,7 +290,7 @@ public class ForwardsController {
 			
 			return "redirect:/customer/showSettingsPage";
 		} else {
-			model.addAttribute("changePasswordErr", "Old password provided was incorrect");
+			model.addAttribute("changePasswordError", "Old password provided was incorrect");
 			return "redirect:/customer/showSettingsPage";
 		}
 		
@@ -317,7 +318,6 @@ public class ForwardsController {
 		theModel.addAttribute("updateShippingDetails", new ShippingInfoRequest());
 		return "customer-addresses";
 	}
-	
 	
 	@PostMapping("/customer/processShippingForm")
 	public String processShippingForm(Principal principal, Model theModel, @ModelAttribute("updateShippingDetails") ShippingInfoRequest shippingRequest) {
@@ -394,9 +394,13 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
-				
-		return "redirect:/customer/getPaymentDetails";
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
+			return "redirect:/customer/getPaymentDetails";
+		} else {
+			theModel.addAttribute("addPaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			return "redirect:/customer/getPaymentDetails";
+		}
 	}
 	
 	@PostMapping("/customer/updatePaymentDetails")
@@ -413,13 +417,18 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/updatePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
-				
-		return "redirect:/customer/getPaymentDetails";
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
+			return "redirect:/customer/getPaymentDetails";
+		} else {
+			theModel.addAttribute("updatePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			return "redirect:/customer/getPaymentDetails";
+		}
+	
 	}
 	
 	@PostMapping("/customer/deletePaymentDetails/{cardNumber}")
-	public String deletePaymentDetails(Principal principal, @PathVariable String cardNumber) {
+	public String deletePaymentDetails(Principal principal, Model theModel, @PathVariable String cardNumber) {
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -430,9 +439,14 @@ public class ForwardsController {
 		
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/deletePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
-		
-		return "redirect:/customer/getPaymentDetails";
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Success")) {
+			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
+			return "redirect:/customer/getPaymentDetails";
+		} else {
+			theModel.addAttribute("deletePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			return "redirect:/customer/getPaymentDetails";
+		}
+	
 	}
 	
 	
