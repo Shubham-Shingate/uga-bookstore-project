@@ -9,6 +9,14 @@ public class PromotionInfoResponse {
 	private Object apiError;
 	
 	private Promotion promotion;
+	
+	
+
+	/**
+	 * 
+	 */
+	public PromotionInfoResponse() {
+	}
 
 	/**
 	 * @param message

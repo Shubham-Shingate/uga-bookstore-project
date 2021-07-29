@@ -33,7 +33,7 @@ public class BookManageController {
 	private BookRepository bookRepository;	
 	
 	/* updateBook with Image */
-	@PostMapping(value = "/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE, MediaType.IMAGE_PNG_VALUE} )
+	@PostMapping(value = "/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
 	public ResponseEntity<BookResponse> addBook(
 			@RequestParam Long id,
 			@RequestParam String title,

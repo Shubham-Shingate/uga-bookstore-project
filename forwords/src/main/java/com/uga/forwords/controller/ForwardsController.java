@@ -5,7 +5,9 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -21,10 +23,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.client.RestTemplate;
@@ -63,7 +67,7 @@ public class ForwardsController {
 	
 	/** -----------------------------------Service Endpoint for View Promotions page -------------------------------------------------------------*/
 	
-	@GetMapping("/admin/viewPromotions")
+	@GetMapping("/administrator/viewPromotions")
 	public String viewPromotions(Model model) {
 		
 		// Obtain promotions list
@@ -73,13 +77,11 @@ public class ForwardsController {
 		model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
 		model.addAttribute("addPromotion", new PromotionInfoRequest());
 		
-		return "admin/viewPromotions";	
+		return "administrator/viewPromotions";	
 	}
 	
-	@PostMapping("/admin/processPromotionAddition")
+	@PostMapping("/administrator/processPromotionAddition")
 	public String processPromotionAddition(Model model, @ModelAttribute("addPromotion") PromotionInfoRequest promotionRequest) {
-		
-		// Set up request body
 		
 		// Set up Http entity with request body
 		HttpEntity<PromotionInfoRequest> entity = new HttpEntity<PromotionInfoRequest>(promotionRequest);
@@ -88,11 +90,11 @@ public class ForwardsController {
 		ResponseEntity<PromotionInfoResponse> promotionServiceResponse = restTemplate.postForEntity("http://promotion-manage-service/createPromotion", entity, PromotionInfoResponse.class);
 		
 		
-		return "redirect:/admin/viewPromotions";
+		return "redirect:/administrator/viewPromotions";
 	}
 	
 	/** -------------------------------------Service Endpoint for Add Book----------------------------------------------------------------*/
-	@GetMapping("/admin/viewBookInventory")
+	@GetMapping("/administrator/viewBookInventory")
 	public String viewBookInventory(Model model) {
 		
 		// Fetch book list using book_catalog_service (don't need images)
@@ -107,16 +109,19 @@ public class ForwardsController {
 		
 		model.addAttribute("bookInventory", inventory);
 		
-		return "admin-dashboard";		
+		return "administrator/admin-dashboard";		
 	}
 	
-	@PostMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+	@PostMapping(value = "/administrator/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	public String addBook(HttpServletRequest request) {
+			
+		// Try with RequestDispatcher
+//		RequestDispatcher dispatcher = request.getServletContext().getContext("http://book-manage-service/updateBook").getRequestDispatcher("http://book-manage-service/updateBook");
 		
 		// Forward request to backend service
 		ResponseEntity<BookResponse> bookResponse = restTemplate.postForEntity("http://book-manage-service/updateBook", request, BookResponse.class);
 		
-		return "redirect:/admin-dashboard";
+		return "redirect:/adminstrator/admin-dashboard";
 	}
 	
 	
