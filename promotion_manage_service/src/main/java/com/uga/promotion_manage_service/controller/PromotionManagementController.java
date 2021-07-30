@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import com.uga.promotion_manage_service.exception.InvalidDatesException;
@@ -16,7 +18,6 @@ import com.uga.promotion_manage_service.exception.PromoExistsException;
 import com.uga.promotion_manage_service.exception.PromotionNotFoundException;
 import com.uga.promotion_manage_service.model.Promotion;
 import com.uga.promotion_manage_service.request.PromotionInfoRequest;
-import com.uga.promotion_manage_service.response.FetchAllPromotionsResponse;
 import com.uga.promotion_manage_service.response.PromotionInfoResponse;
 import com.uga.promotion_manage_service.service.PromotionRepository;
 
@@ -28,11 +29,11 @@ public class PromotionManagementController {
 	
 	/* Retrieve all promotions */
 	@GetMapping("/fetchAllPromotions")
-	public ResponseEntity<FetchAllPromotionsResponse> fetchAllPromotions() {
+	public ResponseEntity<PromotionInfoResponse> fetchAllPromotions() {
 		List<Promotion> promotions = repository.findAll();
 		
-		FetchAllPromotionsResponse response = new FetchAllPromotionsResponse("Success", null, promotions);
-		return new ResponseEntity<FetchAllPromotionsResponse>(response, HttpStatus.OK);
+		PromotionInfoResponse response = new PromotionInfoResponse("Success", null, promotions);
+		return new ResponseEntity<PromotionInfoResponse>(response, HttpStatus.OK);
 	}
 	
 	/* Create a promotion */
@@ -68,7 +69,11 @@ public class PromotionManagementController {
 			throw new PromotionNotFoundException("There is no promotion with this id");
 		}
 		
-		PromotionInfoResponse response = new PromotionInfoResponse("Success", null, promo);
+		List<Promotion> promotions = new ArrayList<Promotion>();
+		promotions.add(promo);
+		
+		
+		PromotionInfoResponse response = new PromotionInfoResponse("Success", null, promotions);
 		return new ResponseEntity<PromotionInfoResponse>(response, HttpStatus.OK);
 	}
 	
