@@ -139,5 +139,15 @@ public class RestExceptionHandler {
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
 	}
 	
+	@ExceptionHandler(EmptyCartException.class)
+	protected ResponseEntity<CartResponse> handleEmptyCartException(EmptyCartException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
+		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
+	}
+	
 	
 }
