@@ -3,7 +3,7 @@ package com.uga.order_manage_service.response;
 import java.util.List;
 
 import com.uga.order_manage_service.model.Order;
-import com.uga.order_manage_service.model.OrderedBook;
+import com.uga.order_manage_service.model.OrderBookMapping;
 
 public class OrderResponse {
 	
@@ -13,7 +13,7 @@ public class OrderResponse {
 	
 	private Order order;
 	
-	private List<OrderedBook> booksInOrder;
+	private List<OrderBookMapping> booksInOrder;
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public class OrderResponse {
 	 * @param order
 	 * @param booksInOrder
 	 */
-	public OrderResponse(String message, Object apiError, Order order, List<OrderedBook> booksInOrder) {
+	public OrderResponse(String message, Object apiError, Order order, List<OrderBookMapping> booksInOrder) {
 		this.message = message;
 		this.apiError = apiError;
 		this.order = order;
@@ -99,14 +99,14 @@ public class OrderResponse {
 	/**
 	 * @return the booksInOrder
 	 */
-	public List<OrderedBook> getBooks() {
+	public List<OrderBookMapping> getBooks() {
 		return booksInOrder;
 	}
 
 	/**
 	 * @param booksInOrder the booksInOrder to set
 	 */
-	public void setBooks(List<OrderedBook> booksInOrder) {
+	public void setBooks(List<OrderBookMapping> booksInOrder) {
 		this.booksInOrder = booksInOrder;
 	}
 

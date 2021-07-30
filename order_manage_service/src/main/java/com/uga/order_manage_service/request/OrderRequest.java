@@ -1,14 +1,11 @@
 package com.uga.order_manage_service.request;
 
-import java.util.List;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
 import com.uga.order_manage_service.model.BookEntry;
 
-public class NewOrderRequest {
+public class OrderRequest {
 	
 	@NotBlank(message = "{cardNumber.notBlank}")
 	private String cardNumber;
@@ -39,7 +36,7 @@ public class NewOrderRequest {
 	 * @param discountedCost
 	 * @param books
 	 */
-	public NewOrderRequest(@NotBlank(message = "{cardNumber.notBlank}") String cardNumber,
+	public OrderRequest(@NotBlank(message = "{cardNumber.notBlank}") String cardNumber,
 			@NotNull(message = "{addressId.notNull}") Long addressId,
 			@NotNull(message = "{totalCost.notNull}") Double totalCost,
 			@NotNull(message = "{discountedCost.notNull}") Double discountedCost,
@@ -55,7 +52,7 @@ public class NewOrderRequest {
 	/**
 	 * 
 	 */
-	public NewOrderRequest() {
+	public OrderRequest() {
 	}
 
 	/**
@@ -66,7 +63,7 @@ public class NewOrderRequest {
 	 * @param discountedCost
 	 * @param books
 	 */
-	public NewOrderRequest(@NotBlank(message = "{cardNumber.notBlank}") String cardNumber,
+	public OrderRequest(@NotBlank(message = "{cardNumber.notBlank}") String cardNumber,
 			@NotNull(message = "{addressId.notNull}") Long addressId,
 			@NotNull(message = "{totalCost.notNull}") Double totalCost,
 			@NotNull(message = "{promoId.notBlank}") String promoId,
