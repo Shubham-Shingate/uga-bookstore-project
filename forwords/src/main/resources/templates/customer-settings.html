@@ -177,7 +177,7 @@
 		<div class="card">
 		  <div class="card-body">
 		 <form th:action="@{/customer/updateProfileDetails}" 
-                	th:object="${updateProfileDetailsRequest}"
+                	th:object="${activeUserDetails}"
 					method="POST"
 					id="settingsForm"
 					class="row">
@@ -186,22 +186,35 @@
 				 <div class="form-row">
 					<div class="col form-group">
 						<label>Name</label>
-						  <input type="text" th:field="*{fullName}" class="form-control" value="@{activeUserDetails?.fullName}">
+						  <input type="text" th:field="*{fullName}" class="form-control" name="fullName">
 					</div> <!-- form-group end.// -->
 					
 					<div class="form-group col-md-6">
 						<label>Phone</label>
-						<input type="text" th:field="*{phoneNo}" class="form-control" value="@{activeUserDetails?.phoneNo}">
+						<input type="text" th:field="*{phoneNo}" class="form-control" name="phoneNo">
 					  </div> <!-- form-group end.// -->
 					  
 					
 				</div> <!-- form-row.// -->
+				<div th:if="${#fields.hasErrors('fullName')}"
+							style="margin-bottom: 25px" class="text-danger">
+					<ul>
+				  		<li th:each="err : ${#fields.errors('fullName')}" th:text="'Fullname: ' + ${err}" />
+					</ul>						
+				</div>
+				
+				<div th:if="${#fields.hasErrors('phoneNo')}"
+							style="margin-bottom: 25px" class="text-danger">
+					<ul>
+				  		<li th:each="err : ${#fields.errors('phoneNo')}" th:text="'Phone Number: ' + ${err}" />
+					</ul>						
+				</div>
 				
 	
 				
 	
 				<button type = "submit" class="btn btn-primary">Save</button>	
-				<button class="btn btn-light" onclick="javascript:changePassword();">Change password</button>	
+				<button class="btn btn-light" type ="button" onclick="javascript:changePassword();">Change password</button>	
 				
 				<br><br><br>
 	
@@ -214,7 +227,7 @@
 			 <!-- div for reset password -->
 		<div class="card-body" id="changePasswordCard" style="display:none">
 			<form th:action="@{/customer/changePassword}" 
-                	th:object="${changePasswordRequest}"
+                	th:object="${changePassword}"
 					method="POST"
 					id="changeForm"
 					class="row">
@@ -238,6 +251,7 @@
 				class="form-control"
 				th:field="*{oldPassword}"
 				placeholder="******"
+				name="oldPassword"
 				type="password" required
 				/>
 			</div>
@@ -255,6 +269,7 @@
 				th:field="*{newPassword}"
 				placeholder="******"
 				type="password" required
+				name="newPassword"
 				/>
 			</div>
 			<div th:if="${#fields.hasErrors('newPassword')}"
