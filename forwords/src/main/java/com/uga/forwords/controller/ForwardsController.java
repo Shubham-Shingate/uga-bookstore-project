@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
-
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
@@ -551,7 +548,7 @@ public class ForwardsController {
 	}
 	
 	
-	/** -----------------------------------Services for showing/Manageing Checkout and Place Order related services (calls go to order_manage_service)----------------------------------- */
+	/** --------------------Services for showing/Managing Checkout (calls three services: cart-manage-service, payment-detail-service, shipping-detail-service)----------------------------------- */
 	
 	@GetMapping("/customer/proceedToCheckout")
 	public String proceedToCheckout(Principal principal, Model theModel) {
@@ -593,14 +590,22 @@ public class ForwardsController {
 		theModel.addAttribute("cartBooks", base64encodedCartBooks);
 		theModel.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
 		theModel.addAttribute("userPaymentInfo", paymentDetailsServiceResponse.getBody().getCards());
-
+		
+		//Calculate the total cost
+		double totalCost = 0;
+		for (Base64EncodedBook base64EncodedBook : base64encodedCartBooks) {
+			totalCost = totalCost + base64EncodedBook.getPrice();
+		}
+		
 		// Pas the empty model attribute object so that UI can populate order data in it to place the order
 		theModel.addAttribute("placeOrderReq", new PlaceOrderRequest());
+		theModel.addAttribute("totalCost", totalCost);
 		return "customer-checkout";
 				
 	}
 	
-	
+	/** -----------------------------------Services for Place Order related services (calls go to order_manage_service)----------------------------------- */
+		
 	
 
 	
