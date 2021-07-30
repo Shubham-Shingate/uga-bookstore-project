@@ -1,8 +1,8 @@
-package com.uga.cart_manage_service.response;
+package com.uga.forwords.response;
 
 import java.util.List;
 
-import com.uga.cart_manage_service.model.CartBook;
+import com.uga.forwords.model.CartBook;
 
 public class CartResponse {
 

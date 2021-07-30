@@ -1,4 +1,4 @@
-package com.uga.cart_manage_service.model;
+package com.uga.forwords.model;
 
 import java.io.Serializable;
 

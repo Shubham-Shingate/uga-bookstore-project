@@ -34,22 +34,76 @@ public class Order {
 	private Double discountedCost;
 	
 	@Column(name = "CREATED_DATETIME")
-	private Date orderDate;
-
-	/**
-	 * 
-	 */
-	public Order() {
+	private Date orderDate;	
+	
+	public String getOrderId() {
+		return orderId;
 	}
 
-	/**
-	 * @param accountId
-	 * @param cardNumber
-	 * @param addressId
-	 * @param totalCost
-	 * @param promoId
-	 * @param discountedCost
-	 */
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(String accountId) {
+		this.accountId = accountId;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public Double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(Double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public String getPromoId() {
+		return promoId;
+	}
+
+	public void setPromoId(String promoId) {
+		this.promoId = promoId;
+	}
+
+	public Double getDiscountedCost() {
+		return discountedCost;
+	}
+
+	public void setDiscountedCost(Double discountedCost) {
+		this.discountedCost = discountedCost;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public Order() {
+		
+	}
+
 	public Order(String accountId, String cardNumber, Long addressId, Double totalCost, String promoId,
 			Double discountedCost) {
 		this.accountId = accountId;
@@ -60,15 +114,6 @@ public class Order {
 		this.discountedCost = discountedCost;
 	}
 
-	/**
-	 * @param accountId
-	 * @param cardNumber
-	 * @param addressId
-	 * @param totalCost
-	 * @param promoId
-	 * @param discountedCost
-	 * @param orderDate
-	 */
 	public Order(String accountId, String cardNumber, Long addressId, Double totalCost, String promoId,
 			Double discountedCost, Date orderDate) {
 		this.accountId = accountId;
@@ -80,16 +125,6 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	/**
-	 * @param orderId
-	 * @param accountId
-	 * @param cardNumber
-	 * @param addressId
-	 * @param totalCost
-	 * @param promoId
-	 * @param discountedCost
-	 * @param orderDate
-	 */
 	public Order(String orderId, String accountId, String cardNumber, Long addressId, Double totalCost, String promoId,
 			Double discountedCost, Date orderDate) {
 		this.orderId = orderId;
@@ -102,118 +137,11 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	/**
-	 * @return the orderId
-	 */
-	public String getOrderId() {
-		return orderId;
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", accountId=" + accountId + ", cardNumber=" + cardNumber + ", addressId="
+				+ addressId + ", totalCost=" + totalCost + ", promoId=" + promoId + ", discountedCost=" + discountedCost
+				+ ", orderDate=" + orderDate + "]";
 	}
-
-	/**
-	 * @param orderId the orderId to set
-	 */
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
-
-	/**
-	 * @return the accountId
-	 */
-	public String getAccountId() {
-		return accountId;
-	}
-
-	/**
-	 * @param accountId the accountId to set
-	 */
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
-
-	/**
-	 * @return the cardNumber
-	 */
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	/**
-	 * @param cardNumber the cardNumber to set
-	 */
-	public void setCardNumber(String cardNumber) {
-		this.cardNumber = cardNumber;
-	}
-
-	/**
-	 * @return the addressId
-	 */
-	public Long getAddressId() {
-		return addressId;
-	}
-
-	/**
-	 * @param addressId the addressId to set
-	 */
-	public void setAddressId(Long addressId) {
-		this.addressId = addressId;
-	}
-
-	/**
-	 * @return the totalCost
-	 */
-	public Double getTotalCost() {
-		return totalCost;
-	}
-
-	/**
-	 * @param totalCost the totalCost to set
-	 */
-	public void setTotalCost(Double totalCost) {
-		this.totalCost = totalCost;
-	}
-
-	/**
-	 * @return the promoId
-	 */
-	public String getPromoId() {
-		return promoId;
-	}
-
-	/**
-	 * @param promoId the promoId to set
-	 */
-	public void setPromoId(String promoId) {
-		this.promoId = promoId;
-	}
-
-	/**
-	 * @return the discountedCost
-	 */
-	public Double getDiscountedCost() {
-		return discountedCost;
-	}
-
-	/**
-	 * @param discountedCost the discountedCost to set
-	 */
-	public void setDiscountedCost(Double discountedCost) {
-		this.discountedCost = discountedCost;
-	}
-
-	/**
-	 * @return the orderDate
-	 */
-	public Date getOrderDate() {
-		return orderDate;
-	}
-
-	/**
-	 * @param orderDate the orderDate to set
-	 */
-	public void setOrderDate(Date orderDate) {
-		this.orderDate = orderDate;
-	}
-	
-	
 	
 }
