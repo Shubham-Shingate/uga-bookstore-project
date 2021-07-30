@@ -49,7 +49,6 @@ import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
 import com.uga.forwords.response.CartResponse;
 import com.uga.forwords.response.CatalogResponse;
-import com.uga.forwords.response.FetchAllPromotionsResponse;
 import com.uga.forwords.response.EmailResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
@@ -76,7 +75,7 @@ public class ForwardsController {
 	public String viewPromotions(Model model) {
 		
 		// Obtain promotions list
-		ResponseEntity<FetchAllPromotionsResponse> allPromotions = restTemplate.getForEntity("http://promotion-manage-service/fetchAllPromotions", FetchAllPromotionsResponse.class);
+		ResponseEntity<PromotionInfoResponse> allPromotions = restTemplate.getForEntity("http://promotion-manage-service/fetchAllPromotions", PromotionInfoResponse.class);
 		
 		// Add list to model
 		model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
