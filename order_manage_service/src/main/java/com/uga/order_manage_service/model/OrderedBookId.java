@@ -6,8 +6,8 @@ public class OrderedBookId implements Serializable {
 	
 	private static final long serialVersionUID = -125695617523194L;
 
-	long bookId;
+	public Long bookId;
 	
-	String orderId;
+	public String orderId;
 	
 }

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @IdClass(OrderedBookId.class)
 @Entity
 @Table(name = "ORDER_BOOK_MAPPING")
-public class OrderedBook {
+public class OrderBookMapping {
 
 	@Id
 	@Column(name="BOOK_ID")
@@ -25,7 +25,7 @@ public class OrderedBook {
 	/**
 	 * 
 	 */
-	public OrderedBook() {
+	public OrderBookMapping() {
 	}
 
 	/**
@@ -33,7 +33,7 @@ public class OrderedBook {
 	 * @param bookId
 	 * @param quantity
 	 */
-	public OrderedBook(String orderId, Long bookId, Long quantity) {
+	public OrderBookMapping(String orderId, Long bookId, Long quantity) {
 		this.orderId = orderId;
 		this.bookId = bookId;
 		this.quantity = quantity;

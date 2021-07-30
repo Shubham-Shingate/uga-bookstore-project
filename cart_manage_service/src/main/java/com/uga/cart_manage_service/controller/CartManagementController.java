@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uga.cart_manage_service.exception.BookNotFoundException;
 import com.uga.cart_manage_service.exception.BookQtyInsufficientException;
 import com.uga.cart_manage_service.exception.CartNotFoundException;
+import com.uga.cart_manage_service.exception.EmptyCartException;
 import com.uga.cart_manage_service.exception.InvalidQuantityException;
 import com.uga.cart_manage_service.model.CartBook;
 import com.uga.cart_manage_service.model.Cart;
@@ -47,9 +48,9 @@ public class CartManagementController {
 		}
 		//Fetch cart-book mappings from DB
 		List<CartBookMapping> cartBookMappings = cartBookMappingRepository.findByCartId(cart.getCartId());
-//		if (cartBookMappings.isEmpty()) {
-//			throw new EmptyCartException("There are no items in this particular cart");
-//		}
+		if (cartBookMappings.isEmpty()) {
+			throw new EmptyCartException("There are no items in this particular cart");
+		}
 		
 		//Fetch the book details for book id's mapped to cart
 		List<CartBook> books = new ArrayList<CartBook>();

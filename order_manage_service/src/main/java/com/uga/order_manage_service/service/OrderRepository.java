@@ -12,8 +12,10 @@ import com.uga.order_manage_service.model.Order;
 
 @Repository
 public interface OrderRepository extends CrudRepository<Order, String> {
+	
 	@Transactional
 	public List<Order> findByAccountId(String account_id);
+	
 	@Transactional
 	public Order findByAccountIdAndOrderId(String account_id, String order_id);
 
@@ -22,9 +24,9 @@ public interface OrderRepository extends CrudRepository<Order, String> {
 	public String saveOrder(
 			@Param("in_ACCOUNT_ID") String in_ACCOUNT_ID,
 			@Param("in_CARD_NUMBER") String in_CARD_NUMBER, 
-			@Param("in_ADDRESS_ID") long in_ADDRESS_ID, 
-			@Param("in_TOTAL_COST") double in_TOTAL_COST,
+			@Param("in_ADDRESS_ID") Long in_ADDRESS_ID, 
+			@Param("in_TOTAL_COST") Double in_TOTAL_COST,
 			@Param("in_PROMO_ID") String in_PROMO_ID,
-			@Param("in_DISCOUNTED_COST") double in_DISCOUNTED_COST);
+			@Param("in_DISCOUNTED_COST") Double in_DISCOUNTED_COST);
 
 }

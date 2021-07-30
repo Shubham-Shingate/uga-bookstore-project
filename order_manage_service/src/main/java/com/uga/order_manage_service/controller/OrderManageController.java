@@ -16,34 +16,36 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uga.order_manage_service.exception.OrderNotFoundException;
 import com.uga.order_manage_service.model.BookEntry;
 import com.uga.order_manage_service.model.Order;
-import com.uga.order_manage_service.model.OrderedBook;
-import com.uga.order_manage_service.request.NewOrderRequest;
+import com.uga.order_manage_service.model.OrderBookMapping;
+import com.uga.order_manage_service.request.OrderRequest;
 import com.uga.order_manage_service.response.OrderListResponse;
 import com.uga.order_manage_service.response.OrderResponse;
-import com.uga.order_manage_service.service.OrderContents;
+import com.uga.order_manage_service.service.OrderBookMappingRepository;
 import com.uga.order_manage_service.service.OrderRepository;
 
 @RestController
 public class OrderManageController {
 	
-	@Autowired OrderRepository orderRepository;
+	@Autowired 
+	private OrderRepository orderRepository;
 	
 	// Contains index of books in each order
-	@Autowired OrderContents orderContents;
+	@Autowired 
+	private OrderBookMappingRepository orderBookMapingRepository;
 	
 	
 	/* Add an order */
-	@PostMapping("/addOrder")
-	public ResponseEntity<OrderResponse> addOrder(@RequestHeader String accountId, @RequestBody @Validated NewOrderRequest request) {
+	@PostMapping("/placeOrder")
+	public ResponseEntity<OrderResponse> placeOrder(@RequestHeader String accountId, @Validated @RequestBody OrderRequest orderRequest) {
 		
 		/* Save order entry */
-		String orderId = orderRepository.saveOrder(accountId, request.getCardNumber(), request.getAddressId(), request.getTotalCost(), request.getPromoId(), request.getDiscountedCost());
+		String orderId = orderRepository.saveOrder(accountId, orderRequest.getCardNumber(), orderRequest.getAddressId(), orderRequest.getTotalCost(), orderRequest.getPromoId(), orderRequest.getDiscountedCost());
 		
 		/* Save mapping of ordered books */
-		BookEntry[] orderedBooks = request.getBooks();
+		BookEntry[] orderedBooks = orderRequest.getBooks();
 		for(BookEntry book : orderedBooks) {
-			OrderedBook orderedBook = new OrderedBook(orderId, book.getBookId(), book.getQuantity());
-			orderContents.save(orderedBook);
+			OrderBookMapping orderedBook = new OrderBookMapping(orderId, book.getBookId(), book.getQuantity());
+			orderBookMapingRepository.save(orderedBook);
 		}
 		
 		OrderResponse response = new OrderResponse("Success", null);
@@ -73,7 +75,7 @@ public class OrderManageController {
 			throw new OrderNotFoundException("There is no order with the given Order ID in this account's order history");
 		
 		/* Set order contents */
-		List<OrderedBook> books = orderContents.findByOrderId(orderId);
+		List<OrderBookMapping> books = orderBookMapingRepository.findByOrderId(orderId);
 		
 		
 		OrderResponse response = new OrderResponse("Success", null, order, books);
