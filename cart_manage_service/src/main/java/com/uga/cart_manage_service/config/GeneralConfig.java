@@ -24,4 +24,5 @@ public class GeneralConfig {
 		bean.setValidationMessageSource(messageSource());
 		return bean;
 	}
+	
 }

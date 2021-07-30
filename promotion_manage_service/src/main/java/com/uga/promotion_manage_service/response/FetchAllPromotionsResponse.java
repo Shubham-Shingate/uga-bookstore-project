@@ -12,6 +12,14 @@ public class FetchAllPromotionsResponse {
 	
 	private List<Promotion> promotions;
 
+	
+	
+	/**
+	 * 
+	 */
+	public FetchAllPromotionsResponse() {
+	}
+
 	/**
 	 * @param message
 	 * @param apiError

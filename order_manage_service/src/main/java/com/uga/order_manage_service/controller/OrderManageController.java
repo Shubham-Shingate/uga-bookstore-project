@@ -1,7 +1,7 @@
 package com.uga.order_manage_service.controller;
 
+import java.util.Arrays;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.uga.order_manage_service.exception.OrderNotFoundException;
 import com.uga.order_manage_service.model.BookEntry;
 import com.uga.order_manage_service.model.Order;
 import com.uga.order_manage_service.model.OrderBookMapping;
 import com.uga.order_manage_service.request.OrderRequest;
-import com.uga.order_manage_service.response.OrderListResponse;
 import com.uga.order_manage_service.response.OrderResponse;
 import com.uga.order_manage_service.service.OrderBookMappingRepository;
 import com.uga.order_manage_service.service.OrderRepository;
@@ -29,12 +27,10 @@ public class OrderManageController {
 	@Autowired 
 	private OrderRepository orderRepository;
 	
-	// Contains index of books in each order
 	@Autowired 
 	private OrderBookMappingRepository orderBookMapingRepository;
 	
 	
-	/* Add an order */
 	@PostMapping("/placeOrder")
 	public ResponseEntity<OrderResponse> placeOrder(@RequestHeader String accountId, @Validated @RequestBody OrderRequest orderRequest) {
 		
@@ -48,37 +44,35 @@ public class OrderManageController {
 			orderBookMapingRepository.save(orderedBook);
 		}
 		
-		OrderResponse response = new OrderResponse("Success", null);
-		return new ResponseEntity<OrderResponse>(response, HttpStatus.OK);
+		OrderResponse orderResponse = new OrderResponse("Success", null, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.OK);
 	}
 	
-	/* Return order history of given account ID, does not return books in order */
-	@GetMapping("/fetchOrderHistory")
-	public ResponseEntity<OrderListResponse> fetchOrderHistory(@RequestHeader String accountId) {
-		List<Order> orderHistory = orderRepository.findByAccountId(accountId);
+
+	@GetMapping("/getOrderHistory")
+	public ResponseEntity<OrderResponse> getOrderHistory(@RequestHeader String accountId) {
+		List<Order> orders = orderRepository.findByAccountId(accountId);
 		
-		if(orderHistory == null)
+		if(orders == null || orders.isEmpty()) {
 			throw new OrderNotFoundException("There are no past orders associated with the given account ID");
+		}
 		
-		OrderListResponse response = new OrderListResponse("Success", null, orderHistory);
-		return new ResponseEntity<OrderListResponse>(response, HttpStatus.OK); 
+		OrderResponse orderResponse = new OrderResponse("Success", null, orders);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.OK); 
 	}
 	
-	/* Returns an order and its contents given an orderId*/
+
 	@GetMapping("/fetchOrder/{orderId}")
 	public ResponseEntity<OrderResponse> fetchOrder(@RequestHeader String accountId, @PathVariable String orderId) {
 		
 		/* Get order record */
 		Order order = orderRepository.findByAccountIdAndOrderId(accountId, orderId);
 		
-		if(order == null)
+		if(order == null) {
 			throw new OrderNotFoundException("There is no order with the given Order ID in this account's order history");
+		}		
 		
-		/* Set order contents */
-		List<OrderBookMapping> books = orderBookMapingRepository.findByOrderId(orderId);
-		
-		
-		OrderResponse response = new OrderResponse("Success", null, order, books);
+		OrderResponse response = new OrderResponse("Success", null, Arrays.asList(order));
 		return new ResponseEntity<OrderResponse>(response, HttpStatus.OK);
 	}
 

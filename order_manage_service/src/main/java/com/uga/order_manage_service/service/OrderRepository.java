@@ -14,10 +14,10 @@ import com.uga.order_manage_service.model.Order;
 public interface OrderRepository extends CrudRepository<Order, String> {
 	
 	@Transactional
-	public List<Order> findByAccountId(String account_id);
+	public List<Order> findByAccountId(String accountId);
 	
 	@Transactional
-	public Order findByAccountIdAndOrderId(String account_id, String order_id);
+	public Order findByAccountIdAndOrderId(String accountId, String orderId);
 
 	@Transactional
 	@Query(value = "CALL SP_CREATE_ORDER(:in_ACCOUNT_ID, :in_CARD_NUMBER, :in_ADDRESS_ID, :in_TOTAL_COST, :in_PROMO_ID, :in_DISCOUNTED_COST);", nativeQuery = true)
