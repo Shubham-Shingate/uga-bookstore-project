@@ -23,7 +23,7 @@ public class RestExceptionHandler {
 		apiError.setTimestamp(LocalDateTime.now());
 		apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.BAD_REQUEST);
 	}
 
@@ -33,7 +33,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Media type is not supported");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
@@ -43,7 +43,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service bad request");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.BAD_REQUEST);
 	}
 
@@ -53,7 +53,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal service is down");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -63,7 +63,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error- Failed to access/query/perform transaction in DB");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -73,7 +73,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("One or more mandatory http request headers not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.BAD_REQUEST);
 	}
 	
@@ -83,7 +83,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("Internal Server Error");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
@@ -93,7 +93,7 @@ public class RestExceptionHandler {
 		apiError.setMessage("The required HTTP request body was not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.BAD_REQUEST);
 	}
 	
@@ -105,7 +105,7 @@ public class RestExceptionHandler {
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
 	}
 	
@@ -115,7 +115,7 @@ public class RestExceptionHandler {
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
 	}
 	
@@ -125,7 +125,17 @@ public class RestExceptionHandler {
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		CartResponse cartResponse = new CartResponse("Failure", apiError);
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
+		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(BookQtyInsufficientException.class)
+	protected ResponseEntity<CartResponse> handleBookQtyInsufficientException(BookQtyInsufficientException ex) {
+		ApiError apiError = new ApiError(HttpStatus.OK);
+		apiError.setMessage(ex.getMessage());
+		apiError.setTimestamp(LocalDateTime.now());
+		
+		CartResponse cartResponse = new CartResponse("Failure", apiError, null);
 		return new ResponseEntity<CartResponse>(cartResponse, HttpStatus.OK);
 	}
 	

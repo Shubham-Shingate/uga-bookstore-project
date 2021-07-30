@@ -6,7 +6,7 @@ public class CartBookId implements Serializable {
 	
 	private static final long serialVersionUID = 1091020035983031046L;
 
-	long cartId;
+	public Long cartId;
 	
-	long bookId;
+	public Long bookId;
 }
