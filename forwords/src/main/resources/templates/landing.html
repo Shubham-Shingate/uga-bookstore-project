@@ -262,11 +262,11 @@
 		<div class="slider-items-slick row" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
 			<div th:each="featuredBook : ${featuredBooks}" class="col-md-4">
 				<figure class="card card-product-grid">
-					<a th:href="@{/viewBookDetails/+${featuredBook.book_id}}" class="img-wrap"> 
+					<a th:href="@{'/viewBookDetails/'+${featuredBook.book_id}}" class="img-wrap">
 						<img  th:src="@{'data:image/png;base64,'+${featuredBook.cover_picture}}" />
 					</a>
 					<figcaption class="info-wrap">
-						<a th:text="${featuredBook.title}" th:href="@{/viewBookDetails/+${featuredBook.book_id}}" class="title"></a>
+						<a th:text="${featuredBook.title}" th:href="@{'/viewBookDetails/'+${featuredBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${featuredBook.price}" class="price"></var> <!-- price-wrap.// -->
 							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
@@ -284,11 +284,11 @@
 		<div class="slider-items-slick row" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
 			<div th:each="topSellerBook : ${topSellerBooks}" class="col-md-4">
 				<figure class="card card-product-grid">
-					<a th:href="@{/viewBookDetails/+${topSellerBook.book_id}}" class="img-wrap"> 
+					<a th:href="@{'/viewBookDetails/'+${topSellerBook.book_id}}" class="img-wrap">
 						<img  th:src="@{'data:image/png;base64,'+${topSellerBook.cover_picture}}" />
 					</a>
 					<figcaption class="info-wrap">
-						<a th:text="${topSellerBook.title}" th:href="@{/viewBookDetails/+${topSellerBook.book_id}}" class="title"></a>
+						<a th:text="${topSellerBook.title}" th:href="@{'/viewBookDetails/'+${topSellerBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${topSellerBook.price}" class="price"></var> <!-- price-wrap.// -->
 							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
