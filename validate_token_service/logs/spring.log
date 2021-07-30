@@ -1,186 +1,88 @@
-2021-07-28 11:32:44.060  INFO 7856 --- [main] c.u.v.ValidateTokenServiceApplication    : No active profile set, falling back to default profiles: default
-2021-07-28 11:32:46.461  INFO 7856 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
-2021-07-28 11:32:46.556  INFO 7856 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 82ms. Found 1 JPA repository interfaces.
-2021-07-28 11:32:46.758  WARN 7856 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 11:32:46.981  INFO 7856 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=08d21ecb-3769-3ee4-832e-a59e8bec6eb6
-2021-07-28 11:32:48.981  INFO 7856 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
-2021-07-28 11:32:48.995  INFO 7856 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 11:32:48.996  INFO 7856 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 11:32:49.396  INFO 7856 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 11:32:49.397  INFO 7856 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5281 ms
-2021-07-28 11:32:49.541  WARN 7856 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:32:49.541  INFO 7856 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:32:49.562  INFO 7856 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@1ad9b8d3
-2021-07-28 11:32:49.907  INFO 7856 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 11:32:49.927  INFO 7856 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-07-28 11:32:51.510  INFO 7856 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-07-28 11:32:51.579  INFO 7856 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-07-28 11:32:51.668  INFO 7856 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
-2021-07-28 11:32:51.979  INFO 7856 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2021-07-28 11:32:52.128  WARN 7856 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-07-28 11:32:52.208  INFO 7856 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-2021-07-28 11:32:53.795  INFO 7856 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 11:32:53.893  INFO 7856 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-07-28 11:32:53.910  INFO 7856 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 11:32:54.012  INFO 7856 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 11:32:54.125  WARN 7856 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:32:54.125  INFO 7856 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:32:55.196  INFO 7856 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 11:32:55.733  WARN 7856 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 11:32:55.885  INFO 7856 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 11:32:55.927  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 11:32:55.982  INFO 7856 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 11:32:55.982  INFO 7856 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 11:32:56.187  INFO 7856 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 11:32:56.187  INFO 7856 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 11:32:56.410  INFO 7856 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:32:56.649  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 11:32:56.650  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 11:32:56.650  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 11:32:56.651  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 11:32:56.651  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 11:32:56.651  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 11:32:56.651  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 11:32:56.801  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 11:32:56.805  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 11:32:56.808  INFO 7856 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 11:32:56.814  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627486376811 with initial instances count: 3
-2021-07-28 11:32:56.830  INFO 7856 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application VALIDATE-TOKEN-SERVICE with eureka with status UP
-2021-07-28 11:32:56.832  INFO 7856 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627486376831, current=UP, previous=STARTING]
-2021-07-28 11:32:56.835  INFO 7856 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
-2021-07-28 11:32:56.872  INFO 7856 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
-2021-07-28 11:32:56.911  INFO 7856 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
-2021-07-28 11:32:56.912  INFO 7856 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8089
-2021-07-28 11:32:57.203  INFO 7856 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 11:32:57.247  INFO 7856 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 11:32:57.297  INFO 7856 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 11:32:57.489  INFO 7856 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
-2021-07-28 11:32:58.397  INFO 7856 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
-2021-07-28 11:32:58.413  INFO 7856 --- [main] c.u.v.ValidateTokenServiceApplication    : Started ValidateTokenServiceApplication in 17.732 seconds (JVM running for 20.464)
-2021-07-28 11:32:58.578  INFO 7856 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as b61e5288ba4c
-2021-07-28 11:32:58.665  INFO 7856 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 11:32:58.666  INFO 7856 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 11:32:58.683  INFO 7856 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 17 ms
-2021-07-28 11:37:56.670  INFO 7856 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:40:06.016  INFO 7856 --- [http-nio-8089-exec-8] c.u.v.aop.LoggingAspect                  : Before method execution validateToken
-2021-07-28 11:40:06.869  INFO 7856 --- [http-nio-8089-exec-8] c.u.v.aop.LoggingAspect                  : execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest)) returned with value <200 OK OK,ValidateTokenResponse [message=Success, apiError=null],[]>
-2021-07-28 11:40:06.872  INFO 7856 --- [http-nio-8089-exec-8] c.u.v.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest))
-2021-07-28 11:40:06.873  INFO 7856 --- [http-nio-8089-exec-8] c.u.v.aop.LoggingAspect                  : Execution time of ValidateTokenController.validateToken :: 857 ms
-2021-07-28 11:42:56.678  INFO 7856 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:47:56.680  INFO 7856 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:52:56.683  INFO 7856 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:57:56.698  INFO 7856 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 12:01:08.175  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 12:01:08.212  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application VALIDATE-TOKEN-SERVICE with eureka with status DOWN
-2021-07-28 12:01:08.216  WARN 7856 --- [RMI TCP Connection(45)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627488068212, current=DOWN, previous=UP]
-2021-07-28 12:01:08.216  INFO 7856 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
-2021-07-28 12:01:08.234  INFO 7856 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
-2021-07-28 12:01:08.471  INFO 7856 --- [RMI TCP Connection(46)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 12:01:08.521  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 12:01:08.535  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 12:01:08.601  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 12:01:08.647  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 12:01:08.686  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 12:01:08.688  INFO 7856 --- [RMI TCP Connection(45)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-07-28 13:31:33.567  INFO 16468 --- [main] c.u.v.ValidateTokenServiceApplication    : No active profile set, falling back to default profiles: default
-2021-07-28 13:31:35.270  INFO 16468 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
-2021-07-28 13:31:35.343  INFO 16468 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64ms. Found 1 JPA repository interfaces.
-2021-07-28 13:31:35.469  WARN 16468 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 13:31:35.649  INFO 16468 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=08d21ecb-3769-3ee4-832e-a59e8bec6eb6
-2021-07-28 13:31:36.816  INFO 16468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
-2021-07-28 13:31:36.828  INFO 16468 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 13:31:36.828  INFO 16468 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 13:31:37.012  INFO 16468 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 13:31:37.013  INFO 16468 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3411 ms
-2021-07-28 13:31:37.198  WARN 16468 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:31:37.198  INFO 16468 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:31:37.212  INFO 16468 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@245253d8
-2021-07-28 13:31:37.681  INFO 16468 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 13:31:37.706  INFO 16468 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-07-28 13:31:39.591  INFO 16468 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-07-28 13:31:39.680  INFO 16468 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-07-28 13:31:39.803  INFO 16468 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
-2021-07-28 13:31:40.199  INFO 16468 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2021-07-28 13:31:40.366  WARN 16468 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-07-28 13:31:40.476  INFO 16468 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-2021-07-28 13:31:41.744  INFO 16468 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 13:31:41.777  INFO 16468 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-07-28 13:31:41.792  INFO 16468 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 13:31:41.945  INFO 16468 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 13:31:41.989  WARN 16468 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:31:41.989  INFO 16468 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:31:43.197  INFO 16468 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 13:31:44.185  WARN 16468 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 13:31:44.371  INFO 16468 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 13:31:44.477  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 13:31:44.557  INFO 16468 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 13:31:44.557  INFO 16468 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 13:31:44.823  INFO 16468 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 13:31:44.824  INFO 16468 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 13:31:45.009  INFO 16468 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:31:45.223  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 13:31:45.223  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 13:31:45.223  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 13:31:45.224  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 13:31:45.224  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 13:31:45.224  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 13:31:45.225  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 13:31:45.380  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 13:31:45.384  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 13:31:45.387  INFO 16468 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 13:31:45.399  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627493505389 with initial instances count: 4
-2021-07-28 13:31:45.418  INFO 16468 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application VALIDATE-TOKEN-SERVICE with eureka with status UP
-2021-07-28 13:31:45.419  INFO 16468 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627493505419, current=UP, previous=STARTING]
-2021-07-28 13:31:45.421  INFO 16468 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
-2021-07-28 13:31:45.507  INFO 16468 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
-2021-07-28 13:31:45.509  INFO 16468 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
-2021-07-28 13:31:45.510  INFO 16468 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8089
-2021-07-28 13:31:45.800  INFO 16468 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 13:31:45.847  INFO 16468 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 13:31:45.924  INFO 16468 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 13:31:46.105  INFO 16468 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
-2021-07-28 13:31:46.683  INFO 16468 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
-2021-07-28 13:31:46.687  INFO 16468 --- [main] c.u.v.ValidateTokenServiceApplication    : Started ValidateTokenServiceApplication in 15.045 seconds (JVM running for 16.308)
-2021-07-28 13:31:46.690  INFO 16468 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 13:31:46.690  INFO 16468 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 13:31:46.714  INFO 16468 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 24 ms
-2021-07-28 13:31:46.786  INFO 16468 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as b61e5288ba4c
-2021-07-28 13:36:45.270  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:41:45.303  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:44:42.641  INFO 16468 --- [http-nio-8089-exec-7] c.u.v.aop.LoggingAspect                  : Before method execution validateToken
-2021-07-28 13:44:44.457  INFO 16468 --- [http-nio-8089-exec-7] c.u.v.aop.LoggingAspect                  : execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest)) returned with value <200 OK OK,ValidateTokenResponse [message=Success, apiError=null],[]>
-2021-07-28 13:44:44.459  INFO 16468 --- [http-nio-8089-exec-7] c.u.v.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest))
-2021-07-28 13:44:44.463  INFO 16468 --- [http-nio-8089-exec-7] c.u.v.aop.LoggingAspect                  : Execution time of ValidateTokenController.validateToken :: 1821 ms
-2021-07-28 13:46:45.320  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:51:45.330  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:56:45.343  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:01:45.358  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:06:45.362  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:11:45.367  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:16:45.380  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:21:45.399  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:26:45.420  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:31:45.429  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:36:45.432  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:41:45.441  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:46:45.453  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:51:45.464  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:56:45.475  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:01:45.483  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:06:45.493  INFO 16468 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:07:40.275  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:40.410  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application VALIDATE-TOKEN-SERVICE with eureka with status DOWN
-2021-07-28 15:07:40.418  WARN 16468 --- [RMI TCP Connection(111)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627499260415, current=DOWN, previous=UP]
-2021-07-28 15:07:40.423  INFO 16468 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
-2021-07-28 15:07:40.477  INFO 16468 --- [RMI TCP Connection(113)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:40.488  INFO 16468 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
-2021-07-28 15:07:40.729  INFO 16468 --- [RMI TCP Connection(114)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:40.933  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 15:07:40.969  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 15:07:41.005  INFO 16468 --- [RMI TCP Connection(115)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:41.129  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 15:07:41.233  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 15:07:41.324  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 15:07:41.328  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-07-28 15:07:41.349  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2021-07-28 15:07:41.375  INFO 16468 --- [RMI TCP Connection(111)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2021-07-29 21:08:33.527  INFO 3156 --- [main] c.u.v.ValidateTokenServiceApplication    : No active profile set, falling back to default profiles: default
+2021-07-29 21:08:35.078  INFO 3156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2021-07-29 21:08:35.171  INFO 3156 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85ms. Found 1 JPA repository interfaces.
+2021-07-29 21:08:35.297  WARN 3156 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-29 21:08:35.493  INFO 3156 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=08d21ecb-3769-3ee4-832e-a59e8bec6eb6
+2021-07-29 21:08:36.718  INFO 3156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8089 (http)
+2021-07-29 21:08:36.733  INFO 3156 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-29 21:08:36.734  INFO 3156 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-07-29 21:08:36.950  INFO 3156 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-29 21:08:36.951  INFO 3156 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3400 ms
+2021-07-29 21:08:37.223  WARN 3156 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-29 21:08:37.224  INFO 3156 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-29 21:08:37.276  INFO 3156 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@41bfa9e9
+2021-07-29 21:08:37.762  INFO 3156 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-29 21:08:37.785  INFO 3156 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-29 21:08:39.575  INFO 3156 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-29 21:08:39.667  INFO 3156 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-29 21:08:39.819  INFO 3156 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2021-07-29 21:08:40.155  INFO 3156 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-07-29 21:08:40.347  WARN 3156 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-29 21:08:40.538  INFO 3156 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-07-29 21:08:41.606  INFO 3156 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2021-07-29 21:08:41.804  INFO 3156 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-29 21:08:41.804  INFO 3156 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-29 21:08:41.824  INFO 3156 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-29 21:08:41.842  WARN 3156 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-29 21:08:41.842  INFO 3156 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-29 21:08:43.188  INFO 3156 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-07-29 21:08:43.784  WARN 3156 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2021-07-29 21:08:43.927  INFO 3156 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2021-07-29 21:08:43.981  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2021-07-29 21:08:44.046  INFO 3156 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2021-07-29 21:08:44.046  INFO 3156 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2021-07-29 21:08:44.280  INFO 3156 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2021-07-29 21:08:44.280  INFO 3156 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2021-07-29 21:08:44.472  INFO 3156 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-29 21:08:44.758  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-29 21:08:44.759  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-29 21:08:44.759  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-29 21:08:44.760  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-29 21:08:44.760  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-29 21:08:44.760  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2021-07-29 21:08:44.761  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-29 21:08:45.234  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-29 21:08:45.243  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2021-07-29 21:08:45.246  INFO 3156 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-29 21:08:45.252  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627607325249 with initial instances count: 4
+2021-07-29 21:08:45.263  INFO 3156 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application VALIDATE-TOKEN-SERVICE with eureka with status UP
+2021-07-29 21:08:45.264  INFO 3156 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627607325264, current=UP, previous=STARTING]
+2021-07-29 21:08:45.266  INFO 3156 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
+2021-07-29 21:08:45.319  INFO 3156 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
+2021-07-29 21:08:45.366  INFO 3156 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8089 (http) with context path ''
+2021-07-29 21:08:45.367  INFO 3156 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8089
+2021-07-29 21:08:45.617  INFO 3156 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-29 21:08:45.653  INFO 3156 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-29 21:08:45.729  INFO 3156 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-29 21:08:46.001  INFO 3156 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2021-07-29 21:08:46.922  INFO 3156 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2021-07-29 21:08:46.944  INFO 3156 --- [main] c.u.v.ValidateTokenServiceApplication    : Started ValidateTokenServiceApplication in 14.903 seconds (JVM running for 15.898)
+2021-07-29 21:08:47.214  INFO 3156 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as b61e5288ba4c
+2021-07-29 21:08:47.367  INFO 3156 --- [http-nio-8089-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-29 21:08:47.368  INFO 3156 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-29 21:08:47.399  INFO 3156 --- [http-nio-8089-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 31 ms
+2021-07-29 21:13:44.789  INFO 3156 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-29 21:17:04.866  INFO 3156 --- [http-nio-8089-exec-1] c.u.v.aop.LoggingAspect                  : Before method execution validateToken
+2021-07-29 21:17:06.824  INFO 3156 --- [http-nio-8089-exec-1] c.u.v.aop.LoggingAspect                  : execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest)) returned with value <200 OK OK,ValidateTokenResponse [message=Success, apiError=null],[]>
+2021-07-29 21:17:06.826  INFO 3156 --- [http-nio-8089-exec-1] c.u.v.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest))
+2021-07-29 21:17:06.829  INFO 3156 --- [http-nio-8089-exec-1] c.u.v.aop.LoggingAspect                  : Execution time of ValidateTokenController.validateToken :: 1973 ms
+2021-07-29 21:17:09.948  INFO 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : Before method execution validateToken
+2021-07-29 21:17:10.163 ERROR 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : Exception in com.uga.validate_token_service.controller.ValidateTokenController.validateToken() with cause = NULL
+2021-07-29 21:17:10.163  INFO 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest))
+2021-07-29 21:18:44.823  INFO 3156 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-29 21:19:48.249  INFO 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : Before method execution validateToken
+2021-07-29 21:19:48.455 ERROR 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : Exception in com.uga.validate_token_service.controller.ValidateTokenController.validateToken() with cause = NULL
+2021-07-29 21:19:48.455  INFO 3156 --- [http-nio-8089-exec-5] c.u.v.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.validate_token_service.controller.ValidateTokenController.validateToken(String,ValidateTokenRequest))
+2021-07-29 21:23:16.508  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-29 21:23:16.578  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application VALIDATE-TOKEN-SERVICE with eureka with status DOWN
+2021-07-29 21:23:16.581  WARN 3156 --- [RMI TCP Connection(26)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627608196581, current=DOWN, previous=UP]
+2021-07-29 21:23:16.584  INFO 3156 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089: registering service...
+2021-07-29 21:23:16.605  INFO 3156 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_VALIDATE-TOKEN-SERVICE/192.168.1.187:validate-token-service:8089 - registration status: 204
+2021-07-29 21:23:16.864  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-07-29 21:23:16.884  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2021-07-29 21:23:16.958  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2021-07-29 21:23:17.001  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-07-29 21:23:17.036  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-07-29 21:23:17.040  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-07-29 21:23:17.058  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-07-29 21:23:17.066  INFO 3156 --- [RMI TCP Connection(26)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
