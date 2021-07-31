@@ -19,7 +19,7 @@ public class Promotion {
 	private Timestamp startDatetime;
 	
 	@Column(name = "END_DATETIME")
-	private Timestamp endDateTime;
+	private Timestamp endDatetime;
 	
 	@Column(name = "DISCOUNT_VALUE")
 	private double discountValue;
@@ -33,19 +33,19 @@ public class Promotion {
 	/**
 	 * @param promoId
 	 * @param startDatetime
-	 * @param endDateTime
+	 * @param endDatetime
 	 * @param discountValue
 	 */
-	public Promotion(String promoId, Timestamp startDatetime, Timestamp endDateTime, double discountValue) {
+	public Promotion(String promoId, Timestamp startDatetime, Timestamp endDatetime, double discountValue) {
 		this.promoId = promoId;
 		this.startDatetime = startDatetime;
-		this.endDateTime = endDateTime;
+		this.endDatetime = endDatetime;
 		this.discountValue = discountValue;
 	}
 
 	@Override
 	public String toString() {
-		return "Promotion [promoId=" + promoId + ", startDatetime=" + startDatetime + ", endDateTime=" + endDateTime
+		return "Promotion [promoId=" + promoId + ", startDatetime=" + startDatetime + ", endDatetime=" + endDatetime
 				+ ", discountValue=" + discountValue + "]";
 	}
 
@@ -78,17 +78,17 @@ public class Promotion {
 	}
 
 	/**
-	 * @return the endDateTime
+	 * @return the endDatetime
 	 */
 	public Timestamp getEndDateTime() {
-		return endDateTime;
+		return endDatetime;
 	}
 
 	/**
-	 * @param endDateTime the endDateTime to set
+	 * @param endDatetime the endDatetime to set
 	 */
-	public void setEndDateTime(Timestamp endDateTime) {
-		this.endDateTime = endDateTime;
+	public void setEndDateTime(Timestamp endDatetime) {
+		this.endDatetime = endDatetime;
 	}
 
 	/**

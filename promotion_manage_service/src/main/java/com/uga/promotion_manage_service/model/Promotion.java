@@ -19,7 +19,7 @@ public class Promotion {
 	private Timestamp startDatetime;
 	
 	@Column(name = "END_DATETIME")
-	private Timestamp endDateTime;
+	private Timestamp endDatetime;
 	
 	@Column(name = "DISCOUNT_VALUE")
 	private double discountValue;
