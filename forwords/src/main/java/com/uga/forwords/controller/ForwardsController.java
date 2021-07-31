@@ -123,10 +123,17 @@ public class ForwardsController {
 		return "admin-dashboard";	
 	}
 	
+	@GetMapping("/admin/showAddBookPage")
+	public String showAddBookPage(Model model) {
+		return "admin-add-book";
+	}
+	
 	@PostMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
 	public String addBook(HttpServletRequest request) {
 			
-		// Try with RequestDispatcher
+		// If encountering issues, try XMLHttpRequest and/or constructing a FormData object in the frontend
+		
+		// Attempt with RequestDispatcher
 //		RequestDispatcher dispatcher = request.getServletContext().getContext("http://book-manage-service/updateBook").getRequestDispatcher("http://book-manage-service/updateBook");
 		
 		// Forward request to backend service
