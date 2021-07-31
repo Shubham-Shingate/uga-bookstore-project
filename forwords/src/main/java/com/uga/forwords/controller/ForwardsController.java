@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
@@ -637,6 +636,28 @@ public class ForwardsController {
 		} else {
 			theModel.addAttribute("orderPlacementError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/proceedToCheckout";
+		}
+		
+	}
+	
+	@GetMapping("/customer/getOrderHistory")
+	public String getOrderHistory (Principal principal, Model theModel) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/getOrderHistory", HttpMethod.GET, entity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+			
+			theModel.addAttribute("pastOrders", orderManageServiceResponse.getBody().getOrders());
+			return "customer-order-history";
+		} else {
+			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "customer-order-history";
 		}
 		
 	}
