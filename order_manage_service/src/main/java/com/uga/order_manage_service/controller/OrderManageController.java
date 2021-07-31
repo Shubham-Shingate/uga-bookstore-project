@@ -38,7 +38,7 @@ public class OrderManageController {
 		String orderId = orderRepository.saveOrder(accountId, orderRequest.getCardNumber(), orderRequest.getAddressId(), orderRequest.getTotalCost(), orderRequest.getPromoId(), orderRequest.getDiscountedCost());
 		
 		/* Save mapping of ordered books */
-		BookEntry[] orderedBooks = orderRequest.getBooks();
+		List<BookEntry> orderedBooks = orderRequest.getBooks();
 		for(BookEntry book : orderedBooks) {
 			OrderBookMapping orderedBook = new OrderBookMapping(orderId, book.getBookId(), book.getQuantity());
 			orderBookMapingRepository.save(orderedBook);

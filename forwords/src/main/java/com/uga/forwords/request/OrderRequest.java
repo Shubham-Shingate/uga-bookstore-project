@@ -1,11 +1,11 @@
-package com.uga.order_manage_service.request;
+package com.uga.forwords.request;
 
 import java.util.List;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import com.uga.order_manage_service.model.BookEntry;
+import com.uga.forwords.model.BookEntry;
 
 public class OrderRequest {
 	
