@@ -12,6 +12,13 @@ public class EditProfileController {
 
     }
 
+    @GetMapping("/showCheckoutPage")
+    public String showCheckoutPage() {
+
+        return "customer-checkout";
+
+    }
+
     @GetMapping("/showPayments")
     public String showPayments() {
 
