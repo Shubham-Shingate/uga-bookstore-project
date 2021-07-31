@@ -31,6 +31,8 @@ public class Base64EncodedBook {
 	private Double price;
 	
 	private String sub_category;
+	
+	private Integer quantityInCart;
 
 	public Long getBook_id() {
 		return book_id;
@@ -152,6 +154,14 @@ public class Base64EncodedBook {
 		this.sub_category = sub_category;
 	}
 
+	public Integer getQuantityInCart() {
+		return quantityInCart;
+	}
+
+	public void setQuantityInCart(Integer quantityInCart) {
+		this.quantityInCart = quantityInCart;
+	}
+
 	public Base64EncodedBook(Long book_id, String title, String isbn, String author, String category,
 			String description, String cover_picture, Long publication_year, String edition, String publisher,
 			String book_status, Long quantity_in_stock, Long minimum_threshold, Double price, String sub_category) {
@@ -172,6 +182,28 @@ public class Base64EncodedBook {
 		this.sub_category = sub_category;
 	}
 	
+	public Base64EncodedBook(Long book_id, String title, String isbn, String author, String category,
+			String description, String cover_picture, Long publication_year, String edition, String publisher,
+			String book_status, Long quantity_in_stock, Long minimum_threshold, Double price, String sub_category,
+			Integer quantityInCart) {
+		this.book_id = book_id;
+		this.title = title;
+		this.isbn = isbn;
+		this.author = author;
+		this.category = category;
+		this.description = description;
+		this.cover_picture = cover_picture;
+		this.publication_year = publication_year;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.book_status = book_status;
+		this.quantity_in_stock = quantity_in_stock;
+		this.minimum_threshold = minimum_threshold;
+		this.price = price;
+		this.sub_category = sub_category;
+		this.quantityInCart = quantityInCart;
+	}
+
 	public Base64EncodedBook() {
 		
 	}

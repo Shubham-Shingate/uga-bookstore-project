@@ -31,7 +31,7 @@ public class BooksBase64Encoder {
 				book.getCategory(), book.getDescription(),
 				Base64.encodeBase64String(ArrayUtils.toPrimitive(book.getCoverPicture())), book.getPublicationYear(),
 				book.getEdition(), book.getPublisher(), book.getBookStatus(), book.getQuantity(),
-				book.getMinimumThreshold(), book.getPrice(), book.getSubCategory());
+				book.getMinimumThreshold(), book.getPrice(), book.getSubCategory(), book.getQuantityInCart());
 	}
 	
 }

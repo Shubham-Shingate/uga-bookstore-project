@@ -138,6 +138,8 @@ public class ForwardsController {
 		}
 		model.addAttribute("featuredBooks", featuredBooks);
 		model.addAttribute("topSellerBooks", topSellerBooks);
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
+		
 		return "landing";
 	}
 	
@@ -156,9 +158,11 @@ public class ForwardsController {
 		
 		//HTTP call to the backend service- search_book_service
 		ResponseEntity<SearchBookResponse> searchBookServiceResponse = restTemplate.getForEntity("http://search-book-service/searchBooksBookId/"+book_id, SearchBookResponse.class);
-		model.addAttribute("searchedBookById", searchBookServiceResponse.getBody().getBooks().get(0));		
 		
-		return "";
+		model.addAttribute("searchedBookById", BooksBase64Encoder.getBase64Encoded(searchBookServiceResponse.getBody().getBooks().get(0)));
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
+		
+		return "book-details";
 	}
 	
 	
