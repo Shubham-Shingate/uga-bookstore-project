@@ -37,7 +37,7 @@ public class PromotionManagementController {
 	}
 	
 	/* Create a promotion */
-	@GetMapping("/createPromotion")
+	@PostMapping("/createPromotion")
 	public ResponseEntity<PromotionInfoResponse> createPromotion(@RequestBody @Validated PromotionInfoRequest request) {
 		
 		/* Check if promoID already exists */		

@@ -79,12 +79,19 @@ public class ForwardsController {
 		
 		// Add list to model
 		model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
-		model.addAttribute("addPromotion", new PromotionInfoRequest());
+//		model.addAttribute("addPromotion", new PromotionInfoRequest());
 		
-		return "admin/viewPromotions";	
+		return "admin-manage-promotions";	
 	}
 	
-	@GetMapping("/admin/processPromotionAddition")
+	@GetMapping("/admin/showAddPromoPage")
+	public String showAddPromoPage(Model model) {
+		model.addAttribute("addPromotionRequest", new PromotionInfoRequest());
+		
+		return "admin-add-promotion"; 
+	}
+		
+	@PostMapping("/admin/processPromotionAddition")
 	public String processPromotionAddition(Model model, @ModelAttribute("addPromotion") PromotionInfoRequest promotionRequest) {
 		
 		// Set up Http entity with request body
@@ -113,7 +120,7 @@ public class ForwardsController {
 		
 		model.addAttribute("bookInventory", inventory);
 		
-		return "admin/admin-dashboard";		
+		return "admin-dashboard";	
 	}
 	
 	@PostMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -125,7 +132,7 @@ public class ForwardsController {
 		// Forward request to backend service
 		ResponseEntity<BookResponse> bookResponse = restTemplate.postForEntity("http://book-manage-service/updateBook", request, BookResponse.class);
 		
-		return "redirect:/admin/admin-dashboard";
+		return "redirect:/admin-dashboard";
 	}
 	
 
