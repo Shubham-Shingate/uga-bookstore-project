@@ -1,4 +1,4 @@
-package com.uga.order_manage_service.model;
+package com.uga.forwords.model;
 
 import java.util.Collection;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.uga.forwords.model;
+package com.uga.order_manage_service.model;
 
 import java.util.Arrays;
 import javax.persistence.Column;

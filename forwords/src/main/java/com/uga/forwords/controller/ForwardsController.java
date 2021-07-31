@@ -3,6 +3,7 @@ package com.uga.forwords.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -20,28 +21,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
+import com.uga.forwords.model.BookEntry;
 import com.uga.forwords.model.CartBook;
 import com.uga.forwords.model.Config;
-import com.uga.forwords.model.PaymentCard;
 import com.uga.forwords.model.SearchBook;
-import com.uga.forwords.model.ShippingEntry;
 import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.CartUpdateRequest;
 import com.uga.forwords.request.ChangePasswordRequest;
 import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
 import com.uga.forwords.request.EmailRequest;
-import com.uga.forwords.request.PlaceOrderRequest;
+import com.uga.forwords.request.OrderRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
 import com.uga.forwords.response.CartResponse;
 import com.uga.forwords.response.CatalogResponse;
 import com.uga.forwords.response.EmailResponse;
+import com.uga.forwords.response.OrderResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
 import com.uga.forwords.response.SearchBookResponse;
@@ -396,11 +398,11 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Success")) {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("addPaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("addPaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	}
@@ -419,11 +421,11 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/updatePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Success")) {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("updatePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("updatePaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	
@@ -445,7 +447,7 @@ public class ForwardsController {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("deletePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("deletePaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	
@@ -494,13 +496,13 @@ public class ForwardsController {
 		// Set up Http entity with request body
 		HttpEntity<CartUpdateRequest> entity = new HttpEntity<CartUpdateRequest>(cartUpdateRequest, headers);
 		
-		// Send request to backend service
+		// Send request to backend service: cart-manage-service
 		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.postForEntity("http://cart-manage-service/addUpdateBookToCart", entity, CartResponse.class);
 		
 		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
 			return "redirect:/customer/getCartDetails";
 		} else {
-			theModel.addAttribute("cartUpdateError", cartManageServiceResponse.getBody().getMessage());
+			theModel.addAttribute("cartUpdateError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getCartDetails";
 		}	
 	}
@@ -521,7 +523,7 @@ public class ForwardsController {
 		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
 			return "redirect:/customer/getCartDetails";
 		} else {
-			theModel.addAttribute("bookDeleteError", cartManageServiceResponse.getBody().getMessage());
+			theModel.addAttribute("bookDeleteError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getCartDetails";
 		}
 	}
@@ -542,7 +544,7 @@ public class ForwardsController {
 		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
 			return "redirect:/customer/getCartDetails";
 		} else {
-			theModel.addAttribute("bookDeleteError", cartManageServiceResponse.getBody().getMessage());
+			theModel.addAttribute("bookDeleteError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getCartDetails";
 		}
 	}
@@ -568,21 +570,21 @@ public class ForwardsController {
 				base64encodedCartBooks.add(BooksBase64Encoder.getBase64Encoded(cartBook));
 			}
 		} else {
-			theModel.addAttribute("getCartDetailsError", cartManageServiceResponse.getBody().getMessage());
+			theModel.addAttribute("getCartDetailsError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
 		}
 		
 		// Make Request to backend service- shipping-detail-service
 		HttpEntity<Object> entity2 = new HttpEntity<Object>(headers);
 		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails", HttpMethod.GET, entity2, ShippingInfoResponse.class);
 		if (shippingDetailsServiceResponse.getBody().getMessage().equals("Failure") || shippingDetailsServiceResponse.getBody().getAddresses() == null) {
-			theModel.addAttribute("getShippingDetailsError", shippingDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("getShippingDetailsError", ((LinkedHashMap<?, ?>) shippingDetailsServiceResponse.getBody().getApiError()).get("message"));
 		}
 		
 		// Make Request to backend service
 		HttpEntity<Object> entity3 = new HttpEntity<Object>(headers);
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.exchange("http://payment-detail-service/getPaymentDetails", HttpMethod.GET, entity3, PaymentDetailsResponse.class);
 		if (paymentDetailsServiceResponse.getBody().getMessage().equals("Failure") || paymentDetailsServiceResponse.getBody().getCards() == null) {
-			theModel.addAttribute("getPaymentDetailsError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("getPaymentDetailsError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 		}
 		
 		
@@ -598,7 +600,11 @@ public class ForwardsController {
 		}
 		
 		// Pas the empty model attribute object so that UI can populate order data in it to place the order
-		theModel.addAttribute("placeOrderReq", new PlaceOrderRequest());
+		List<BookEntry> books = new ArrayList<BookEntry>();
+		OrderRequest orderRequest = new OrderRequest();
+		orderRequest.setBooks(books);
+		
+		theModel.addAttribute("orderRequest", orderRequest);
 		theModel.addAttribute("totalCost", totalCost);
 		return "customer-checkout";
 				
@@ -607,7 +613,32 @@ public class ForwardsController {
 	/** -----------------------------------Services for Place Order related services (calls go to order_manage_service)----------------------------------- */
 		
 	
-
+	@PostMapping("/customer/placeOrder")
+	public String placeOrder(Principal principal, Model theModel, @ModelAttribute("orderRequest") OrderRequest orderRequest) {
+		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		HttpEntity<OrderRequest> entity = new HttpEntity<OrderRequest>(orderRequest, headers);
+		
+		// Send request to backend service: cart-manage-service
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.postForEntity("http://order-manage-service/placeOrder", entity, OrderResponse.class);
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+			//Send confirmation email for order placed
+			sendEmail(principal.getName(), "ORDER_PLACED_CONFIRMATION_EMAIL");
+			return "customer-order-confirmation";
+		} else {
+			theModel.addAttribute("orderPlacementError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/proceedToCheckout";
+		}
+		
+	}
+	
+	
+	
 	
 	
 	

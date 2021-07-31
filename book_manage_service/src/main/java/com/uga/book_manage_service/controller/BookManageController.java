@@ -33,23 +33,22 @@ public class BookManageController {
 	private BookRepository bookRepository;	
 	
 	/* updateBook with Image */
-	@PostMapping(value = "/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.IMAGE_JPEG_VALUE, MediaType.APPLICATION_JSON_VALUE, MediaType.TEXT_PLAIN_VALUE, MediaType.IMAGE_PNG_VALUE} )
-	@Validated
+	@PostMapping(value = "/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
 	public ResponseEntity<BookResponse> addBook(
 			@RequestParam Long id,
-			@RequestParam @NotBlank(message="{title.notblank}") String title,
-			@RequestParam @NotBlank(message="{isbn.notblank}") String isbn,
-			@RequestParam @NotBlank(message="{author.notblank}") String author,
-			@RequestParam @NotBlank(message="{category.notblank}") String category,
-			@RequestParam @NotNull(message="Description cannot be null") String description,
-			@RequestPart(value="coverPicture") @NotNull(message="Cover picture is mandatory, cannot be null") MultipartFile coverPicture,
-			@RequestParam @NotBlank(message="Publication year cannot be blank or null") Integer publicationYear,
-			@RequestParam @NotNull(message="Edition cannot be null") String edition,
-			@RequestParam @NotBlank(message="Publisher cannot be blank or null") String publisher,
-			@RequestParam @NotNull(message="Quantity cannot be blank or null") Long quantity,
-			@RequestParam @NotNull(message="Minimum threshold cannot be blank or null") Long minThreshold,
-			@RequestParam @NotNull(message="Price cannot be blank or null") Double price,
-			@RequestParam @NotNull(message="Category cannot be null") String subCategory
+			@RequestParam String title,
+			@RequestParam String isbn,
+			@RequestParam String author,
+			@RequestParam String category,
+			@RequestParam String description,
+			@RequestPart(value="coverPicture") MultipartFile coverPicture,
+			@RequestParam Integer publicationYear,
+			@RequestParam String edition,
+			@RequestParam String publisher,
+			@RequestParam Long quantity,
+			@RequestParam Long minThreshold,
+			@RequestParam Double price,
+			@RequestParam String subCategory
 			) throws IOException {
 		
 		/* Cannot get the above validations to work */
@@ -59,7 +58,7 @@ public class BookManageController {
 			throw new InvalidFieldException("No values can be null. Some String values can be empty, but never null.");
 		
 		if(title.isEmpty() || isbn.isEmpty() || author.isEmpty() || category.isEmpty() || publisher.isEmpty() || price.toString().isEmpty() 
-				|| quantity.toString().isEmpty() || minThreshold.toString().isEmpty() || publicationYear.toString().isEmpty())
+				|| quantity.toString().isEmpty() || minThreshold.toString().isEmpty() || publicationYear.toString().isEmpty() || coverPicture.isEmpty())
 			throw new InvalidFieldException("One or more mandatory fields is empty. Review your submission and make sure no required values are left blank.");
 		
 		// Calculate status

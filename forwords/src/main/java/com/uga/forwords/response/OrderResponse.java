@@ -1,8 +1,7 @@
-package com.uga.order_manage_service.response;
+package com.uga.forwords.response;
 
 import java.util.List;
-
-import com.uga.order_manage_service.model.Order;
+import com.uga.forwords.model.Order;
 
 public class OrderResponse {
 
