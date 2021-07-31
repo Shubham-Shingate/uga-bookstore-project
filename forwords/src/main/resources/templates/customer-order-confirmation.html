@@ -1,0 +1,385 @@
+//confirmation
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy M." />
+    <title>Forwords</title>
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery-2.0.0.min.js}" type="text/javascript"></script>
+    <!-- Bootstrap4 files-->
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      type="text/javascript"
+    ></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+    <!-- Fonticons -->
+    <link
+      th:href="@{/fonts/fontawesome/css/all.min.css}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/fonts/feathericons/css/iconfont.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      th:href="@{/fonts/material-icons/css/materialdesignicons.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- custom style -->
+    <link th:href="@{/css/ui.css}" rel="stylesheet" />
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+    <link th:href="@{css/cart.css}" rel="stylesheet" />
+    <!-- plugin: slickslider -->
+    <link
+      th:href="@{/plugins/slickslider/slick.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      th:href="@{/plugins/slickslider/slick-theme.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script th:src="@{/plugins/slickslider/slick.min.js}"></script>
+    <!-- custom javascript -->
+    <script th:src="@{/js/script.js}" type="text/javascript"></script>
+  </head>
+  <body>
+    <header class="section-header">
+      <section class="header-main border-bottom">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-4">
+              <a
+                th:href="@{/landingPage}"
+                class="brand-wrap"
+                style="font-family: 'Exo 2', sans-serif; font-size: xx-large"
+                >FORWORDS</a
+              >
+              <!-- brand-wrap.// -->
+            </div>
+            <div
+              class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block"
+            ></div>
+            <!-- col.// -->
+            <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
+              <div class="d-flex justify-content-end">
+                <a href="#" class="widget-header mr-3">
+                  <div class="icon">
+                    <i
+                      class="icon-sm rounded-circle border fa fa-shopping-cart"
+                    ></i>
+                    <span class="notify">0</span>
+                  </div>
+                </a>
+
+                <div class="widget-header dropdown">
+                  <a
+                    href="#"
+                    data-toggle="dropdown"
+                    class="dropdown-toggle"
+                    data-offset="20,10"
+                  >
+                    <div class="icon icon-sm rounded-circle border">
+                      <i class="fa fa-user"></i>
+                    </div>
+                    <span class="sr-only">Profile actions</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a
+                      class="dropdown-item"
+                      th:href="@{/customer/showSettingsPage}"
+                      >Profile setting</a
+                    >
+                    <a
+                      class="dropdown-item"
+                      th:href="@{/customer/showOrderHistory}"
+                      >My orders</a
+                    >
+                    <hr class="dropdown-divider" />
+                    <form th:action="@{/logout}" method="POST">
+                      <input
+                        type="submit"
+                        class="dropdown-item"
+                        value="Logout"
+                      />
+                    </form>
+                  </div>
+                  <!--  dropdown-menu .// -->
+                </div>
+              </div>
+              <!-- widgets-wrap.// -->
+            </div>
+            <!-- col.// -->
+          </div>
+          <!-- row.// -->
+        </div>
+        <!-- container.// -->
+      </section>
+    </header>
+    <!-- section-header.// -->
+    <!-- ========================= SECTION PAGETOP ========================= -->
+    <section class="section-pagetop bg">
+      <div class="container">
+        <h2 class="title-page">Order Confirmation</h2>
+        <nav>
+          <ol class="breadcrumb text-white">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Cart</a></li>
+            <li class="breadcrumb-item"><a href="#">Checkout</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+              Confirmation
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <!-- container //  -->
+    </section>
+    <!-- ========================= SECTION INTRO END// ========================= -->
+
+    <section class="section-content padding-y">
+      <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+        <p>
+          Thank you for placing order with us. Your order number is
+          <b th:text="@{currentShippingInfo.orderId}">12345678</b> and is
+          estimated to arrive in <b>2</b> days
+        </p>
+
+        <div class="row">
+          <main class="col-md-8">
+            <div class="card">
+              <table class="table table-borderless table-shopping-cart">
+                <thead class="text-muted">
+                  <tr class="small text-uppercase">
+                    <th scope="col">Items</th>
+                    <th scope="col" width="120">Quantity</th>
+                    <th scope="col" width="120">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="cartBook : ${cartBooks}">
+                    <td>
+                      <figure class="itemside align-items-center">
+                        <div class="aside">
+                          <img
+                            th:src="@{'data:image/png;base64,'+${cartBook.cover_picture}}"
+                            class="img-sm"
+                          />
+                        </div>
+                        <figcaption class="info">
+                          <a
+                            th:href="@{'/viewBookDetails/'+${cartBook.book_id}}"
+                            th:text="${cartBook.title}"
+                            class="title text-dark"
+                          ></a>
+                          <p class="text-muted small">
+                            By
+                            <span
+                              th:text="${cartBook.author}"
+                              th:remove="tag"
+                            ></span>
+                            <br />
+                            <span
+                              th:text="${cartBook.edition}"
+                              th:remove="tag"
+                            ></span>
+                          </p>
+                        </figcaption>
+                      </figure>
+                    </td>
+                    <td>
+                      <div class="price">
+                        <div class="price">
+                          <var>$</var
+                          ><var th:id="@{'qty-'+${cartBook.book_id}}"></var>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="price-wrap">
+                        <div class="price">
+                          <div class="price">
+                            <var>$</var
+                            ><var
+                              th:id="@{'total-price-'+${cartBook.book_id}}"
+                            ></var>
+                          </div>
+                        </div>
+                        <small class="text-muted"
+                          >$<span
+                            th:text="${cartBook.price}"
+                            th:remove="tag"
+                          ></span>
+                          each
+                        </small>
+                      </div>
+                      <!-- price-wrap .// -->
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="card-body border-top">
+                <dl class="row">
+                  <dt class="col-sm-10">
+                    Subtotal:
+                    <span class="float-right text-muted">2 items</span>
+                  </dt>
+                  <dd class="col-sm-2 text-right"><strong>$1,568</strong></dd>
+
+                  <dt class="col-sm-10">
+                    Promo code discount:
+                    <span class="float-right text-muted">10% offer</span>
+                  </dt>
+                  <dd class="col-sm-2 text-danger text-right">
+                    <strong>$29</strong>
+                  </dd>
+
+                  <dt class="col-sm-10">
+                    Delivery charge:
+                    <span class="float-right text-muted">Express delivery</span>
+                  </dt>
+                  <dd class="col-sm-2 text-right"><strong>$120</strong></dd>
+
+                  <dt class="col-sm-10">
+                    Tax: <span class="float-right text-muted">5%</span>
+                  </dt>
+                  <dd class="col-sm-2 text-right text-success">
+                    <strong>$7</strong>
+                  </dd>
+
+                  <dt class="col-sm-10">Total:</dt>
+                  <dd class="col-sm-2 text-right">
+                    <strong class="h5 text-dark">$1,650</strong>
+                  </dd>
+                </dl>
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+          </main>
+          <!-- col.// -->
+          <aside class="col-lg-3">
+            <div class="card">
+              <div class="card-body">
+                <h4>Shipping address</h4>
+                <hr />
+                <div class="input-group">
+                  <p th:text="@{currentShippingInfo.street}">21 Baker Street</p>
+                  <p th:text="@{currentShippingInfo.city}">city of London</p>
+                  <p th:text="@{currentShippingInfo.state}">State</p>
+                  <p th:text="@{currentShippingInfo.zipCode}">30009</p>
+                </div>
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+
+            <div class="card">
+              <div class="card-body">
+                <h4>Payment</h4>
+                <hr />
+                <p th:text="@{customerInfo.creditCardName}">Credit XX1234</p>
+              </div>
+              <!-- card-body.// -->
+            </div>
+            <!-- card.// -->
+          </aside>
+          <!-- col.// -->
+        </div>
+        <br /><br />
+        <br /><br />
+      </div>
+      <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    <!-- ========================= FOOTER ========================= -->
+    <footer class="section-footer border-top">
+      <div class="container">
+        <section class="footer-top padding-y">
+          <div class="row">
+            <aside class="col-md">
+              <h6 class="title">forWORDS</h6>
+              <ul class="list-unstyled">
+                <li><a href="#">About us</a></li>
+                <!-- <li> <a href="#">Career</a></li>
+                           <li> <a href="#">Find a store</a></li> -->
+                <li><a href="#">Rules and terms</a></li>
+                <!-- <li> <a href="#">Sitemap</a></li> -->
+              </ul>
+            </aside>
+            <aside class="col-md">
+              <h6 class="title">Help</h6>
+              <ul class="list-unstyled">
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">Cart Items</a></li>
+                <li><a href="#">Order status</a></li>
+                <li><a href="#">Shipping info</a></li>
+              </ul>
+            </aside>
+            <aside class="col-md">
+              <h6 class="title">Account</h6>
+              <ul class="list-unstyled">
+                <li><a href="#"> User Login </a></li>
+                <li><a href="#"> User register </a></li>
+                <li><a href="#"> Account Setting </a></li>
+                <li><a href="#"> My Orders </a></li>
+              </ul>
+            </aside>
+            <aside class="col-md">
+              <h6 class="title">Social</h6>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="#"> <i class="fab fa-facebook"></i> Facebook </a>
+                </li>
+                <li>
+                  <a href="#"> <i class="fab fa-twitter"></i> Twitter </a>
+                </li>
+                <li>
+                  <a href="#"> <i class="fab fa-instagram"></i> Instagram </a>
+                </li>
+                <li>
+                  <a href="#"> <i class="fab fa-youtube"></i> Youtube </a>
+                </li>
+              </ul>
+            </aside>
+          </div>
+          <!-- row.// -->
+        </section>
+        <!-- footer-top.// -->
+        <section class="footer-bottom border-top row">
+          <div class="col-md-2">
+            <p class="text-muted">&copy 2021 forWORDS.com</p>
+          </div>
+          <div class="col-md-8 text-md-center">
+            <span class="px-2">info@emailservis.com</span>
+            <span class="px-2">+12037157177</span>
+            <span class="px-2">1000 Lakeside Drive, Athens</span>
+          </div>
+          <div class="col-md-2 text-md-right text-muted">
+            <i class="fab fa-lg fa-cc-visa"></i>
+            <i class="fab fa-lg fa-cc-paypal"></i>
+            <i class="fab fa-lg fa-cc-mastercard"></i>
+          </div>
+        </section>
+      </div>
+      <!-- //container -->
+    </footer>
+    <!-- ========================= FOOTER END // ========================= -->
+  </body>
+</html>
