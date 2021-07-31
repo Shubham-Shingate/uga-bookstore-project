@@ -78,7 +78,7 @@
 				</div> <!-- col.// -->
 				<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
 					<div class="d-flex justify-content-end mb-3 mb-lg-0">
-						<a href="#" class="widget-header pl-3 ml-3">
+						<a th:href="@{/customer/getCartDetails}" class="widget-header pl-3 ml-3">
 							<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
 							<span class="badge badge-pill badge-danger notify">0</span>
 						</a>
@@ -134,10 +134,6 @@
 								<div class="card img-big-wrap">
 									<a href="#"> <img  th:src="@{'data:image/png;base64,'+${searchedBookById.cover_picture}}" /> </a>
 								</div> <!-- card img-big-wrap.// -->
-<!--								<div class="thumbs-wrap">-->
-<!--									<a href="#" class="item-thumb"> <img src="images/items/book10.jpg"></a>-->
-<!--									<a href="#" class="item-thumb"> <img src="images/items/book1.jpeg"></a>-->
-<!--								</div> &lt;!&ndash; thumbs-wrap .// &ndash;&gt;-->
 							</article> <!-- gallery-wrap .end// -->
 					</aside>
 					<main class="col-md-6">
@@ -145,15 +141,6 @@
 							<p th:text="${searchedBookById.category}" class="text-primary"></p>
 							<h3 class="title" th:text="${searchedBookById.title}"></h3>
 							<div>
-<!--								<ul class="rating-stars">-->
-<!--									<li style="width:60%" class="stars-active">-->
-<!--										<img src="images/icons/stars-active.svg" alt="">-->
-<!--									</li>-->
-<!--									<li>-->
-<!--										<img src="images/icons/starts-disable.svg" alt="">-->
-<!--									</li>-->
-<!--								</ul>-->
-<!--								<span class="label-rating mr-3 text-muted">7/10</span>-->
 								<p href="#" class="btn-link  mr-3 text-muted">
 									ISBN: <span th:text="${searchedBookById.isbn}"></span>
 								</p>
@@ -176,34 +163,34 @@
 								<var class="price h4" th:text="${searchedBookById.price}"></var> <br>
 							</div> <!-- price-detail-wrap .// -->
 
+								<form
+												th:action="@{/customer/addUpdateBookInCart}"
+												th:object="${updateCartRequest}"
+												method="POST"
+								>
+									<div class="mb-3">
+										<label>Quantity</label>
 
-							<form
-											th:action="@{/customer/addUpdateBookInCart}"
-											th:object="${updateCartRequest}"
-											method="POST"
-							>
-							<div class="mb-3">
-								<label>Quantity</label>
-								<input type="number"
-											 id="quantity"
-											 name="quantity"
-											 th:min="1"
-											 th:max="${searchedBookById.quantity_in_stock}"
-											 th:field="*{qty}"
-											 required
-								/>
-								<input hidden
-											 name="bookId"
-											 type="number"
-											 th:attr="name='bookId'"
-											 th:value="${searchedBookById.book_id}"/>
-							</div>
+										<input type="number"
+													 id="quantity"
+													 name="quantity"
+													 th:field="*{qty}"
+													 th:min="1"
+													 th:max="${searchedBookById.quantity_in_stock}"
+													 required
+										/>
+										<input hidden
+													 name="bookId"
+													 type="number"
+													 th:attr="name='bookId'"
+													 th:value="${searchedBookById.book_id}"/>
+									</div>
 
-							<div class="mb-3">
-									<button type="submit" class="btn btn-light">Buy now</button>
-									<button type="submit" class="btn btn-light">Add to cart</button>
-							</div>
-							</form>
+									<div class="mb-3">
+											<button type="submit" class="btn btn-light">Buy now</button>
+											<button type="submit" class="btn btn-light">Add to cart</button>
+									</div>
+								</form>
 
 						</article> <!-- product-info-aside .// -->
 					</main> <!-- col.// -->
