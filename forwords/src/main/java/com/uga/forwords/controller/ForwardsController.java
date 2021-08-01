@@ -229,7 +229,7 @@ public class ForwardsController {
 	
 	/** -----------------------------------Services for Customer Account  Overview----------------------------------- */
 	
-	@GetMapping("/customer/account-overview")
+	@GetMapping("/customer/getAccountOverview")
 	public String showAccountOverviewPage(Principal principal, Model model) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
