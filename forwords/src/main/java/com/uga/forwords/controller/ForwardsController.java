@@ -450,25 +450,28 @@ public class ForwardsController {
 	}
 	
 	
+	@GetMapping("/customer/account-overview")
+	public String showAccountOverviewPage(Principal principal, Model model) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service for profile information
+		HttpEntity<Object> profileEntity = new HttpEntity<Object>(headers);
+		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.exchange("http://profile-detail-service/getPersonalDetails",
+				HttpMethod.GET, profileEntity, PersonalDetailsResponse.class);
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		// Make Request to backend service for address details
+		HttpEntity<Object> shippingEntity = new HttpEntity<Object>(headers);
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
+																						HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);		
+		
+		// Add information to model
+		model.addAttribute("activeUserDetails", profileDetailsServiceResponse.getBody().getUserDetails());
+		model.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
+		return "customer-account-overview";
+		
+	}
 	
 }
