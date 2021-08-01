@@ -1,233 +1,102 @@
-2021-07-28 11:31:51.559  INFO 8524 --- [main] c.u.b.BookCatalogServiceApplication      : No active profile set, falling back to default profiles: default
-2021-07-28 11:31:52.937  INFO 8524 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
-2021-07-28 11:31:53.023  INFO 8524 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77ms. Found 1 JPA repository interfaces.
-2021-07-28 11:31:53.164  WARN 8524 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 11:31:53.328  INFO 8524 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=dcdfd4d6-a018-3ac6-a9a9-13e2ca79ac9b
-2021-07-28 11:31:54.136  INFO 8524 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
-2021-07-28 11:31:54.148  INFO 8524 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 11:31:54.149  INFO 8524 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 11:31:54.328  INFO 8524 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 11:31:54.328  INFO 8524 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2742 ms
-2021-07-28 11:31:54.475  WARN 8524 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:31:54.475  INFO 8524 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:31:54.487  INFO 8524 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@f2b90fc
-2021-07-28 11:31:54.817  INFO 8524 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 11:31:54.838  INFO 8524 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-07-28 11:31:56.404  INFO 8524 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-07-28 11:31:56.450  INFO 8524 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-07-28 11:31:56.523  INFO 8524 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
-2021-07-28 11:31:56.720  INFO 8524 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2021-07-28 11:31:57.012  INFO 8524 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-2021-07-28 11:31:57.048  WARN 8524 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-07-28 11:31:57.916  INFO 8524 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-07-28 11:31:57.929  INFO 8524 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 11:31:58.021  INFO 8524 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 11:31:58.147  INFO 8524 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 11:31:58.176  WARN 8524 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:31:58.176  INFO 8524 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:31:59.198  INFO 8524 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 11:31:59.728  WARN 8524 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 11:31:59.892  INFO 8524 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 11:31:59.935  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 11:31:59.999  INFO 8524 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 11:31:59.999  INFO 8524 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 11:32:00.146  INFO 8524 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 11:32:00.146  INFO 8524 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 11:32:00.323  INFO 8524 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:32:00.523  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 11:32:00.524  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 11:32:00.524  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 11:32:00.524  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 11:32:00.524  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 11:32:00.525  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 11:32:00.525  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 11:32:00.678  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 11:32:00.681  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 11:32:00.684  INFO 8524 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 11:32:00.688  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627486320687 with initial instances count: 2
-2021-07-28 11:32:00.698  INFO 8524 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application BOOK-CATALOG-SERVICE with eureka with status UP
-2021-07-28 11:32:00.699  INFO 8524 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627486320699, current=UP, previous=STARTING]
-2021-07-28 11:32:00.701  INFO 8524 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084: registering service...
-2021-07-28 11:32:00.729  INFO 8524 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
-2021-07-28 11:32:00.730  INFO 8524 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
-2021-07-28 11:32:00.768  INFO 8524 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084 - registration status: 204
-2021-07-28 11:32:01.086  INFO 8524 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 11:32:01.102  INFO 8524 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 11:32:01.154  INFO 8524 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 11:32:01.312  INFO 8524 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
-2021-07-28 11:32:01.828  INFO 8524 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
-2021-07-28 11:32:01.845  INFO 8524 --- [main] c.u.b.BookCatalogServiceApplication      : Started BookCatalogServiceApplication in 11.687 seconds (JVM running for 12.776)
-2021-07-28 11:32:01.918  INFO 8524 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as 93faad8e918c
-2021-07-28 11:32:01.955  INFO 8524 --- [http-nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 11:32:01.955  INFO 8524 --- [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 11:32:01.972  INFO 8524 --- [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 16 ms
-2021-07-28 11:34:12.464  INFO 8524 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:34:14.880  INFO 8524 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:34:14.881  INFO 8524 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:34:14.882  INFO 8524 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2417 ms
-2021-07-28 11:34:17.299  INFO 8524 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:34:19.183  INFO 8524 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:34:19.184  INFO 8524 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:34:19.184  INFO 8524 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1885 ms
-2021-07-28 11:34:39.158  INFO 8524 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:34:40.767  INFO 8524 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:34:40.768  INFO 8524 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:34:40.769  INFO 8524 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1610 ms
-2021-07-28 11:37:00.550  INFO 8524 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:40:37.344  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:40:39.236  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:40:39.238  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:40:39.240  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1895 ms
-2021-07-28 11:42:00.564  INFO 8524 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:43:13.724  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:43:16.492  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:43:16.492  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:43:16.492  INFO 8524 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2768 ms
-2021-07-28 11:43:44.823  INFO 8524 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 11:43:46.344  INFO 8524 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 11:43:46.345  INFO 8524 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 11:43:46.346  INFO 8524 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1522 ms
-2021-07-28 11:47:00.568  INFO 8524 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:52:00.575  INFO 8524 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:57:00.579  INFO 8524 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 12:01:17.388  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 12:01:17.410  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application BOOK-CATALOG-SERVICE with eureka with status DOWN
-2021-07-28 12:01:17.410  WARN 8524 --- [RMI TCP Connection(41)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627488077410, current=DOWN, previous=UP]
-2021-07-28 12:01:17.412  INFO 8524 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084: registering service...
-2021-07-28 12:01:17.435  INFO 8524 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084 - registration status: 204
-2021-07-28 12:01:17.800  INFO 8524 --- [RMI TCP Connection(42)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 12:01:17.865  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 12:01:17.875  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 12:01:17.923  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 12:01:17.950  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 12:01:17.981  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 12:01:17.982  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-07-28 12:01:18.028  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2021-07-28 12:01:18.031  INFO 8524 --- [RMI TCP Connection(41)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2021-07-28 13:29:57.793  INFO 22572 --- [main] c.u.b.BookCatalogServiceApplication      : No active profile set, falling back to default profiles: default
-2021-07-28 13:29:59.243  INFO 22572 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
-2021-07-28 13:29:59.319  INFO 22572 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69ms. Found 1 JPA repository interfaces.
-2021-07-28 13:29:59.438  WARN 22572 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 13:29:59.696  INFO 22572 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=dcdfd4d6-a018-3ac6-a9a9-13e2ca79ac9b
-2021-07-28 13:30:00.533  INFO 22572 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
-2021-07-28 13:30:00.544  INFO 22572 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 13:30:00.544  INFO 22572 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 13:30:00.800  INFO 22572 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 13:30:00.801  INFO 22572 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2968 ms
-2021-07-28 13:30:00.982  WARN 22572 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:30:00.982  INFO 22572 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:30:00.995  INFO 22572 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@11787b64
-2021-07-28 13:30:01.321  INFO 22572 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 13:30:01.346  INFO 22572 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2021-07-28 13:30:02.872  INFO 22572 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2021-07-28 13:30:02.939  INFO 22572 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2021-07-28 13:30:03.067  INFO 22572 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
-2021-07-28 13:30:03.358  INFO 22572 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
-2021-07-28 13:30:03.478  WARN 22572 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2021-07-28 13:30:03.669  INFO 22572 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-2021-07-28 13:30:04.640  INFO 22572 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 13:30:04.843  INFO 22572 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 13:30:04.877  WARN 22572 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:30:04.878  INFO 22572 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:30:04.879  INFO 22572 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2021-07-28 13:30:04.893  INFO 22572 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 13:30:05.745  INFO 22572 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 13:30:06.272  WARN 22572 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 13:30:06.404  INFO 22572 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 13:30:06.447  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 13:30:06.518  INFO 22572 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 13:30:06.518  INFO 22572 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 13:30:06.667  INFO 22572 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 13:30:06.667  INFO 22572 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 13:30:06.843  INFO 22572 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:30:07.052  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 13:30:07.053  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 13:30:07.219  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 13:30:07.224  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 13:30:07.228  INFO 22572 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 13:30:07.233  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627493407231 with initial instances count: 2
-2021-07-28 13:30:07.247  INFO 22572 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application BOOK-CATALOG-SERVICE with eureka with status UP
-2021-07-28 13:30:07.248  INFO 22572 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627493407248, current=UP, previous=STARTING]
-2021-07-28 13:30:07.250  INFO 22572 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084: registering service...
-2021-07-28 13:30:07.312  INFO 22572 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084 - registration status: 204
-2021-07-28 13:30:07.353  INFO 22572 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
-2021-07-28 13:30:07.354  INFO 22572 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
-2021-07-28 13:30:07.725  INFO 22572 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 13:30:07.781  INFO 22572 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 13:30:07.852  INFO 22572 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 13:30:07.969  INFO 22572 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
-2021-07-28 13:30:08.512  INFO 22572 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
-2021-07-28 13:30:08.529  INFO 22572 --- [main] c.u.b.BookCatalogServiceApplication      : Started BookCatalogServiceApplication in 12.311 seconds (JVM running for 13.461)
-2021-07-28 13:30:08.654  INFO 22572 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as 93faad8e918c
-2021-07-28 13:30:08.740  INFO 22572 --- [http-nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 13:30:08.740  INFO 22572 --- [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 13:30:08.765  INFO 22572 --- [http-nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 25 ms
-2021-07-28 13:35:07.098  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:35:20.287  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 13:35:22.420  INFO 22572 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 13:35:27.534  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 13:35:27.536  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 13:35:27.540  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 7267 ms
-2021-07-28 13:35:28.575  INFO 22572 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 13:35:28.575  INFO 22572 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 13:35:28.575  INFO 22572 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 6156 ms
-2021-07-28 13:38:43.325  INFO 22572 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 13:38:45.071  INFO 22572 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 13:38:45.073  INFO 22572 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 13:38:45.075  INFO 22572 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1749 ms
-2021-07-28 13:38:47.294  INFO 22572 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 13:38:49.527  INFO 22572 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 13:38:49.527  INFO 22572 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 13:38:49.527  INFO 22572 --- [http-nio-8084-exec-8] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2233 ms
-2021-07-28 13:40:07.137  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:45:07.154  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:50:07.162  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:55:07.175  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:00:07.182  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:05:07.193  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:10:07.207  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:15:07.216  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:17:31.072  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 14:17:34.040  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 14:17:34.041  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 14:17:34.041  INFO 22572 --- [http-nio-8084-exec-1] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2969 ms
-2021-07-28 14:17:34.872  INFO 22572 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 14:17:37.909  INFO 22572 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 14:17:37.909  INFO 22572 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 14:17:37.910  INFO 22572 --- [http-nio-8084-exec-5] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 3038 ms
-2021-07-28 14:17:52.334  INFO 22572 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
-2021-07-28 14:17:55.137  INFO 22572 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
-2021-07-28 14:17:55.137  INFO 22572 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
-2021-07-28 14:17:55.137  INFO 22572 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2804 ms
-2021-07-28 14:20:07.229  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:25:07.240  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:30:07.258  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:35:07.271  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:40:07.279  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:45:07.290  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:50:07.304  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:55:07.322  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:00:07.340  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:05:07.346  INFO 22572 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:07:43.757  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:43.867  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application BOOK-CATALOG-SERVICE with eureka with status DOWN
-2021-07-28 15:07:43.876  INFO 22572 --- [RMI TCP Connection(113)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:43.875  WARN 22572 --- [RMI TCP Connection(112)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627499263873, current=DOWN, previous=UP]
-2021-07-28 15:07:43.880  INFO 22572 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084: registering service...
-2021-07-28 15:07:43.917  INFO 22572 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/192.168.1.187:book-catalog-service:8084 - registration status: 204
-2021-07-28 15:07:44.175  INFO 22572 --- [RMI TCP Connection(114)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:44.631  INFO 22572 --- [RMI TCP Connection(115)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:44.686  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 15:07:44.747  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 15:07:44.890  INFO 22572 --- [RMI TCP Connection(116)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:44.896  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 15:07:44.980  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2021-07-28 15:07:45.075  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 15:07:45.078  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2021-07-28 15:07:45.109  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2021-07-28 15:07:45.122  INFO 22572 --- [RMI TCP Connection(112)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2021-07-31 20:15:47.006  INFO 17324 --- [main] c.u.b.BookCatalogServiceApplication      : No active profile set, falling back to default profiles: default
+2021-07-31 20:15:48.564  INFO 17324 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+2021-07-31 20:15:48.635  INFO 17324 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 64ms. Found 1 JPA repository interfaces.
+2021-07-31 20:15:48.945  WARN 17324 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-31 20:15:49.099  INFO 17324 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=dcdfd4d6-a018-3ac6-a9a9-13e2ca79ac9b
+2021-07-31 20:15:49.904  INFO 17324 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8084 (http)
+2021-07-31 20:15:49.914  INFO 17324 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-31 20:15:49.914  INFO 17324 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-07-31 20:15:50.120  INFO 17324 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-31 20:15:50.121  INFO 17324 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3057 ms
+2021-07-31 20:15:50.284  WARN 17324 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-31 20:15:50.284  INFO 17324 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-31 20:15:50.298  INFO 17324 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@6b321262
+2021-07-31 20:15:50.609  INFO 17324 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-31 20:15:50.631  INFO 17324 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-07-31 20:15:51.799  INFO 17324 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-07-31 20:15:51.860  INFO 17324 --- [task-1] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-07-31 20:15:51.963  INFO 17324 --- [task-1] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.17.Final
+2021-07-31 20:15:52.310  INFO 17324 --- [task-1] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-07-31 20:15:52.433  WARN 17324 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-07-31 20:15:52.561  INFO 17324 --- [task-1] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-07-31 20:15:54.448  INFO 17324 --- [task-1] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-07-31 20:15:54.471  INFO 17324 --- [task-1] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-07-31 20:15:54.486  INFO 17324 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2021-07-31 20:15:54.665  INFO 17324 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-31 20:15:54.720  WARN 17324 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-31 20:15:54.721  INFO 17324 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-31 20:15:56.357  INFO 17324 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-07-31 20:15:56.971  WARN 17324 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2021-07-31 20:15:57.309  INFO 17324 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2021-07-31 20:15:57.350  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2021-07-31 20:15:57.436  INFO 17324 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2021-07-31 20:15:57.436  INFO 17324 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2021-07-31 20:15:57.554  INFO 17324 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2021-07-31 20:15:57.555  INFO 17324 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2021-07-31 20:15:57.870  INFO 17324 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:15:58.111  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-31 20:15:58.112  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-31 20:15:58.112  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-31 20:15:58.112  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-31 20:15:58.112  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-31 20:15:58.113  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2021-07-31 20:15:58.113  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-31 20:15:58.235  INFO 17324 --- [RMI TCP Connection(3)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-31 20:15:58.235  INFO 17324 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-31 20:15:58.253  INFO 17324 --- [RMI TCP Connection(3)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 18 ms
+2021-07-31 20:15:58.293  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-31 20:15:58.296  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2021-07-31 20:15:58.299  INFO 17324 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-31 20:15:58.304  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627776958302 with initial instances count: 1
+2021-07-31 20:15:58.324  INFO 17324 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application BOOK-CATALOG-SERVICE with eureka with status UP
+2021-07-31 20:15:58.325  INFO 17324 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627776958325, current=UP, previous=STARTING]
+2021-07-31 20:15:58.327  INFO 17324 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/SHUBHAM-PC:book-catalog-service:8084: registering service...
+2021-07-31 20:15:58.390  INFO 17324 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/SHUBHAM-PC:book-catalog-service:8084 - registration status: 204
+2021-07-31 20:15:58.418  INFO 17324 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8084 (http) with context path ''
+2021-07-31 20:15:58.421  INFO 17324 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8084
+2021-07-31 20:15:58.774  INFO 17324 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-31 20:15:58.787  INFO 17324 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-31 20:15:58.826  INFO 17324 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-31 20:15:58.929  INFO 17324 --- [main] DeferredRepositoryInitializationListener : Triggering deferred initialization of Spring Data repositories…
+2021-07-31 20:15:59.420  INFO 17324 --- [main] DeferredRepositoryInitializationListener : Spring Data repositories initialized!
+2021-07-31 20:15:59.423  INFO 17324 --- [main] c.u.b.BookCatalogServiceApplication      : Started BookCatalogServiceApplication in 13.841 seconds (JVM running for 14.818)
+2021-07-31 20:15:59.490  INFO 17324 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as a516c93c2e47
+2021-07-31 20:20:58.221  INFO 17324 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:21:02.964  INFO 17324 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:21:05.356  INFO 17324 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:21:05.357  INFO 17324 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:21:05.361  INFO 17324 --- [http-nio-8084-exec-3] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 2398 ms
+2021-07-31 20:25:25.734  INFO 17324 --- [http-nio-8084-exec-9] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:25:27.168  INFO 17324 --- [http-nio-8084-exec-9] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:25:27.168  INFO 17324 --- [http-nio-8084-exec-9] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:25:27.168  INFO 17324 --- [http-nio-8084-exec-9] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1434 ms
+2021-07-31 20:25:28.333  INFO 17324 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:25:29.790  INFO 17324 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:25:29.791  INFO 17324 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:25:29.796  INFO 17324 --- [http-nio-8084-exec-2] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1463 ms
+2021-07-31 20:25:58.417  INFO 17324 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:26:31.838  INFO 17324 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:26:33.337  INFO 17324 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:26:33.338  INFO 17324 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:26:33.339  INFO 17324 --- [http-nio-8084-exec-7] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1501 ms
+2021-07-31 20:27:01.436  INFO 17324 --- [http-nio-8084-exec-6] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:27:02.989  INFO 17324 --- [http-nio-8084-exec-6] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:27:02.990  INFO 17324 --- [http-nio-8084-exec-6] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:27:02.990  INFO 17324 --- [http-nio-8084-exec-6] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1555 ms
+2021-07-31 20:27:04.103  INFO 17324 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : Before method execution showBooks
+2021-07-31 20:27:05.515  INFO 17324 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks()) returned with status 200 OK
+2021-07-31 20:27:05.516  INFO 17324 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : after execution of execution(ResponseEntity com.uga.book_catalog_service.controller.BookCatalogController.showBooks())
+2021-07-31 20:27:05.517  INFO 17324 --- [http-nio-8084-exec-10] c.u.b.aop.LoggingAspect                  : Execution time of BookCatalogController.showBooks :: 1414 ms
+2021-07-31 20:28:32.943  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-31 20:28:32.959  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application BOOK-CATALOG-SERVICE with eureka with status DOWN
+2021-07-31 20:28:32.961  WARN 17324 --- [RMI TCP Connection(22)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627777712961, current=DOWN, previous=UP]
+2021-07-31 20:28:32.961  INFO 17324 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/SHUBHAM-PC:book-catalog-service:8084: registering service...
+2021-07-31 20:28:32.976  INFO 17324 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_BOOK-CATALOG-SERVICE/SHUBHAM-PC:book-catalog-service:8084 - registration status: 204
+2021-07-31 20:28:33.233  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-07-31 20:28:33.251  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2021-07-31 20:28:33.300  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2021-07-31 20:28:33.329  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-07-31 20:28:33.346  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-07-31 20:28:33.348  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-07-31 20:28:33.373  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-07-31 20:28:33.376  INFO 17324 --- [RMI TCP Connection(22)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...

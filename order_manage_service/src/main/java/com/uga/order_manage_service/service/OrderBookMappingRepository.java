@@ -6,14 +6,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uga.order_manage_service.model.OrderedBook;
+import com.uga.order_manage_service.model.OrderBookMapping;
 
 @Repository
-public interface OrderContents extends CrudRepository<OrderedBook, Long> {
+public interface OrderBookMappingRepository extends CrudRepository<OrderBookMapping, Long> {
 	
 	@Transactional
-	public List<OrderedBook> findByOrderId(String orderId);
+	public List<OrderBookMapping> findByOrderId(String orderId);
+	
 	@Transactional
-	public OrderedBook findByBookIdAndOrderId(Long bookId, String orderId);
+	public OrderBookMapping findByBookIdAndOrderId(Long bookId, String orderId);
 
 }

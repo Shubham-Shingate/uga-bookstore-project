@@ -1,290 +1,66 @@
-2021-07-28 11:33:11.107  INFO 17972 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
-2021-07-28 11:33:12.637  WARN 17972 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 11:33:12.981  INFO 17972 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
-2021-07-28 11:33:13.738  INFO 17972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2021-07-28 11:33:13.753  INFO 17972 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 11:33:13.755  INFO 17972 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 11:33:14.009  INFO 17972 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 11:33:14.010  INFO 17972 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2876 ms
-2021-07-28 11:33:14.305  WARN 17972 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:33:14.305  INFO 17972 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:33:14.314  INFO 17972 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@4ed15347
-2021-07-28 11:33:15.687  INFO 17972 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 11:33:15.970  INFO 17972 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 11:33:16.006  WARN 17972 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 11:33:16.006  INFO 17972 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 11:33:16.326  INFO 17972 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 11:33:17.376  INFO 17972 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 11:33:17.845  WARN 17972 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 11:33:17.975  INFO 17972 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 11:33:18.021  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 11:33:18.075  INFO 17972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 11:33:18.075  INFO 17972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 11:33:18.221  INFO 17972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 11:33:18.221  INFO 17972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 11:33:18.394  INFO 17972 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:33:18.590  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 11:33:18.590  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 11:33:18.590  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 11:33:18.590  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 11:33:18.591  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 11:33:18.591  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 11:33:18.591  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 11:33:18.726  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 11:33:18.729  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 11:33:18.731  INFO 17972 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 11:33:18.735  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627486398734 with initial instances count: 5
-2021-07-28 11:33:18.745  INFO 17972 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EMAIL-SERVICE with eureka with status UP
-2021-07-28 11:33:18.747  INFO 17972 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627486398747, current=UP, previous=STARTING]
-2021-07-28 11:33:18.749  INFO 17972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 11:33:18.783  INFO 17972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2021-07-28 11:33:18.784  INFO 17972 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
-2021-07-28 11:33:18.812  INFO 17972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 11:33:19.062  INFO 17972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 11:33:19.085  INFO 17972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 11:33:19.161  INFO 17972 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 11:33:19.312  INFO 17972 --- [main] c.u.e.EmailServiceApplication            : Started EmailServiceApplication in 9.645 seconds (JVM running for 10.776)
-2021-07-28 11:33:19.380  INFO 17972 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as c0b596d15039
-2021-07-28 11:33:19.429  INFO 17972 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 11:33:19.430  INFO 17972 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 11:33:19.453  INFO 17972 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 23 ms
-2021-07-28 11:38:18.608  INFO 17972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:39:53.956  INFO 17972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 11:39:55.675  INFO 17972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 11:39:55.675  INFO 17972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 11:39:55.676  INFO 17972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1719 ms
-2021-07-28 11:43:18.621  INFO 17972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:48:18.630  INFO 17972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:53:18.642  INFO 17972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 11:58:18.644  INFO 17972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 12:01:05.005  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 12:01:05.054  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EMAIL-SERVICE with eureka with status DOWN
-2021-07-28 12:01:05.055  WARN 17972 --- [RMI TCP Connection(39)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627488065055, current=DOWN, previous=UP]
-2021-07-28 12:01:05.061  INFO 17972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 12:01:05.082  INFO 17972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 12:01:05.381  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 12:01:05.404  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 12:01:05.504  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 12:01:05.511  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 12:01:05.566  INFO 17972 --- [RMI TCP Connection(39)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2021-07-28 13:29:18.273  INFO 3972 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
-2021-07-28 13:29:21.091  WARN 3972 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 13:29:21.357  INFO 3972 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
-2021-07-28 13:29:22.135  INFO 3972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2021-07-28 13:29:22.147  INFO 3972 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 13:29:22.147  INFO 3972 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 13:29:22.333  INFO 3972 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 13:29:22.334  INFO 3972 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3982 ms
-2021-07-28 13:29:22.635  WARN 3972 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:29:22.636  INFO 3972 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:29:22.653  INFO 3972 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@5dc769f9
-2021-07-28 13:29:24.175  INFO 3972 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 13:29:24.359  INFO 3972 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 13:29:24.388  WARN 3972 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 13:29:24.389  INFO 3972 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 13:29:24.696  INFO 3972 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 13:29:26.051  INFO 3972 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 13:29:26.501  WARN 3972 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 13:29:26.668  INFO 3972 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 13:29:26.705  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 13:29:26.767  INFO 3972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 13:29:26.767  INFO 3972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 13:29:27.037  INFO 3972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 13:29:27.039  INFO 3972 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 13:29:27.229  INFO 3972 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 13:29:27.448  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 13:29:27.535  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 13:29:27.537  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 13:29:27.540  INFO 3972 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 13:29:27.547  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627493367543 with initial instances count: 0
-2021-07-28 13:29:27.557  INFO 3972 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EMAIL-SERVICE with eureka with status UP
-2021-07-28 13:29:27.558  INFO 3972 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627493367558, current=UP, previous=STARTING]
-2021-07-28 13:29:27.560  INFO 3972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 13:29:27.646  INFO 3972 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2021-07-28 13:29:27.647  INFO 3972 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
-2021-07-28 13:29:27.671  INFO 3972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 13:29:27.992  INFO 3972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 13:29:28.023  INFO 3972 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 13:29:28.075  INFO 3972 --- [RMI TCP Connection(4)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 13:29:28.076  INFO 3972 --- [RMI TCP Connection(4)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 13:29:28.093  INFO 3972 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 13:29:28.095  INFO 3972 --- [RMI TCP Connection(4)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 19 ms
-2021-07-28 13:29:28.456  INFO 3972 --- [main] c.u.e.EmailServiceApplication            : Started EmailServiceApplication in 12.766 seconds (JVM running for 14.315)
-2021-07-28 13:29:28.608  INFO 3972 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as c0b596d15039
-2021-07-28 13:29:57.543  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application version is -1: false
-2021-07-28 13:29:57.544  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 13:29:57.599  INFO 3972 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 13:34:27.490  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:39:27.543  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:40:38.806  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 13:40:40.199  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 13:40:40.209  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 13:40:40.216  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1407 ms
-2021-07-28 13:44:27.572  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:44:46.256  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 13:44:47.679  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 13:44:47.679  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 13:44:47.680  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1424 ms
-2021-07-28 13:49:27.582  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:54:27.590  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 13:59:27.606  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:04:27.615  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:05:55.060  INFO 3972 --- [http-nio-8082-exec-3] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:05:56.296  INFO 3972 --- [http-nio-8082-exec-3] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:05:56.301  INFO 3972 --- [http-nio-8082-exec-3] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:05:56.302  INFO 3972 --- [http-nio-8082-exec-3] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1243 ms
-2021-07-28 14:07:05.818  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:07:06.723  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:07:06.725  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:07:06.727  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 908 ms
-2021-07-28 14:07:41.843  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:07:42.682  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:07:42.685  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:07:42.686  INFO 3972 --- [http-nio-8082-exec-2] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 843 ms
-2021-07-28 14:09:27.622  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:11:50.150  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:11:51.122  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:11:51.123  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:11:51.124  INFO 3972 --- [http-nio-8082-exec-9] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 974 ms
-2021-07-28 14:14:27.634  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:16:42.891  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:16:44.257  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:16:44.258  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:16:44.259  INFO 3972 --- [http-nio-8082-exec-7] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1368 ms
-2021-07-28 14:19:27.649  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:24:27.658  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:27:07.249  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:27:08.272  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:27:08.275  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:27:08.275  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1027 ms
-2021-07-28 14:29:27.666  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:34:27.667  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:37:59.760  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:38:01.247  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:38:01.249  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:38:01.251  INFO 3972 --- [http-nio-8082-exec-6] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 1491 ms
-2021-07-28 14:39:27.671  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:43:37.092  INFO 3972 --- [http-nio-8082-exec-8] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:43:38.032  INFO 3972 --- [http-nio-8082-exec-8] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:43:38.033  INFO 3972 --- [http-nio-8082-exec-8] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:43:38.034  INFO 3972 --- [http-nio-8082-exec-8] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 941 ms
-2021-07-28 14:44:26.554  INFO 3972 --- [http-nio-8082-exec-1] com.uga.email_service.aop.LoggingAspect  : Before method execution emailService
-2021-07-28 14:44:27.476  INFO 3972 --- [http-nio-8082-exec-1] com.uga.email_service.aop.LoggingAspect  : execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest)) returned with value <200 OK OK,EmailResponse [message=Success, apiError=null],[]>
-2021-07-28 14:44:27.476  INFO 3972 --- [http-nio-8082-exec-1] com.uga.email_service.aop.LoggingAspect  : after execution of execution(ResponseEntity com.uga.email_service.controller.EmailController.emailService(EmailRequest))
-2021-07-28 14:44:27.477  INFO 3972 --- [http-nio-8082-exec-1] com.uga.email_service.aop.LoggingAspect  : Execution time of EmailController.emailService :: 924 ms
-2021-07-28 14:44:27.681  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:49:27.695  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:54:27.698  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 14:59:27.722  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:04:27.750  INFO 3972 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 15:07:47.727  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:47.848  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EMAIL-SERVICE with eureka with status DOWN
-2021-07-28 15:07:47.850  WARN 3972 --- [RMI TCP Connection(107)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627499267850, current=DOWN, previous=UP]
-2021-07-28 15:07:47.852  INFO 3972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 15:07:47.899  INFO 3972 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 15:07:47.908  INFO 3972 --- [RMI TCP Connection(108)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:48.222  INFO 3972 --- [RMI TCP Connection(109)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:48.326  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 15:07:48.358  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 15:07:48.487  INFO 3972 --- [RMI TCP Connection(110)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 15:07:48.515  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 15:07:48.525  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 15:07:48.581  INFO 3972 --- [RMI TCP Connection(107)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
-2021-07-28 18:53:04.877  INFO 10232 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
-2021-07-28 18:53:06.233  WARN 10232 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 18:53:06.366  INFO 10232 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
-2021-07-28 18:54:13.481  INFO 14736 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
-2021-07-28 18:54:14.684  WARN 14736 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
-2021-07-28 18:54:14.822  INFO 14736 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
-2021-07-28 18:54:15.360  INFO 14736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
-2021-07-28 18:54:15.367  INFO 14736 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2021-07-28 18:54:15.367  INFO 14736 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
-2021-07-28 18:54:15.488  INFO 14736 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2021-07-28 18:54:15.489  INFO 14736 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1992 ms
-2021-07-28 18:54:15.708  WARN 14736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 18:54:15.709  INFO 14736 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 18:54:15.718  INFO 14736 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@ef718de
-2021-07-28 18:54:16.854  INFO 14736 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
-2021-07-28 18:54:16.983  INFO 14736 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
-2021-07-28 18:54:17.008  WARN 14736 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2021-07-28 18:54:17.009  INFO 14736 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2021-07-28 18:54:17.248  INFO 14736 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2021-07-28 18:54:17.889  INFO 14736 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
-2021-07-28 18:54:18.274  WARN 14736 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
-2021-07-28 18:54:18.393  INFO 14736 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
-2021-07-28 18:54:18.421  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
-2021-07-28 18:54:18.471  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
-2021-07-28 18:54:18.471  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
-2021-07-28 18:54:18.572  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
-2021-07-28 18:54:18.572  INFO 14736 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
-2021-07-28 18:54:18.722  INFO 14736 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 18:54:18.904  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 18:54:18.904  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
-2021-07-28 18:54:18.905  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 18:54:19.023  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 18:54:19.025  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
-2021-07-28 18:54:19.027  INFO 14736 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
-2021-07-28 18:54:19.031  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627512859029 with initial instances count: 0
-2021-07-28 18:54:19.040  INFO 14736 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EMAIL-SERVICE with eureka with status UP
-2021-07-28 18:54:19.041  INFO 14736 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627512859041, current=UP, previous=STARTING]
-2021-07-28 18:54:19.043  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 18:54:19.072  INFO 14736 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
-2021-07-28 18:54:19.073  INFO 14736 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
-2021-07-28 18:54:19.170  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 18:54:19.352  INFO 14736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2021-07-28 18:54:19.365  INFO 14736 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2021-07-28 18:54:19.409  INFO 14736 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2021-07-28 18:54:19.548  INFO 14736 --- [main] c.u.e.EmailServiceApplication            : Started EmailServiceApplication in 7.381 seconds (JVM running for 8.306)
-2021-07-28 18:54:20.327  INFO 14736 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as c0b596d15039
-2021-07-28 18:54:20.433  INFO 14736 --- [http-nio-8082-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2021-07-28 18:54:20.433  INFO 14736 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2021-07-28 18:54:20.444  INFO 14736 --- [http-nio-8082-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 11 ms
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application is null : false
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
-2021-07-28 18:54:49.034  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Application version is -1: false
-2021-07-28 18:54:49.035  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
-2021-07-28 18:54:49.083  INFO 14736 --- [DiscoveryClient-CacheRefreshExecutor-0] com.netflix.discovery.DiscoveryClient    : The response status is 200
-2021-07-28 18:59:18.920  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:04:18.935  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:09:18.944  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:14:18.957  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:19:18.975  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:24:18.979  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:29:18.981  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:34:18.997  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:39:19.008  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:44:19.012  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:49:19.022  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:54:19.030  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 19:59:19.032  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 20:04:19.035  INFO 14736 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
-2021-07-28 20:07:15.278  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 20:07:15.320  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EMAIL-SERVICE with eureka with status DOWN
-2021-07-28 20:07:15.324  WARN 14736 --- [RMI TCP Connection(82)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627517235324, current=DOWN, previous=UP]
-2021-07-28 20:07:15.324  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082: registering service...
-2021-07-28 20:07:15.336  INFO 14736 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/192.168.1.187:email-service:8082 - registration status: 204
-2021-07-28 20:07:15.479  INFO 14736 --- [RMI TCP Connection(84)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 20:07:15.652  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-2021-07-28 20:07:15.672  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-2021-07-28 20:07:15.675  INFO 14736 --- [RMI TCP Connection(85)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2021-07-28 20:07:15.798  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
-2021-07-28 20:07:15.808  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2021-07-28 20:07:15.868  INFO 14736 --- [RMI TCP Connection(82)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2021-07-31 20:15:28.842  INFO 15500 --- [main] c.u.e.EmailServiceApplication            : No active profile set, falling back to default profiles: default
+2021-07-31 20:15:30.174  WARN 15500 --- [main] o.s.boot.actuate.endpoint.EndpointId     : Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2021-07-31 20:15:30.301  INFO 15500 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=718fabf9-9b1a-3477-9b9a-516843e17f3e
+2021-07-31 20:15:30.909  INFO 15500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+2021-07-31 20:15:30.916  INFO 15500 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-07-31 20:15:30.959  INFO 15500 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.36]
+2021-07-31 20:15:31.162  INFO 15500 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-07-31 20:15:31.162  INFO 15500 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2292 ms
+2021-07-31 20:15:31.386  WARN 15500 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-31 20:15:31.387  INFO 15500 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-31 20:15:31.396  INFO 15500 --- [main] c.netflix.config.DynamicPropertyFactory  : DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@40bb4f87
+2021-07-31 20:15:32.739  INFO 15500 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 18 endpoint(s) beneath base path '/actuator'
+2021-07-31 20:15:32.981  INFO 15500 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2021-07-31 20:15:33.007  WARN 15500 --- [main] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2021-07-31 20:15:33.007  INFO 15500 --- [main] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2021-07-31 20:15:33.252  INFO 15500 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-07-31 20:15:34.033  INFO 15500 --- [main] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-07-31 20:15:34.462  WARN 15500 --- [main] ockingLoadBalancerClientRibbonWarnLogger : You already have RibbonLoadBalancerClient on your classpath. It will be used by default. As Spring Cloud Ribbon is in maintenance mode. We recommend switching to BlockingLoadBalancerClient instead. In order to use it, set the value of `spring.cloud.loadbalancer.ribbon.enabled` to `false` or remove spring-cloud-starter-netflix-ribbon from your project.
+2021-07-31 20:15:34.587  INFO 15500 --- [main] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2021-07-31 20:15:34.615  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2021-07-31 20:15:34.680  INFO 15500 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON encoding codec LegacyJacksonJson
+2021-07-31 20:15:34.680  INFO 15500 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using JSON decoding codec LegacyJacksonJson
+2021-07-31 20:15:34.807  INFO 15500 --- [RMI TCP Connection(4)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-07-31 20:15:34.814  INFO 15500 --- [RMI TCP Connection(4)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-07-31 20:15:34.828  INFO 15500 --- [RMI TCP Connection(4)-127.0.0.1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2021-07-31 20:15:34.834  INFO 15500 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML encoding codec XStreamXml
+2021-07-31 20:15:34.834  INFO 15500 --- [main] c.n.d.provider.DiscoveryJerseyProvider   : Using XML decoding codec XStreamXml
+2021-07-31 20:15:35.130  INFO 15500 --- [main] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2021-07-31 20:15:35.331  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2021-07-31 20:15:35.332  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2021-07-31 20:15:35.439  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2021-07-31 20:15:35.441  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2021-07-31 20:15:35.444  INFO 15500 --- [main] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2021-07-31 20:15:35.447  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1627776935446 with initial instances count: 1
+2021-07-31 20:15:35.457  INFO 15500 --- [main] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application EMAIL-SERVICE with eureka with status UP
+2021-07-31 20:15:35.458  INFO 15500 --- [main] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627776935458, current=UP, previous=STARTING]
+2021-07-31 20:15:35.460  INFO 15500 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/SHUBHAM-PC:email-service:8082: registering service...
+2021-07-31 20:15:35.487  INFO 15500 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+2021-07-31 20:15:35.488  INFO 15500 --- [main] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8082
+2021-07-31 20:15:35.513  INFO 15500 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/SHUBHAM-PC:email-service:8082 - registration status: 204
+2021-07-31 20:15:35.762  INFO 15500 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-07-31 20:15:35.774  INFO 15500 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-07-31 20:15:35.812  INFO 15500 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-07-31 20:15:35.980  INFO 15500 --- [main] c.u.e.EmailServiceApplication            : Started EmailServiceApplication in 8.464 seconds (JVM running for 9.5)
+2021-07-31 20:15:36.052  INFO 15500 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as 2201fe59aaa9
+2021-07-31 20:20:35.361  INFO 15500 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:25:35.393  INFO 15500 --- [AsyncResolver-bootstrap-executor-0] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2021-07-31 20:28:35.869  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2021-07-31 20:28:35.983  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] o.s.c.n.e.s.EurekaServiceRegistry        : Unregistering application EMAIL-SERVICE with eureka with status DOWN
+2021-07-31 20:28:35.986  WARN 15500 --- [RMI TCP Connection(23)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1627777715986, current=DOWN, previous=UP]
+2021-07-31 20:28:35.991  INFO 15500 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/SHUBHAM-PC:email-service:8082: registering service...
+2021-07-31 20:28:36.013  INFO 15500 --- [DiscoveryClient-InstanceInfoReplicator-0] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/SHUBHAM-PC:email-service:8082 - registration status: 204
+2021-07-31 20:28:36.320  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-07-31 20:28:36.339  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+2021-07-31 20:28:36.418  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService
+2021-07-31 20:28:36.422  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-07-31 20:28:36.458  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Shutting down DiscoveryClient ...
+2021-07-31 20:28:39.471  WARN 15500 --- [DiscoveryClient-0] c.netflix.discovery.TimedSupervisorTask  : task supervisor shutting down, can't accept the task
+2021-07-31 20:28:39.482  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Unregistering ...
+2021-07-31 20:28:39.518  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_EMAIL-SERVICE/SHUBHAM-PC:email-service:8082 - deregister  status: 200
+2021-07-31 20:28:39.551  INFO 15500 --- [RMI TCP Connection(23)-127.0.0.1] com.netflix.discovery.DiscoveryClient    : Completed shut down of DiscoveryClient

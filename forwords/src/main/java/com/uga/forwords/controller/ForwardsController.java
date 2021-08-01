@@ -3,11 +3,10 @@ package com.uga.forwords.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,22 +22,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
-
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
+import com.uga.forwords.model.BookEntry;
+import com.uga.forwords.model.CartBook;
 import com.uga.forwords.model.Config;
 import com.uga.forwords.model.SearchBook;
 import com.uga.forwords.request.AddPaymentDetailsRequest;
+import com.uga.forwords.request.CartUpdateRequest;
 import com.uga.forwords.request.ChangePasswordRequest;
 import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
 import com.uga.forwords.request.EmailRequest;
+import com.uga.forwords.request.OrderRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
+import com.uga.forwords.response.CartResponse;
 import com.uga.forwords.response.CatalogResponse;
 import com.uga.forwords.response.EmailResponse;
+import com.uga.forwords.response.OrderResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
 import com.uga.forwords.response.SearchBookResponse;
@@ -133,6 +137,8 @@ public class ForwardsController {
 		}
 		model.addAttribute("featuredBooks", featuredBooks);
 		model.addAttribute("topSellerBooks", topSellerBooks);
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
+		
 		return "landing";
 	}
 	
@@ -151,9 +157,11 @@ public class ForwardsController {
 		
 		//HTTP call to the backend service- search_book_service
 		ResponseEntity<SearchBookResponse> searchBookServiceResponse = restTemplate.getForEntity("http://search-book-service/searchBooksBookId/"+book_id, SearchBookResponse.class);
-		model.addAttribute("searchedBookById", searchBookServiceResponse.getBody().getBooks().get(0));		
 		
-		return "";
+		model.addAttribute("searchedBookById", BooksBase64Encoder.getBase64Encoded(searchBookServiceResponse.getBody().getBooks().get(0)));
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
+		
+		return "book-details";
 	}
 	
 	
@@ -219,7 +227,7 @@ public class ForwardsController {
 		return "search";
 	}
 	
-	/** -----------------------------------Services for showing Profile Settings and related services (calls go to profile_detail_service)----------------------------------- */
+	/** -----------------------------------Services for showing/managing Profile Settings and related services (calls go to profile_detail_service)----------------------------------- */
 	
 	@GetMapping("/customer/showSettingsPage")
 	public String showSettingsPage(Principal principal, Model model) {
@@ -297,7 +305,7 @@ public class ForwardsController {
 	}
 	
 	
-	/** -----------------------------------Services for showing Shipping Details and related services (calls go to shipping_detail_service)----------------------------------- */
+	/** -----------------------------------Services for showing/managing Shipping Details and related services (calls go to shipping_detail_service)----------------------------------- */
 	
 	
 	@GetMapping("/customer/getShippingDetails")
@@ -356,7 +364,7 @@ public class ForwardsController {
 	}
 	
 	
-	/** -----------------------------------Services for showing Payment Details and related services (calls go to payment_detail_service)----------------------------------- */
+	/** -----------------------------------Services for showing/managing Payment Details and related services (calls go to payment_detail_service)----------------------------------- */
 	
 	
 	@GetMapping("/customer/getPaymentDetails")
@@ -376,7 +384,6 @@ public class ForwardsController {
 		theModel.addAttribute("userPaymentInfo", paymentDetailsServiceResponse.getBody().getCards());
 		theModel.addAttribute("updatePaymentDetails", new UpdatePaymentDetailsRequest());
 		theModel.addAttribute("addPaymentDetails", new AddPaymentDetailsRequest());
-		
 		return "customer-payments";
 	}
 	
@@ -394,11 +401,11 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/addPaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Success")) {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("addPaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("addPaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	}
@@ -417,11 +424,11 @@ public class ForwardsController {
 		// Send request to backend service
 		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.postForEntity("http://payment-detail-service/updatePaymentDetails", entity, PaymentDetailsResponse.class);
 		
-		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Successs")) {
+		if (paymentDetailsServiceResponse.getStatusCode().equals(HttpStatus.OK) && paymentDetailsServiceResponse.getBody().getMessage().equals("Success")) {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("updatePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("updatePaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	
@@ -443,35 +450,265 @@ public class ForwardsController {
 			sendEmail(principal.getName(), "PAYMENT_DETAILS_UPDATE_EMAIL");
 			return "redirect:/customer/getPaymentDetails";
 		} else {
-			theModel.addAttribute("deletePaymentError", paymentDetailsServiceResponse.getBody().getMessage());
+			theModel.addAttribute("deletePaymentError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
 			return "redirect:/customer/getPaymentDetails";
 		}
 	
 	}
 	
 	
-	@GetMapping("/customer/account-overview")
-	public String showAccountOverviewPage(Principal principal, Model model) {
+	/** -----------------------------------Services for showing/managing Cart Details and related services (calls go to cart_manage_service)----------------------------------- */
+	
+	
+	@GetMapping("/customer/getCartDetails")
+	public String getCartDetails (Principal principal, Model theModel) {
+
+		// Set account ID in header
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		headers.add("accountId", principal.getName());
 		
-		// Make Request to backend service for profile information
-		HttpEntity<Object> profileEntity = new HttpEntity<Object>(headers);
-		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.exchange("http://profile-detail-service/getPersonalDetails",
-				HttpMethod.GET, profileEntity, PersonalDetailsResponse.class);
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.exchange("http://cart-manage-service/getCartDetails",
+																						HttpMethod.GET, entity, CartResponse.class);
+
+		//Encode the books images to base64 string
+		List<Base64EncodedBook> base64encodedCartBooks = new ArrayList<Base64EncodedBook>();
+		
+		if (cartManageServiceResponse.getBody().getBooks() != null) {
+			for (CartBook cartBook : cartManageServiceResponse.getBody().getBooks()) {
+				base64encodedCartBooks.add(BooksBase64Encoder.getBase64Encoded(cartBook));
+			}
+		}
+		
+		//Add information to the model
+		theModel.addAttribute("cartBooks", base64encodedCartBooks);
+		theModel.addAttribute("updateCartDetails", new CartUpdateRequest());
+		return "customer-cart";
+	}
 	
+	@PostMapping("/customer/addUpdateBookInCart")
+	public String addUpdateBookToCart (Principal principal, Model theModel, @ModelAttribute("updateCartDetails") CartUpdateRequest cartUpdateRequest) {
 		
-		// Make Request to backend service for address details
-		HttpEntity<Object> shippingEntity = new HttpEntity<Object>(headers);
-		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
-																						HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
 		
-		// Add information to model
-		model.addAttribute("activeUserDetails", profileDetailsServiceResponse.getBody().getUserDetails());
-		model.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
-		return "customer-account-overview";
+		// Set up Http entity with request body
+		HttpEntity<CartUpdateRequest> entity = new HttpEntity<CartUpdateRequest>(cartUpdateRequest, headers);
+		
+		// Send request to backend service: cart-manage-service
+		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.postForEntity("http://cart-manage-service/addUpdateBookToCart", entity, CartResponse.class);
+		
+		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
+			return "redirect:/customer/getCartDetails";
+		} else {
+			theModel.addAttribute("cartUpdateError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getCartDetails";
+		}	
+	}
+	
+	@GetMapping("/customer/removeBookFromCart/{bookId}")
+	public String removeBookFromCart(Principal principal, Model theModel, @PathVariable Long bookId) {
+
+		// Set account ID in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.exchange("http://cart-manage-service/removeBook/"+bookId,
+																						HttpMethod.GET, entity, CartResponse.class);
+		
+		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
+			return "redirect:/customer/getCartDetails";
+		} else {
+			theModel.addAttribute("bookDeleteError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getCartDetails";
+		}
+	}
+	
+	@GetMapping("/customer/deleteAllFromCart")
+	public String deleteAllFromCart(Principal principal, Model theModel) {
+
+		// Set account ID in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.exchange("http://cart-manage-service/emptyCart",
+																						HttpMethod.GET, entity, CartResponse.class);
+		
+		if (cartManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && cartManageServiceResponse.getBody().getMessage().equals("Success")) {
+			return "redirect:/customer/getCartDetails";
+		} else {
+			theModel.addAttribute("bookDeleteError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getCartDetails";
+		}
+	}
+	
+	
+	/** --------------------Services for showing/Managing Checkout (calls three services: cart-manage-service, payment-detail-service, shipping-detail-service)----------------------------------- */
+	
+	@GetMapping("/customer/proceedToCheckout")
+	public String proceedToCheckout(Principal principal, Model theModel) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+	
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity1 = new HttpEntity<Object>(headers);
+		ResponseEntity<CartResponse> cartManageServiceResponse = restTemplate.exchange("http://cart-manage-service/getCartDetails", HttpMethod.GET, entity1, CartResponse.class);
+		
+		// Encode the books images to base64 string
+		List<Base64EncodedBook> base64encodedCartBooks = new ArrayList<Base64EncodedBook>();
+		if (cartManageServiceResponse.getBody().getBooks() != null) {
+			for (CartBook cartBook : cartManageServiceResponse.getBody().getBooks()) {
+				base64encodedCartBooks.add(BooksBase64Encoder.getBase64Encoded(cartBook));
+			}
+		} else {
+			theModel.addAttribute("getCartDetailsError", ((LinkedHashMap<?, ?>) cartManageServiceResponse.getBody().getApiError()).get("message"));
+		}
+		
+		// Make Request to backend service- shipping-detail-service
+		HttpEntity<Object> entity2 = new HttpEntity<Object>(headers);
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails", HttpMethod.GET, entity2, ShippingInfoResponse.class);
+		if (shippingDetailsServiceResponse.getBody().getMessage().equals("Failure") || shippingDetailsServiceResponse.getBody().getAddresses() == null) {
+			theModel.addAttribute("getShippingDetailsError", ((LinkedHashMap<?, ?>) shippingDetailsServiceResponse.getBody().getApiError()).get("message"));
+		}
+		
+		// Make Request to backend service
+		HttpEntity<Object> entity3 = new HttpEntity<Object>(headers);
+		ResponseEntity<PaymentDetailsResponse> paymentDetailsServiceResponse = restTemplate.exchange("http://payment-detail-service/getPaymentDetails", HttpMethod.GET, entity3, PaymentDetailsResponse.class);
+		if (paymentDetailsServiceResponse.getBody().getMessage().equals("Failure") || paymentDetailsServiceResponse.getBody().getCards() == null) {
+			theModel.addAttribute("getPaymentDetailsError", ((LinkedHashMap<?, ?>) paymentDetailsServiceResponse.getBody().getApiError()).get("message"));
+		}
+		
+		
+		// Since all cart, shipping, and payment details are fetched now return the Checkout Page View with appropriate Model object
+		theModel.addAttribute("cartBooks", base64encodedCartBooks);
+		theModel.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
+		theModel.addAttribute("userPaymentInfo", paymentDetailsServiceResponse.getBody().getCards());
+		
+		//Calculate the total cost
+		double totalCost = 0;
+		for (Base64EncodedBook base64EncodedBook : base64encodedCartBooks) {
+			totalCost = totalCost + base64EncodedBook.getPrice();
+		}
+		
+		// Pas the empty model attribute object so that UI can populate order data in it to place the order
+		List<BookEntry> books = new ArrayList<BookEntry>();
+		OrderRequest orderRequest = new OrderRequest();
+		orderRequest.setBooks(books);
+		
+		theModel.addAttribute("orderRequest", orderRequest);
+		theModel.addAttribute("totalCost", totalCost);
+		return "customer-checkout";
+				
+	}
+	
+	/** -----------------------------------Services for Place Order related services (calls go to order_manage_service)----------------------------------- */
+		
+	
+	@PostMapping("/customer/placeOrder")
+	public String placeOrder(Principal principal, Model theModel, @ModelAttribute("orderRequest") OrderRequest orderRequest) {
+		
+		// Set account id in header
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		HttpEntity<OrderRequest> entity = new HttpEntity<OrderRequest>(orderRequest, headers);
+		
+		// Send request to backend service: cart-manage-service
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.postForEntity("http://order-manage-service/placeOrder", entity, OrderResponse.class);
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+			//Send confirmation email for order placed
+			sendEmail(principal.getName(), "ORDER_PLACED_CONFIRMATION_EMAIL");
+			return "customer-order-confirmation";
+		} else {
+			theModel.addAttribute("orderPlacementError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/proceedToCheckout";
+		}
 		
 	}
+	
+	@GetMapping("/customer/getOrderHistory")
+	public String getOrderHistory (Principal principal, Model theModel) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/getOrderHistory", HttpMethod.GET, entity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+			
+			theModel.addAttribute("pastOrders", orderManageServiceResponse.getBody().getOrders());
+			return "customer-order-history";
+		} else {
+			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "customer-order-history";
+		}
+		
+	}
+	
+	@GetMapping("/customer/fetchOrder/{orderId}")
+	public String fetchOrder(Principal principal, Model theModel, @PathVariable String orderId) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/fetchOrder/"+orderId, HttpMethod.GET, entity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK)
+				&& orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+
+			theModel.addAttribute("orderDetails", orderManageServiceResponse.getBody().getOrders().get(0));
+			return "customer-order";
+		} else {
+			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getOrderHistory";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

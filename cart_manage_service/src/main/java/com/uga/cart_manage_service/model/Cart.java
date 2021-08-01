@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CART_MASTER")
-public class CartMatch {
+public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,14 +22,14 @@ public class CartMatch {
 	/**
 	 * 
 	 */
-	public CartMatch() {
+	public Cart() {
 	}
 
 	/**
 	 * @param cartId
 	 * @param accountId
 	 */
-	public CartMatch(Long cartId, String accountId) {
+	public Cart(Long cartId, String accountId) {
 		this.cartId = cartId;
 		this.accountId = accountId;
 	}

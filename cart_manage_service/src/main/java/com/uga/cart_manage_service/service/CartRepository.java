@@ -3,15 +3,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uga.cart_manage_service.model.CartMatch;
+import com.uga.cart_manage_service.model.Cart;
 
 @Repository
-public interface CartIndex extends CrudRepository<CartMatch, Long> {
+public interface CartRepository extends CrudRepository<Cart, Long> {
 	
 	@Transactional
-	public CartMatch findByCartId(long id);
-	
-	@Transactional
-	public CartMatch findByAccountId(String accountId);
+	public Cart findByAccountId(String accountId);
 	
 }
