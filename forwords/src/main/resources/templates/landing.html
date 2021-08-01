@@ -376,8 +376,29 @@
 						<a th:text="${featuredBook.title}" th:href="@{'/viewBookDetails/'+${featuredBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${featuredBook.price}" class="price"></var> <!-- price-wrap.// -->
-							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
-						</div> <!-- action-wrap.end -->
+							<div sec:authorize="isAuthenticated()">
+								<form
+												th:action="@{/customer/addUpdateBookInCart}"
+												th:object="${updateCartDetails}"
+												method="POST"
+								>
+									<input hidden
+												 name="qty"
+												 type="number"
+												 th:attr="name='qty'"
+												 th:value="1"/>
+
+									<input hidden
+												 name="bookId"
+												 type="number"
+												 th:attr="name='bookId'"
+												 th:value="${featuredBook.book_id}"/>
+									<button type="submit" class="btn btn-sm btn-outline-primary float-right">
+										Add to cart <i class="fa fa-shopping-cart"></i>
+									</button>
+								</form>
+							</div>
+							</div> <!-- action-wrap.end -->
 					</figcaption>
 				</figure> <!-- card // -->
 			</div> <!-- col.// -->
@@ -398,8 +419,27 @@
 						<a th:text="${topSellerBook.title}" th:href="@{'/viewBookDetails/'+${topSellerBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${topSellerBook.price}" class="price"></var> <!-- price-wrap.// -->
-							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
-						</div> <!-- action-wrap.end -->
+							<div sec:authorize="isAuthenticated()">
+								<form
+												th:action="@{/customer/addUpdateBookInCart}"
+												th:object="${updateCartDetails}"
+												method="POST"
+								>
+									<input hidden
+												 name="qty"
+												 type="number"
+												 th:attr="name='qty'"
+												 th:value="1"/>
+
+									<input hidden
+												 name="bookId"
+												 type="number"
+												 th:attr="name='bookId'"
+												 th:value="${topSellerBook.book_id}"/>
+									<button type="submit" class="btn btn-sm btn-outline-primary float-right">
+										Add to cart <i class="fa fa-shopping-cart"></i>
+									</button>
+								</form>						</div> <!-- action-wrap.end -->
 					</figcaption>
 				</figure> <!-- card // -->
 			</div> <!-- col.// -->
