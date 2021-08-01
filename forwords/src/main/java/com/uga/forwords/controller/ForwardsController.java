@@ -662,6 +662,31 @@ public class ForwardsController {
 		
 	}
 	
+	@GetMapping("/customer/fetchOrder/{orderId}")
+	public String fetchOrder(Principal principal, Model theModel, @PathVariable String orderId) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/fetchOrder/"+orderId, HttpMethod.GET, entity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK)
+				&& orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+
+			theModel.addAttribute("orderDetails", orderManageServiceResponse.getBody().getOrders().get(0));
+			return "customer-order";
+		} else {
+			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getOrderHistory";
+		}
+		
+	}
+	
+	
+	
 	
 	
 	
