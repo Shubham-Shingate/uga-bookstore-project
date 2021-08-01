@@ -19,7 +19,12 @@
 <link th:href="@{/fonts/fontawesome/css/all.min.css}" type="text/css" rel="stylesheet">
 <link th:href="@{/fonts/feathericons/css/iconfont.css}" rel="stylesheet" type="text/css" />
 <link th:href="@{/fonts/material-icons/css/materialdesignicons.css}" rel="stylesheet" type="text/css" />
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap"
+      rel="stylesheet"
+    />
 <!-- custom style -->
 <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css"/>
 <link th:href="@{/css/responsive.css}" rel="stylesheet" />
@@ -36,7 +41,13 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-3 col-4">
-				<a href="" class="brand-wrap">forWORDS</a> <!-- brand-wrap.// -->
+				<a
+                th:href="@{/landingPage}"
+                class="brand-wrap"
+                style="font-family: 'Exo 2', sans-serif; font-size: xx-large"
+                >FORWORDS</a
+              >
+              <!-- brand-wrap.// -->			
 			</div>
 			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
 				<form action="#" class="search">
@@ -69,13 +80,23 @@
 						<span class="sr-only">Profile actions</span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(65px, 46px, 0px);">
-						<a class="dropdown-item" href="#">My Profile</a>
-						<hr class="dropdown-divider">
+						<a
+						class="dropdown-item"
+						th:href="@{admin/viewBookInventory}"
+						>My Profile</a
+					  >						
+					  <hr class="dropdown-divider">
 						<a class="dropdown-item" href="#">Login &amp; Security</a>
 						<a class="dropdown-item" href="#">Language Preference</a>
 						<hr class="dropdown-divider">
-						<a class="dropdown-item" href="#">Log out</a>
-					</div> <!--  dropdown-menu .// -->
+						<form th:action="@{/logout}" method="POST">
+							<input
+							  type="submit"
+							  class="dropdown-item"
+							  value="Logout"
+							/>
+						  </form>					
+						</div> <!--  dropdown-menu .// -->
 					</div>
 				</div> <!-- widgets-wrap.// -->
 			</div> <!-- col.// -->
@@ -89,7 +110,7 @@
 		<h2 class="title-page">Admin Portal</h2>
 		<nav>
 		<ol class="breadcrumb text-white">
-			<li class="breadcrumb-item"><a th:href="@{/showAdminDashboard}">Home</a></li>
+			<li class="breadcrumb-item"><a th:href="@{admin/viewBookInventory}">Home</a></li>
 		</ol>  
 		</nav>
 	</div> <!-- container //  -->
@@ -107,72 +128,37 @@
 	<aside class="col-md-3">
 		<!--   SIDEBAR   -->
 		<ul class="list-group">
-			<a class="list-group-item" th:href="@{/showAdminDashboard}"> Manage Books </a>
+			<a class="list-group-item" th:href="@{admin/viewBookInventory}"> Manage Books </a>
 			<a class="list-group-item" href=""> Manage Users </a>
-			<a class="list-group-item active" href=""> Manage Promotions </a>
+			<a class="list-group-item active" th:href="@{admin/viewPromotions}"> Manage Promotions </a>
 		</ul>
 		<br>
-		<a class="btn btn-light btn-block" th:href="@{/showMyLoginPage}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
-		<!--   SIDEBAR .//END   -->
+		<form th:action="@{/logout}" method="POST">
+			<input
+			  type="submit"
+			  class="dropdown-item"
+			  value="Logout"
+			/>
+		  </form>		
+		  <!--   SIDEBAR .//END   -->
 	</aside>
 	<main class="col-md-9">
 		<article class="card">
 		<header class="card-header">
 			<strong class="d-inline-block mr-3">Manage Promotions</strong>
-			<a th:href="@{/addPromoPage}" class="btn btn-outline-primary">Add new promo</a>
+			<a th:href="@{/admin/showAddPromoPage}" class="btn btn-outline-primary">Add new promo</a>
 		</header>
 		<div class="table-responsive">
 		<table class="table table-hover">
-			<tr>
-				
+			<tr th:each="promo : ${promotionsList}">
 				<td> 
-					<p class="title mb-0"><b>Promo_ID</b> </p>
+					<p class="title mb-0"><b>
+					<span th:text="${promo.promoId}">Promo_ID</span>	
+					</b> </p>
 				</td>
-				<td> Start date </td>
-				<td> End date </td>
-				<td> Discount </td>
-
-			</tr>
-			<tr>
-				
-				<td> 
-					<p class="title mb-0"><b>Promo_ID</b>  </p>
-				</td>
-				<td> Start date </td>
-				<td> End date </td>
-				<td> Discount </td>
-				
-			</tr>
-			<tr>
-				
-				<td> 
-					<p class="title mb-0"><b>Promo_ID</b>  </p>
-				</td>
-				<td> Start date </td>
-				<td> End date </td>
-				<td> Discount </td>
-				
-				
-			</tr>
-			<tr>
-				
-				<td> 
-					<p class="title mb-0"><b>Promo_ID</b>  </p>
-				</td>
-				<td> Start date </td>
-				<td> End date </td>
-				<td> Discount </td>
-				
-			</tr>
-			<tr>
-				
-				<td> 
-					<p class="title mb-0"><b>Promo_ID</b> </p>
-				</td>
-				<td> Start date </td>
-				<td> End date </td>
-				<td> Discount </td>
-				
+				<td> <span th:text="${promo.startDatetime}">Start date</span></td>
+				<td> <span th:text="${promo.endDatetime}">End date </span></td>
+				<td> <span th:text="${promo.discountValue}">Discount </span></td>
 
 			</tr>
 		</table>
