@@ -45,13 +45,9 @@
             // jQuery code
 
             /*<![CDATA[*/
-
             let books = /*[[${cartBooks}]]*/ [];
-            console.log(books);
-
             /*]]>*/
 
-            console.log(books)
             if (books.length > 0) {
                 let totalPrice = 0;
                 books.map(book => {
@@ -75,8 +71,6 @@
                 $('#total-price').text(totalPrice.toFixed(2))
                 $('#discount').text(discount.toFixed(2))
                 $('#total').text(total.toFixed(2))
-            } else {
-                console.log("Book not found")
             }
 
             // jquery end
