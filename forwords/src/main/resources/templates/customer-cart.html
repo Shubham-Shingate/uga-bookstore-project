@@ -55,13 +55,13 @@
             if (books.length > 0) {
                 let totalPrice = 0;
                 books.map(book => {
-                    let bookPrice = parseFloat(book.price);
+                    let bookPrice = parseFloat(book.price) * parseInt(book.quantityInCart);
                     $(`#total-price-${book.book_id}`).text(bookPrice.toString());
                     totalPrice += bookPrice;
 
                     let bookQuantity = []
                     for (let i = 1 ; i <= book.quantity_in_stock ; i++) {
-                        if (i == 1) {
+                        if (i === book.quantityInCart) {
                             bookQuantity.push(`<option value="${i}" selected>${i}</option>`)
                         } else {
                             bookQuantity.push(`<option value="${i}">${i}</option>`)
@@ -119,11 +119,11 @@
 						<span id="cart-size" class="badge badge-pill badge-danger notify">0</span>
 					</a>
                 
-                    <a href="#" class="widget-header mr-3">
+          <a href="#" class="widget-header mr-3 ml-3">
 				    <div class="icon">
 					    <i class="icon-sm rounded-circle border fa fa-heart heart-icon-mg"></i>
 				    </div>
-			        </a>
+          </a>
 
 			        <div class="widget-header dropdown">
 				<a href="#" data-toggle="dropdown" class="dropdown-toggle"  data-offset="20,10">
