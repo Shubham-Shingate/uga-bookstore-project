@@ -1,49 +1,29 @@
-package com.uga.forwords.model;
+package com.uga.order_manage_service.model;
 
 import java.util.Collection;
 import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "ORDER_MASTER")
-public class Order {
-	
-	@Id
-	@Column(name = "ORDER_ID")
+public class OrderWithDetails {
+
 	private String orderId;
 	
-	@Column(name = "ACCOUNT_ID")
 	private String accountId;
 	
-	@Column(name = "CARD_NUMBER")
 	private String cardNumber;
 	
-	@Column(name = "ADDRESS_ID")
 	private Long addressId;
 	
-	@Column(name = "TOTAL_COST")
 	private Double totalCost;
 	
-	@Column(name = "PROMO_ID")
 	private String promoId;
 	
-	@Column(name = "DISCOUNTED_COST")
 	private Double discountedCost;
 	
-	@Column(name = "CREATED_DATETIME")
 	private Date orderDate;	
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "ORDER_BOOK_MAPPING", joinColumns = @JoinColumn(name = "ORDER_ID"), inverseJoinColumns = @JoinColumn(name = "BOOK_ID"))
 	private Collection<Book> books;
+	
+	private ShippingEntry shippingDetails;
 
 	public String getOrderId() {
 		return orderId;
@@ -117,8 +97,17 @@ public class Order {
 		this.books = books;
 	}
 
-	public Order(String orderId, String accountId, String cardNumber, Long addressId, Double totalCost, String promoId,
-			Double discountedCost, Date orderDate, Collection<Book> books) {
+	public ShippingEntry getShippingDetails() {
+		return shippingDetails;
+	}
+
+	public void setShippingDetails(ShippingEntry shippingDetails) {
+		this.shippingDetails = shippingDetails;
+	}
+
+	public OrderWithDetails(String orderId, String accountId, String cardNumber, Long addressId, Double totalCost,
+			String promoId, Double discountedCost, Date orderDate, Collection<Book> books,
+			ShippingEntry shippingDetails) {
 		this.orderId = orderId;
 		this.accountId = accountId;
 		this.cardNumber = cardNumber;
@@ -128,32 +117,21 @@ public class Order {
 		this.discountedCost = discountedCost;
 		this.orderDate = orderDate;
 		this.books = books;
-	}
-	public Order(String accountId, String cardNumber, Long addressId, Double totalCost, String promoId,
-			Double discountedCost, Date orderDate, Collection<Book> books) {
-		this.accountId = accountId;
-		this.cardNumber = cardNumber;
-		this.addressId = addressId;
-		this.totalCost = totalCost;
-		this.promoId = promoId;
-		this.discountedCost = discountedCost;
-		this.orderDate = orderDate;
-		this.books = books;
+		this.shippingDetails = shippingDetails;
 	}
 	
-	public Order() {
+	public OrderWithDetails() {
 		
 	}
 
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", accountId=" + accountId + ", cardNumber=" + cardNumber + ", addressId="
-				+ addressId + ", totalCost=" + totalCost + ", promoId=" + promoId + ", discountedCost=" + discountedCost
-				+ ", orderDate=" + orderDate + ", books=" + books + "]";
+		return "OrderWithDetails [orderId=" + orderId + ", accountId=" + accountId + ", cardNumber=" + cardNumber
+				+ ", addressId=" + addressId + ", totalCost=" + totalCost + ", promoId=" + promoId + ", discountedCost="
+				+ discountedCost + ", orderDate=" + orderDate + ", books=" + books + ", shippingDetails="
+				+ shippingDetails + "]";
 	}
-	
-	
-	
 
+	
 	
 }

@@ -1,5 +1,6 @@
 package com.uga.order_manage_service.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,12 @@ import com.uga.order_manage_service.exception.OrderNotFoundException;
 import com.uga.order_manage_service.model.BookEntry;
 import com.uga.order_manage_service.model.Order;
 import com.uga.order_manage_service.model.OrderBookMapping;
+import com.uga.order_manage_service.model.OrderWithDetails;
 import com.uga.order_manage_service.request.OrderRequest;
 import com.uga.order_manage_service.response.OrderResponse;
 import com.uga.order_manage_service.service.OrderBookMappingRepository;
 import com.uga.order_manage_service.service.OrderRepository;
+import com.uga.order_manage_service.service.ShippingRepository;
 
 @RestController
 public class OrderManageController {
@@ -29,6 +32,9 @@ public class OrderManageController {
 	
 	@Autowired 
 	private OrderBookMappingRepository orderBookMapingRepository;
+	
+	@Autowired
+	private ShippingRepository shippingRepository;
 	
 	
 	@PostMapping("/placeOrder")
@@ -52,12 +58,19 @@ public class OrderManageController {
 	@GetMapping("/getOrderHistory")
 	public ResponseEntity<OrderResponse> getOrderHistory(@RequestHeader String accountId) {
 		List<Order> orders = orderRepository.findByAccountId(accountId);
-		
 		if(orders == null || orders.isEmpty()) {
 			throw new OrderNotFoundException("There are no past orders associated with the given account ID");
 		}
 		
-		OrderResponse orderResponse = new OrderResponse("Success", null, orders);
+		List<OrderWithDetails> detailedOrders = new ArrayList<OrderWithDetails>();
+		for (Order order : orders) {
+			OrderWithDetails orderWithDetails = new OrderWithDetails(order.getOrderId(), order.getAccountId(), order.getCardNumber()
+					, order.getAddressId(), order.getTotalCost(), order.getPromoId(), order.getDiscountedCost(), order.getOrderDate(),
+					order.getBooks(), shippingRepository.findByAccountIdAndAddressId(accountId, order.getAddressId()).get(0));
+			detailedOrders.add(orderWithDetails);
+		}
+		
+		OrderResponse orderResponse = new OrderResponse("Success", null, detailedOrders);
 		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.OK); 
 	}
 	
@@ -70,9 +83,13 @@ public class OrderManageController {
 		
 		if(order == null) {
 			throw new OrderNotFoundException("There is no order with the given Order ID in this account's order history");
-		}		
+		}
 		
-		OrderResponse response = new OrderResponse("Success", null, Arrays.asList(order));
+		OrderWithDetails orderWithDetails = new OrderWithDetails(order.getOrderId(), order.getAccountId(), order.getCardNumber()
+				, order.getAddressId(), order.getTotalCost(), order.getPromoId(), order.getDiscountedCost(), order.getOrderDate(),
+				order.getBooks(), shippingRepository.findByAccountIdAndAddressId(accountId, order.getAddressId()).get(0));
+		
+		OrderResponse response = new OrderResponse("Success", null, Arrays.asList(orderWithDetails));
 		return new ResponseEntity<OrderResponse>(response, HttpStatus.OK);
 	}
 
