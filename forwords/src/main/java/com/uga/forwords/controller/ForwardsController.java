@@ -36,6 +36,7 @@ import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
 import com.uga.forwords.request.EmailRequest;
 import com.uga.forwords.request.OrderRequest;
+import com.uga.forwords.request.PromotionInfoRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
@@ -45,6 +46,7 @@ import com.uga.forwords.response.EmailResponse;
 import com.uga.forwords.response.OrderResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
+import com.uga.forwords.response.PromotionInfoResponse;
 import com.uga.forwords.response.SearchBookResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.service.ActiveUserRepository;
@@ -658,6 +660,73 @@ public class ForwardsController {
 		} else {
 			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
 			return "customer-order-history";
+		}
+		
+	}
+	
+	@GetMapping("/customer/fetchOrder/{orderId}")
+	public String fetchOrder(Principal principal, Model theModel, @PathVariable String orderId) {
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> entity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/fetchOrder/"+orderId, HttpMethod.GET, entity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK)
+				&& orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+
+			theModel.addAttribute("orderDetails", orderManageServiceResponse.getBody().getOrders().get(0));
+			return "customer-order";
+		} else {
+			theModel.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/customer/getOrderHistory";
+		}
+		
+	}
+	
+	/** -----------------------------------Manage Promotions Related Services (calls go to promotion_manage_service)----------------------------------- */
+	
+	@GetMapping("/admin/viewPromotions")
+	public String viewPromotions(Model model) {
+		
+		// Obtain promotions list
+		ResponseEntity<PromotionInfoResponse> allPromotions = restTemplate.getForEntity("http://promotion-manage-service/fetchAllPromotions", PromotionInfoResponse.class);
+		
+		if (allPromotions.getStatusCode().equals(HttpStatus.OK) && allPromotions.getBody().getMessage().equals("Success")) {
+			// Add list to model
+			model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
+			return "admin-manage-promotions";
+		} else {
+			model.addAttribute("viewPromosError", ((LinkedHashMap<?, ?>) allPromotions.getBody().getApiError()).get("message"));
+			return "admin-manage-promotions";
+		}
+		
+	}
+	
+	@GetMapping("/admin/showAddPromoPage")
+	public String showAddPromoPage(Model model) {
+		model.addAttribute("addPromotionRequest", new PromotionInfoRequest());
+		
+		return "admin-add-promotion"; 
+	}
+		
+	@PostMapping("/admin/processPromotionAddition")
+	public String processPromotionAddition(Model model, @ModelAttribute("addPromotionRequest") PromotionInfoRequest promotionRequest) {
+		
+		// Set up Http entity with request body
+		HttpEntity<PromotionInfoRequest> entity = new HttpEntity<PromotionInfoRequest>(promotionRequest);
+		
+		// Send request to backend service
+		ResponseEntity<PromotionInfoResponse> promotionServiceResponse = restTemplate.postForEntity("http://promotion-manage-service/createPromotion", entity, PromotionInfoResponse.class);
+		
+		if (promotionServiceResponse.getStatusCode().equals(HttpStatus.OK) && promotionServiceResponse.getBody().getMessage().equals("Success")) {
+			return "redirect:/admin/viewPromotions";
+		} else {
+			model.addAttribute("addPromosError", ((LinkedHashMap<?, ?>) promotionServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/admin/viewPromotions";
 		}
 		
 	}

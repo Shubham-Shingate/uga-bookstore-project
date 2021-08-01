@@ -1,23 +1,30 @@
-package com.uga.promotion_manage_service.response;
+package com.uga.forwords.response;
 
 import java.util.List;
 
-import com.uga.promotion_manage_service.model.Promotion;
+import com.uga.forwords.model.Promotion;
 
-public class FetchAllPromotionsResponse {
+public class PromotionInfoResponse {
 	
 	private String message;
 	
 	private Object apiError;
 	
 	private List<Promotion> promotions;
-
-	
 	
 	/**
 	 * 
 	 */
-	public FetchAllPromotionsResponse() {
+	public PromotionInfoResponse() {
+	}
+
+	/**
+	 * @param message
+	 * @param apiError
+	 */
+	public PromotionInfoResponse(String message, Object apiError) {
+		this.message = message;
+		this.apiError = apiError;
 	}
 
 	/**
@@ -25,7 +32,7 @@ public class FetchAllPromotionsResponse {
 	 * @param apiError
 	 * @param promotions
 	 */
-	public FetchAllPromotionsResponse(String message, Object apiError, List<Promotion> promotions) {
+	public PromotionInfoResponse(String message, Object apiError, List<Promotion> promotions) {
 		this.message = message;
 		this.apiError = apiError;
 		this.promotions = promotions;
@@ -78,6 +85,7 @@ public class FetchAllPromotionsResponse {
 	public void setPromotions(List<Promotion> promotions) {
 		this.promotions = promotions;
 	}
+	
 	
 	
 }

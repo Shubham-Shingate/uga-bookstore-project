@@ -1,4 +1,4 @@
-package com.uga.promotion_manage_service.model;
+package com.uga.forwords.model;
 
 import java.sql.Timestamp;
 

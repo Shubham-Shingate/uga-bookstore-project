@@ -1,5 +1,7 @@
 package com.uga.promotion_manage_service.response;
 
+import java.util.List;
+
 import com.uga.promotion_manage_service.model.Promotion;
 
 public class PromotionInfoResponse {
@@ -8,10 +10,10 @@ public class PromotionInfoResponse {
 	
 	private Object apiError;
 	
-	private Promotion promotion;
-	
-	
+	private List<Promotion> promotions;
 
+	
+	
 	/**
 	 * 
 	 */
@@ -30,18 +32,18 @@ public class PromotionInfoResponse {
 	/**
 	 * @param message
 	 * @param apiError
-	 * @param promotion
+	 * @param promotions
 	 */
-	public PromotionInfoResponse(String message, Object apiError, Promotion promotion) {
+	public PromotionInfoResponse(String message, Object apiError, List<Promotion> promotions) {
 		this.message = message;
 		this.apiError = apiError;
-		this.promotion = promotion;
+		this.promotions = promotions;
 	}
 
 	@Override
 	public String toString() {
-		return "PromotionInfoResponse [message=" + message + ", apiError=" + apiError + ", promotion=" + promotion
-				+ "]";
+		return "FetchAllPromotionsResponse [message=" + message + ", apiError=" + apiError + ", promotions="
+				+ promotions + "]";
 	}
 
 	/**
@@ -73,19 +75,18 @@ public class PromotionInfoResponse {
 	}
 
 	/**
-	 * @return the promotion
+	 * @return the promotions
 	 */
-	public Promotion getPromotion() {
-		return promotion;
+	public List<Promotion> getPromotions() {
+		return promotions;
 	}
 
 	/**
-	 * @param promotion the promotion to set
+	 * @param promotions the promotions to set
 	 */
-	public void setPromotion(Promotion promotion) {
-		this.promotion = promotion;
+	public void setPromotions(List<Promotion> promotions) {
+		this.promotions = promotions;
 	}
 	
 	
-
 }
