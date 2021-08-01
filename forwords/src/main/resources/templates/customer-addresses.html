@@ -68,6 +68,12 @@
       function addAddressInfo() {
         document.getElementById("addressInfoCard").style.display = "block";
       }
+      function removeDiv() {
+        document.getElementById("addressDiv").style.display = "none";
+      }
+      function addDiv() {
+        document.getElementById("addressDiv").style.display = "block";
+      }
     </script>
   </head>
   <body>
@@ -271,17 +277,18 @@
               <i class="fa fa-plus"></i> Add new address
             </a>
 
-            <div class="row">
+            <div class="row" id="addressDiv" style="display: none">
               <div class="col-md-6">
                 <article class="box mb-4">
-                  <h6 th:text="${state}">State</h6>
+                  <h6 th:text="${updateShippingDetails.state}">State</h6>
                   <p>
-                    <div th:text="${city}"> City
-                    </div>
-                    <div th:text="${street}"> Street
-                    </div>
-                    <div th:text="${zipCode}"> Zip Code
-                    </div>
+                    <span th:text="${updateShippingDetails.city}"> City </span>
+                    <span th:text="${updateShippingDetails.street}">
+                      Street
+                    </span>
+                    <span th:text="${updateShippingDetails.zip_code}">
+                      Zip Code
+                    </span>
                   </p>
                   <a href="#" class="btn btn-light disabled">
                     <i class="fa fa-check"></i> Default</a
@@ -293,59 +300,15 @@
                   >
                     <i class="fa fa-pen"></i>
                   </a>
-                  <a href="#" class="btn btn-light">
-                    <i class="text-danger fa fa-trash"></i>
-                  </a>
-                </article>
-              </div>
-              <!-- col.// -->
-              <div class="col-md-6">
-                <article class="box mb-4">
-                  <h6 th:text="${state}">State</h6>
-                  <p>
-                    <div th:text="${city}"> City
-                    </div>
-                    <div th:text="${street}"> Street
-                    </div>
-                    <div th:text="${zipCode}"> Zip Code
-                    </div>
-                  </p>
-                  <a href="#" class="btn btn-light">Make default</a>
-                  <a
-                    href="#"
+
+                  <button
+                    type="submit"
+                    th:href="@{/customer/deleteShippingDetails/+{updateShippingDetails.addressId}}"
                     class="btn btn-light"
-                    onclick="javascript:addAddressInfo();"
+                    onclick="javascript:removeDiv();"
                   >
-                    <i class="fa fa-pen"></i>
-                  </a>
-                  <a href="#" class="btn btn-light">
                     <i class="text-danger fa fa-trash"></i>
-                  </a>
-                </article>
-              </div>
-              <!-- col.// -->
-              <div class="col-md-6">
-                <article class="box mb-4">
-                  <h6 th:text="${state}">State</h6>
-                  <p>
-                    <div th:text="${city}"> City
-                    </div>
-                    <div th:text="${street}"> Street
-                    </div>
-                    <div th:text="${zipCode}"> Zip Code
-                    </div>
-                  </p>
-                  <a href="#" class="btn btn-light">Make default</a>
-                  <a
-                    href="#"
-                    class="btn btn-light"
-                    onclick="javascript:addAddressInfo();"
-                  >
-                    <i class="fa fa-pen"></i>
-                  </a>
-                  <a href="#" class="btn btn-light">
-                    <i class="text-danger fa fa-trash"></i>
-                  </a>
+                  </button>
                 </article>
               </div>
               <!-- col.// -->
@@ -358,7 +321,7 @@
                 <h4 class="card-title mb-4">Address info</h4>
                 <form
                   th:action="@{/customer/processShippingForm}"
-                  th:object="${currentShippingInfo}"
+                  th:object="${updateShippingDetails}"
                   id="shippingForm"
                   method="POST"
                 >
@@ -398,9 +361,9 @@
                     <div class="col form-group">
                       <label>Street</label>
                       <input
-                        th:field="*{street}"
-                        name="street"
                         type="text"
+                        id="street"
+                        th:field="*{street}"
                         class="form-control"
                       />
                     </div>
@@ -408,9 +371,9 @@
                     <div class="col form-group">
                       <label>City</label>
                       <input
-                        th:field="*{city}"
-                        name="city"
                         type="text"
+                        name="city"
+                        th:field="*{city}"
                         class="form-control"
                       />
                     </div>
@@ -432,8 +395,8 @@
                     <div class="col form-group">
                       <label>Zip Code</label>
                       <input
-                        th:field="*{zipCode}"
-                        name="zipCode"
+                        th:field="*{zip_code}"
+                        name="zip_code"
                         type="text"
                         class="form-control"
                       />
@@ -443,7 +406,11 @@
                   <!-- form-row end.// -->
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      onclick="javascript:addDiv();"
+                    >
                       Continue
                     </button>
                   </div>

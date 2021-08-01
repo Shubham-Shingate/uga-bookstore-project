@@ -41,7 +41,7 @@
       <!-- custom style -->
       <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css" />
       <link th:href="@{/css/responsive.css}" rel="stylesheet" />
-      <link th:href="@{css/cart.css}" rel="stylesheet" />
+      <link th:href="@{/css/cart.css}" rel="stylesheet" />
       <!-- plugin: slickslider -->
       <link
          th:href="@{/plugins/slickslider/slick.css}"
@@ -55,7 +55,7 @@
          />
       <script th:src="@{/plugins/slickslider/slick.min.js}"></script>
       <!-- custom javascript -->
-      <script th:src="@{js/script.js}" type="text/javascript"></script>
+      <script th:src="@{/js/script.js}" type="text/javascript"></script>
    </head>
    <body>
       <header class="section-header">
@@ -241,7 +241,7 @@
                                  <form>
                                     <div class="form-group">
                                        <label>Have coupon?</label>
-                                       <div class="input-group">
+                                       <form class="form-group">
                                           <input
                                              type="text"
                                              class="form-control"
@@ -274,15 +274,15 @@
                                  </dl>
                                  <hr />
                                  <p class="text-center mb-3">
-                                    <img src="images/misc/payments.png" height="26" />
+                                    <img th:src="@{images/misc/payments.png}" height="26" />
                                  </p>
                               </div>
                               <!-- card-body.// -->
                            </div>
                            <br>
-                           <form method="GET" th:action="@{/customer/proceedToCheckout}">
+                           <!-- <form method="GET" th:action="@{/customer/proceedToCheckout}"> -->
                               <button type="submit" class="btn btn-primary float-md-right"> Place your Order</button>
-                           </form>
+                           <!-- </form> -->
                            <!-- card .// -->
                         </aside>
                         <!-- col.// -->
@@ -337,16 +337,15 @@
                   <article class="card mb-4">
                      <div class="card-body">
                         <h4 class="card-title mb-4">Shipping Address</h4>
-                        <form th:action="@{/customer/processShippingForm}"
+                        <form th:action="@{/customer/placeOrder}"
                            th:object="${currentShippingInfo}"
-                           id="shippingFormCheckout"
                            method="POST">
                            <div class="row">
                               <div class="form-group col-sm-6">
                                  <label>Street*</label>
                                  <input
-                                    th:field="*{city}"
-                                    name="city"
+                                    
+                                    name="street"
                                     type="text"
                                     class="form-control"
                                     />
@@ -354,8 +353,7 @@
                               <div class="form-group col-sm-6">
                                  <label>City*</label>
                                  <input
-                                    th:field="*{state}"
-                                    name="state"
+                                    name="city"
                                     type="text"
                                     class="form-control"
                                     />
@@ -363,7 +361,6 @@
                               <div class="form-group col-sm-8">
                                  <label>State*</label>
                                  <input
-                                    th:field="*{state}"
                                     name="state"
                                     type="text"
                                     class="form-control"
@@ -372,7 +369,6 @@
                               <div class="form-group col-sm-4">
                                  <label>Zip Code</label>
                                  <input
-                                    th:field="*{zipCode}"
                                     name="zipCode"
                                     type="text"
                                     class="form-control"
@@ -417,7 +413,7 @@
                      <div class="card">
                         <header class="card-header">
                            <img
-                              src="images/misc/payment-card.png"
+                              th:src="@{images/misc/payment-card.png}"
                               class="float-right"
                               height="24"
                               />
@@ -444,13 +440,14 @@
                               <p class="alert alert-success">
                                  Enter your card details
                               </p>
-                              <form class="form-inline" th:action="@{/customer/updatePaymentDetails}"
+                              <form class="form-inline" 
+                                 th:action="@{/customer/updatePaymentDetails}"
                                  th:object="${userPaymentInfo}"
                                  method="POST">
                                  <input
                                     type="text" th:field="*{name}"
                                     class="form-control mr-2"
-                                    placeholder="xxxx-xxxx-xxxx-xxxx"
+                                    placeholder="xxxx-xxxx-xxxx-xxxx" maxlength="16"
                                     name=""
                                     />
                                  <input

@@ -41,7 +41,7 @@
     <!-- custom style -->
     <link th:href="@{/css/ui.css}" rel="stylesheet" />
     <link th:href="@{/css/responsive.css}" rel="stylesheet" />
-    <link th:href="@{css/cart.css}" rel="stylesheet" />
+    <link th:href="@{/css/cart.css}" rel="stylesheet" />
     <!-- plugin: slickslider -->
     <link
       th:href="@{/plugins/slickslider/slick.css}"
@@ -155,8 +155,8 @@
         <!-- ============================ COMPONENT 1 ================================= -->
         <p>
           Thank you for placing order with us. Your order number is
-          <b th:text="@{currentShippingInfo.orderId}">12345678</b> and is
-          estimated to arrive in <b>2</b> days
+          <b th:text="@{orderRequest.orderId}">12345678</b> and is estimated to
+          arrive in <b>2</b> days
         </p>
 
         <div class="row">
@@ -239,14 +239,18 @@
                     Subtotal:
                     <span class="float-right text-muted">2 items</span>
                   </dt>
-                  <dd class="col-sm-2 text-right"><strong>$1,568</strong></dd>
+                  <dd class="col-sm-2 text-right">
+                    <strong th:text="@{orderRequest.totalCost}">$1,568</strong>
+                  </dd>
 
                   <dt class="col-sm-10">
                     Promo code discount:
                     <span class="float-right text-muted">10% offer</span>
                   </dt>
                   <dd class="col-sm-2 text-danger text-right">
-                    <strong>$29</strong>
+                    <strong th:text="@{orderRequest.discountedCost}"
+                      >$29</strong
+                    >
                   </dd>
 
                   <dt class="col-sm-10">
@@ -255,16 +259,13 @@
                   </dt>
                   <dd class="col-sm-2 text-right"><strong>$120</strong></dd>
 
-                  <dt class="col-sm-10">
-                    Tax: <span class="float-right text-muted">5%</span>
-                  </dt>
-                  <dd class="col-sm-2 text-right text-success">
-                    <strong>$7</strong>
-                  </dd>
-
                   <dt class="col-sm-10">Total:</dt>
                   <dd class="col-sm-2 text-right">
-                    <strong class="h5 text-dark">$1,650</strong>
+                    <strong
+                      class="h5 text-dark"
+                      th:text="@{orderRequest.totalCost}"
+                      >$1,650</strong
+                    >
                   </dd>
                 </dl>
               </div>
@@ -279,10 +280,10 @@
                 <h4>Shipping address</h4>
                 <hr />
                 <div class="input-group">
-                  <p th:text="@{currentShippingInfo.street}">21 Baker Street</p>
-                  <p th:text="@{currentShippingInfo.city}">city of London</p>
-                  <p th:text="@{currentShippingInfo.state}">State</p>
-                  <p th:text="@{currentShippingInfo.zipCode}">30009</p>
+                  <p th:text="@{orderRequest.state}">21 Baker Street</p>
+                  <p th:text="@{orderRequest.city}">city of London</p>
+                  <p th:text="@{orderRequest.state}">State</p>
+                  <p th:text="@{orderRequest.zipCode}">30009</p>
                 </div>
               </div>
               <!-- card-body.// -->
@@ -293,7 +294,7 @@
               <div class="card-body">
                 <h4>Payment</h4>
                 <hr />
-                <p th:text="@{customerInfo.creditCardName}">Credit XX1234</p>
+                <p th:text="@{orderRequest.cardNumber}">Credit XX1234</p>
               </div>
               <!-- card-body.// -->
             </div>
