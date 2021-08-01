@@ -56,7 +56,7 @@
                 let totalPrice = 0;
                 books.map(book => {
                     let bookPrice = parseFloat(book.price) * parseInt(book.quantityInCart);
-                    $(`#total-price-${book.book_id}`).text(bookPrice.toString());
+                    $(`#total-price-${book.book_id}`).text(bookPrice.toFixed(2));
                     totalPrice += bookPrice;
 
                     let bookQuantity = []
@@ -70,12 +70,11 @@
                     $(`#qty-${book.book_id}`).html(bookQuantity.join(''))
                     return book;
                 })
-
                 let discount = 0;
                 let total = totalPrice - discount;
-                $('#total-price').text(totalPrice.toString())
-                $('#discount').text(discount.toString())
-                $('#total').text(total.toString())
+                $('#total-price').text(totalPrice.toFixed(2))
+                $('#discount').text(discount.toFixed(2))
+                $('#total').text(total.toFixed(2))
             } else {
                 console.log("Book not found")
             }
@@ -118,14 +117,8 @@
 						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
 						<span id="cart-size" class="badge badge-pill badge-danger notify">0</span>
 					</a>
-                
-          <a href="#" class="widget-header mr-3 ml-3">
-				    <div class="icon">
-					    <i class="icon-sm rounded-circle border fa fa-heart heart-icon-mg"></i>
-				    </div>
-          </a>
 
-			        <div class="widget-header dropdown">
+			        <div class="widget-header dropdown ml-3">
 				<a href="#" data-toggle="dropdown" class="dropdown-toggle"  data-offset="20,10">
 					<div class="icon icon-sm rounded-circle border ">
 						<i class="fa fa-user"></i>
@@ -136,7 +129,7 @@
 					<a class="dropdown-item" href="#">Profile setting</a>
 					<a class="dropdown-item" href="#">My orders</a>
 					<hr class="dropdown-divider">
-					<a class="dropdown-item" href="#">Log out</a>
+					<a class="dropdown-item" th:href="@{/logout}">Log out</a>
 				</div> <!--  dropdown-menu .// -->
 			</div>
 
@@ -218,15 +211,6 @@
                       <!-- price-wrap .// -->
                     </td>
                     <td class="text-right">
-                      <a
-                        data-original-title="Save to Wishlist"
-                        title=""
-                        href=""
-                        class="btn btn-light"
-                        data-toggle="tooltip"
-                      >
-                        <i class="fa fa-heart"></i
-                      ></a>
                       <form method="GET"
                             th:action="@{'/customer/removeBookFromCart/'+${cartBook.book_id}}">
                         <button type="submit" class="btn btn-light"> Remove</button>
@@ -298,7 +282,7 @@
                 <a href="#" class="btn btn-primary btn-block">
                   Procees to checkout
                 </a>
-                <a href="#" class="btn btn-light btn-block"
+                <a th:href="@{/landingPage}" class="btn btn-light btn-block"
                   >Continue Shopping</a
                 >
               </div>
