@@ -142,15 +142,15 @@
             <article class="card mb-4">
               <div class="card-body">
                 <h4 class="card-title mb-4">Add New Book</h4>
-                <form action="" enctype="multipart/form-data">
+                <form
+                  th:action="{@/admin/addBook}"
+                  enctype="multipart/form-data"
+                >
                   <div class="row">
                     <div class="form-group col-sm-5">
                       <label>ISBN</label>
-                      <input
-                        type="text"
-                        placeholder="Type here"
-                        class="form-control"
-                      />
+                      <input type="text" th: placeholder="Type here"
+                      class="form-control" />
                     </div>
                     <div class="form-group col-sm-5">
                       <label>Category</label>

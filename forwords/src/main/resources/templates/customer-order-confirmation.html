@@ -155,8 +155,8 @@
         <!-- ============================ COMPONENT 1 ================================= -->
         <p>
           Thank you for placing order with us. Your order number is
-          <b th:text="@{orderRequest.orderId}">12345678</b> and is estimated to
-          arrive in <b>2</b> days
+          <b th:text="@{order.orderId}">12345678</b> and is estimated to arrive
+          in <b>2</b> days
         </p>
 
         <div class="row">
@@ -280,10 +280,10 @@
                 <h4>Shipping address</h4>
                 <hr />
                 <div class="input-group">
-                  <p th:text="@{orderRequest.state}">21 Baker Street</p>
-                  <p th:text="@{orderRequest.city}">city of London</p>
-                  <p th:text="@{orderRequest.state}">State</p>
-                  <p th:text="@{orderRequest.zipCode}">30009</p>
+                  <p th:text="${orderDetails.state}">21 Baker Street</p>
+                  <p th:text="${orderDetails.city}">city of London</p>
+                  <p th:text="${orderDetails.state}">State</p>
+                  <p th:text="${orderDetails.zipCode}">30009</p>
                 </div>
               </div>
               <!-- card-body.// -->

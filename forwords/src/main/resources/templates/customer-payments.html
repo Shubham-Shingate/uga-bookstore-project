@@ -74,6 +74,12 @@
           "block";
         document.getElementById("changePaymentInfoCard").style.display = "none";
       }
+      function removeDiv() {
+        document.getElementById("payDiv").style.display = "none";
+      }
+      function addDiv() {
+        document.getElementById("payDiv").style.display = "block";
+      }
     </script>
   </head>
   <body>
@@ -272,10 +278,13 @@
             >
               <i class="fa fa-plus"></i> Add new payment
             </a>
-            <div class="row">
+            <div class="row" id="payDiv">
               <div class="col-md-6">
                 <article class="box mb-4">
-                  <h6>Credit Card ending in <span>7886</span></h6>
+                  <h6>
+                    Credit Card ending in
+                    <span>7886</span>
+                  </h6>
                   <div>
                     Expires:
                     <span th:text="${addPaymentDetails.cardExpiry}">06/25</span>
@@ -294,12 +303,14 @@
                   >
                     <i class="fa fa-pen"></i>
                   </a>
-                  <a
+                  <button
+                    type="submit"
                     th:href="@{/customer/deletePaymentDetails/+${updatePaymentDetails.cardNumber}}"
                     class="btn btn-light"
+                    onclick="javascript:removeDiv();"
                   >
                     <i class="text-danger fa fa-trash"></i>
-                  </a>
+                  </button>
                 </article>
               </div>
             </div>
@@ -320,7 +331,7 @@
                         class="form-control"
                         th:field="*{cardType}"
                       >
-                        <option th:value="Visa" th:text="Visa"></option>
+                        <option value="Visa" th:text="Visa"></option>
                         <option
                           th:value="MasterCard"
                           th:text="MasterCard"
@@ -337,6 +348,18 @@
                       placeholder="Ex. John Smith"
                       required=""
                     />
+                  </div>
+                  <div
+                    th:if="${#fields.hasErrors('nameOnCard')}"
+                    style="margin-bottom: 25px"
+                    class="text-danger"
+                  >
+                    <ul>
+                      <li
+                        th:each="err : ${#fields.errors('nameOnCard')}"
+                        th:text="'Email Id: ' + ${err}"
+                      />
+                    </ul>
                   </div>
                   <!-- form-group.// -->
                   <div class="form-group">
@@ -361,6 +384,18 @@
                     </div>
                     <!-- input-group.// -->
                   </div>
+                  <div
+                    th:if="${#fields.hasErrors('cardNumber')}"
+                    style="margin-bottom: 25px"
+                    class="text-danger"
+                  >
+                    <ul>
+                      <li
+                        th:each="err : ${#fields.errors('cardNumber')}"
+                        th:text="'cardNumber: ' + ${err}"
+                      />
+                    </ul>
+                  </div>
                   <!-- form-group.// -->
                   <div class="row">
                     <div class="col-md flex-grow-0">
@@ -377,6 +412,18 @@
                             placeholder="Format: MM/YY"
                           />
                         </div>
+                      </div>
+                      <div
+                        th:if="${#fields.hasErrors('cardExpiry')}"
+                        style="margin-bottom: 25px"
+                        class="text-danger"
+                      >
+                        <ul>
+                          <li
+                            th:each="err : ${#fields.errors('cardExpiry')}"
+                            th:text="'card Expiry: ' + ${err}"
+                          />
+                        </ul>
                       </div>
                     </div>
                     <div class="col-md-3">
@@ -396,6 +443,18 @@
                         />
                       </div>
                       <!-- form-group.// -->
+                    </div>
+                    <div
+                      th:if="${#fields.hasErrors('cvv')}"
+                      style="margin-bottom: 25px"
+                      class="text-danger"
+                    >
+                      <ul>
+                        <li
+                          th:each="err : ${#fields.errors('cvv')}"
+                          th:text="'cvv: ' + ${err}"
+                        />
+                      </ul>
                     </div>
                   </div>
                   <!-- row.// -->
@@ -433,6 +492,18 @@
                       required=""
                     />
                   </div>
+                  <div
+                    th:if="${#fields.hasErrors('nameOnCard')}"
+                    style="margin-bottom: 25px"
+                    class="text-danger"
+                  >
+                    <ul>
+                      <li
+                        th:each="err : ${#fields.errors('nameOnCard')}"
+                        th:text="'name On Card: ' + ${err}"
+                      />
+                    </ul>
+                  </div>
                   <!-- form-group.// -->
                   <div class="row">
                     <div class="col-md flex-grow-0">
@@ -450,6 +521,18 @@
                           />
                         </div>
                       </div>
+                    </div>
+                    <div
+                      th:if="${#fields.hasErrors('cardExpiry')}"
+                      style="margin-bottom: 25px"
+                      class="text-danger"
+                    >
+                      <ul>
+                        <li
+                          th:each="err : ${#fields.errors('cardExpiry')}"
+                          th:text="'card Expiry: ' + ${err}"
+                        />
+                      </ul>
                     </div>
                   </div>
                   <!-- row.// -->

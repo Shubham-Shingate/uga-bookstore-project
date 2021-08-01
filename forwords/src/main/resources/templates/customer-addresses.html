@@ -224,7 +224,7 @@
                 <a th:href="@{/customer/landingPage}">Home</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
-                <a th:href="@{/customer/showAddresses}">Addresses</a>
+                <a th:href="@{/customer/getShippingDetails}">Addresses</a>
               </li>
             </ol>
           </nav>
@@ -247,7 +247,10 @@
               >
                 My Address
               </a>
-              <a class="list-group-item" th:href="@{/showOrderHistory}">
+              <a
+                class="list-group-item"
+                th:href="@{/customer/showOrderHistory}"
+              >
                 My Orders
               </a>
               <a
@@ -277,7 +280,7 @@
               <i class="fa fa-plus"></i> Add new address
             </a>
 
-            <div class="row" id="addressDiv" style="display: none">
+            <div class="row" id="addressDiv">
               <div class="col-md-6">
                 <article class="box mb-4">
                   <h6 th:text="${updateShippingDetails.state}">State</h6>
