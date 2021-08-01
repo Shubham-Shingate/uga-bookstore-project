@@ -36,7 +36,12 @@
       rel="stylesheet"
       type="text/css"
     />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <!-- custom style -->
     <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css" />
     <link th:href="@{/css/responsive.css}" rel="stylesheet" />
@@ -50,7 +55,12 @@
         <div class="container">
           <div class="row align-items-center">
             <div class="col-lg-3 col-sm-4 col-md-4 col-5">
-              <a href="" class="brand-wrap">forWORDS</a>
+              <a
+                th:href="@{/landingPage}"
+                class="brand-wrap"
+                style="font-family: 'Exo 2', sans-serif; font-size: xx-large"
+                >FORWORDS</a
+              >
               <!-- brand-wrap.// -->
             </div>
             <div
@@ -72,12 +82,22 @@
                     <span class="sr-only">Profile actions</span>
                   </a>
                   <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">My Profile</a>
+                    <a
+                      class="dropdown-item"
+                      th:href="@{admin/viewBookInventory}"
+                      >My Profile</a
+                    >
                     <hr class="dropdown-divider" />
-                    <a class="dropdown-item" href="#">Login & Security</a>
-                    <a class="dropdown-item" href="#">Language Preference</a>
+                    <a class="dropdown-item" href="">Login & Security</a>
+                    <a class="dropdown-item" href="">Language Preference</a>
                     <hr class="dropdown-divider" />
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <form th:action="@{/logout}" method="POST">
+                      <input
+                        type="submit"
+                        class="dropdown-item"
+                        value="Logout"
+                      />
+                    </form>
                   </div>
                   <!--  dropdown-menu .// -->
                 </div>
@@ -100,7 +120,7 @@
           <nav>
             <ol class="breadcrumb text-white">
               <li class="breadcrumb-item">
-                <a th:href="@{/showAdminDashboard}">Home</a>
+                <a th:href="@{admin/viewBookInventory}">Home</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 Add Book
@@ -122,7 +142,7 @@
             <article class="card mb-4">
               <div class="card-body">
                 <h4 class="card-title mb-4">Add New Book</h4>
-                <form action="#" enctype="multipart/form-data">
+                <form action="" enctype="multipart/form-data">
                   <div class="row">
                     <div class="form-group col-sm-5">
                       <label>ISBN</label>
