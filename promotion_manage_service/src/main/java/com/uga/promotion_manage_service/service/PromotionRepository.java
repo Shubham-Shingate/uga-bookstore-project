@@ -13,8 +13,10 @@ import com.uga.promotion_manage_service.model.Promotion;
 
 @Repository
 public interface PromotionRepository extends CrudRepository<Promotion, String> {
+	
 	@Transactional
 	public Promotion findByPromoId(String promoId);
+	
 	@Transactional
 	public List<Promotion> findAll();
 

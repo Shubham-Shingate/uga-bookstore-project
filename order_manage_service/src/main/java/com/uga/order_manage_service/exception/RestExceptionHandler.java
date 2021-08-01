@@ -11,102 +11,102 @@ import org.springframework.web.bind.MissingRequestHeaderException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
-import com.uga.order_manage_service.response.OrderListResponse;
+import com.uga.order_manage_service.response.OrderResponse;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	protected ResponseEntity<OrderListResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+	protected ResponseEntity<OrderResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
 		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
 		apiError.setMessage("Validation error");
 		apiError.setTimestamp(LocalDateTime.now());
 		apiError.addValidationErrors(ex.getBindingResult().getFieldErrors());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.BAD_REQUEST);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	protected ResponseEntity<OrderListResponse> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException ex) {
+	protected ResponseEntity<OrderResponse> handleHttpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException ex) {
 		ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 		apiError.setMessage("Media type is not supported");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
 	@ExceptionHandler(HttpClientErrorException.BadRequest.class)
-	protected ResponseEntity<OrderListResponse> handleHttpClientErrorExceptionBadRequest(HttpClientErrorException.BadRequest ex) {
+	protected ResponseEntity<OrderResponse> handleHttpClientErrorExceptionBadRequest(HttpClientErrorException.BadRequest ex) {
 		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
 		apiError.setMessage("Internal service bad request");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.BAD_REQUEST);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(HttpClientErrorException.NotFound.class)
-	protected ResponseEntity<OrderListResponse> handleHttpClientErrorExceptionNotFound(HttpClientErrorException.NotFound ex) {
+	protected ResponseEntity<OrderResponse> handleHttpClientErrorExceptionNotFound(HttpClientErrorException.NotFound ex) {
 		ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
 		apiError.setMessage("Internal service is down");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(DataAccessException.class)
-	protected ResponseEntity<OrderListResponse> handleDatabaseException(DataAccessException ex) {
+	protected ResponseEntity<OrderResponse> handleDatabaseException(DataAccessException ex) {
 		ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
 		apiError.setMessage("Internal Server Error- Failed to access/query/perform transaction in DB");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(MissingRequestHeaderException.class)
-	protected ResponseEntity<OrderListResponse> handleMissingRequestHeaderException(MissingRequestHeaderException ex) {
+	protected ResponseEntity<OrderResponse> handleMissingRequestHeaderException(MissingRequestHeaderException ex) {
 		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
 		apiError.setMessage("One or more mandatory http request headers not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.BAD_REQUEST);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.BAD_REQUEST);
 	}
 	
 	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<OrderListResponse> handleException(Exception ex) {
+	protected ResponseEntity<OrderResponse> handleException(Exception ex) {
 		ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR);
 		apiError.setMessage("Internal Server Error");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	protected ResponseEntity<OrderListResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+	protected ResponseEntity<OrderResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
 		ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST);
 		apiError.setMessage("The required HTTP request body was not provided");
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.BAD_REQUEST);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	/**------------------HANDLING OF CUSTOM EXCEPTIONS------------------*/
 	@ExceptionHandler(OrderNotFoundException.class)
-	protected ResponseEntity<OrderListResponse> handleOrderNotFoundException(OrderNotFoundException ex) {
+	protected ResponseEntity<OrderResponse> handleOrderNotFoundException(OrderNotFoundException ex) {
 		ApiError apiError = new ApiError(HttpStatus.OK);
 		apiError.setMessage(ex.getMessage());
 		apiError.setTimestamp(LocalDateTime.now());
 		
-		OrderListResponse orderListResponse = new OrderListResponse("Failure", apiError);
-		return new ResponseEntity<OrderListResponse>(orderListResponse, HttpStatus.OK);
+		OrderResponse orderResponse = new OrderResponse("Failure", apiError, null);
+		return new ResponseEntity<OrderResponse>(orderResponse, HttpStatus.OK);
 	}
 	
 	

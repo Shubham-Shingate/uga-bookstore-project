@@ -56,7 +56,9 @@ public class CartManagementController {
 		List<CartBook> books = new ArrayList<CartBook>();
 		
 		for (CartBookMapping cartBookMapping : cartBookMappings) {
-			books.add(bookRepository.findByBookId(cartBookMapping.getBookId()));
+			CartBook cartBook = bookRepository.findByBookId(cartBookMapping.getBookId());
+			cartBook.setQuantityInCart(cartBookMapping.getQuantity());
+			books.add(cartBook);
 		}
 		
 		CartResponse cartResponse = new CartResponse("Success", null, books);

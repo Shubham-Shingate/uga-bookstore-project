@@ -33,6 +33,8 @@ public class CartBook {
 	private Double price;
 	
 	private String subCategory;
+	
+	private Integer quantityInCart;
 
 	public Long getBookId() {
 		return bookId;
@@ -153,6 +155,14 @@ public class CartBook {
 	public void setSubCategory(String subCategory) {
 		this.subCategory = subCategory;
 	}
+	
+	public Integer getQuantityInCart() {
+		return quantityInCart;
+	}
+
+	public void setQuantityInCart(Integer quantityInCart) {
+		this.quantityInCart = quantityInCart;
+	}
 
 	public CartBook(Long bookId, String title, String isbn, String author, String category, String description,
 			Byte[] coverPicture, Long publicationYear, String edition, String publisher, String bookStatus,
@@ -192,7 +202,30 @@ public class CartBook {
 		this.price = price;
 		this.subCategory = subCategory;
 	}
-		
+
+	
+	
+	public CartBook(Long bookId, String title, String isbn, String author, String category, String description,
+			Byte[] coverPicture, Long publicationYear, String edition, String publisher, String bookStatus,
+			Long quantity, Long minimumThreshold, Double price, String subCategory, Integer quantityInCart) {
+		this.bookId = bookId;
+		this.title = title;
+		this.isbn = isbn;
+		this.author = author;
+		this.category = category;
+		this.description = description;
+		this.coverPicture = coverPicture;
+		this.publicationYear = publicationYear;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.bookStatus = bookStatus;
+		this.quantity = quantity;
+		this.minimumThreshold = minimumThreshold;
+		this.price = price;
+		this.subCategory = subCategory;
+		this.quantityInCart = quantityInCart;
+	}
+
 	public CartBook() {
 		
 	}
