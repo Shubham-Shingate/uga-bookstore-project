@@ -805,6 +805,10 @@ public class ForwardsController {
 				|| quantity.toString().isEmpty() || minThreshold.toString().isEmpty() || publicationYear.toString().isEmpty() || coverPicture.isEmpty())
 			throw new Exception("One or more mandatory fields is empty. Review your submission and make sure no required values are left blank.");
 		
+		if(quantity < minThreshold) {
+			throw new Exception("Quantity cannot be less than the minimum threshold");
+		}
+		
 		// Calculate status
 		String book_status;
 		if(quantity > 0)

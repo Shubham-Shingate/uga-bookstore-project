@@ -36,7 +36,7 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-3 col-4">
-				<a href="" class="brand-wrap">forWORDS</a> <!-- brand-wrap.// -->
+				<a th:href="@{/landingpage}" class="brand-wrap">forWORDS</a> <!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
 				<form action="#" class="search">
@@ -109,7 +109,7 @@
 		<ul class="list-group">
 			<a class="list-group-item active" href=""> Manage Books </a>
 			<a class="list-group-item" href=""> Manage Users </a>
-			<a class="list-group-item" th:href="@{/showManagePromo}"> Manage Promotions </a>
+			<a class="list-group-item" th:href="@{/admin/viewPromotions}"> Manage Promotions </a>
 		</ul>
 		<br>
 		<a class="btn btn-light btn-block" th:href="@{/showMyLoginPage}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
@@ -131,64 +131,11 @@
 					<p class="title mb-0"><b th:text="${book.title}">Book Title</b> </p>
 					<var class="price text-muted" th:text="${book.isbn}"> ISBN</var>
 				</td>
-				<td> Author <br> Category </td>
-				<td> Edition <br> Quantity </td>
-				<td> Buying Price <br> Selling Price </td>
+				<td> <span th:text="${book.author}">Author</span><br><span th:text="${book.category}">Category</span></td>
+				<td> <span th:text="${book.edition}">Edition</span> <br> <span th:text="${book.quantity_in_stock}">Quantity</span> </td>
+				<td> <span th:text="${book.price}">Price</span></td>
 
 				<td width="250"> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
-			</tr>
-			<tr>
-				<td>
-					<img src="images/items/book7.jpg" class="img-xs border">
-				</td>
-				<td> 
-					<p class="title mb-0"><b>Book Title</b>  </p>
-					<var class="price text-muted">ISBN</var>
-				</td>
-				<td> Author <br> Category </td>
-				<td> Edition <br> Quantity </td>
-				<td> Buying Price <br> Selling Price </td>
-				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
-			</tr>
-			<tr>
-				<td>
-					<img src="images/items/book10.jpg" class="img-xs border">
-				</td>
-				<td> 
-					<p class="title mb-0"><b>Book Title</b>  </p>
-					<var class="price text-muted">ISBN</var>
-				</td>
-				<td> Author <br> Category </td>
-				<td> Edition <br> Quantity </td>
-				<td> Buying Price <br> Selling Price </td>
-				
-				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
-			</tr>
-			<tr>
-				<td>
-					<img src="images/items/book7.jpg" class="img-xs border">
-				</td>
-				<td> 
-					<p class="title mb-0"><b>Book Title</b>  </p>
-					<var class="price text-muted">ISBN</var>
-				</td>
-				<td> Author <br> Category </td>
-				<td> Edition <br> Quantity </td>
-				<td> Buying Price <br> Selling Price </td>
-				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
-			</tr>
-			<tr>
-				<td>
-					<img src="images/items/book8.jpg" class="img-xs border">
-				</td>
-				<td> 
-					<p class="title mb-0"><b>Book Title</b> </p>
-					<var class="price text-muted">ISBN</var>
-				</td>
-				<td> Author <br> Category </td>
-				<td> Edition <br> Quantity </td>
-				<td> Buying Price <br> Selling Price </td>
-				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
 			</tr>
 		</table>
 		</div> <!-- table-responsive .end// -->
