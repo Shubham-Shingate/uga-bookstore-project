@@ -1,0 +1,226 @@
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bootstrap-ecommerce by Vosidiy M.">
+
+<title>Forwords</title>
+
+<!-- jQuery -->
+<script th:src="@{/js/jquery-2.0.0.min.js}" type="text/javascript"></script>
+
+<!-- Bootstrap4 files-->
+<script th:src="@{/js/bootstrap.bundle.min.js}" type="text/javascript"></script>
+<link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css"/>
+
+<!-- Fonticons -->
+<link th:href="@{/fonts/fontawesome/css/all.min.css}" type="text/css" rel="stylesheet">
+<link th:href="@{/fonts/feathericons/css/iconfont.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/fonts/material-icons/css/materialdesignicons.css}" rel="stylesheet" type="text/css" />
+
+<!-- custom style -->
+<link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css"/>
+<link th:href="@{/css/responsive.css}" rel="stylesheet" />
+
+<!-- custom javascript -->
+<script th:src="@{/js/script.js}" type="text/javascript"></script>
+
+
+</head>
+<body>
+
+<header class="section-header">
+	<section class="header-main border-bottom">
+	<div class="container">
+		<div class="row align-items-center">
+			<div class="col-lg-3 col-4">
+				<a href="" class="brand-wrap">forWORDS</a> <!-- brand-wrap.// -->
+			</div>
+			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
+				<form action="#" class="search">
+					<div class="input-group w-100">
+						<select class="custom-select"  name="category_name">
+								<option value="">All Types</option>
+								<option value="comments">ISBN</option>
+								<option value="content">Author</option>
+								<option value="content">Title</option>
+								<option value="content">Category</option>
+
+						</select>
+					    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+					    
+					    <div class="input-group-append">
+					      <button class="btn btn-primary" type="submit">
+					        <i class="fa fa-search"></i>
+					      </button>
+					    </div>
+				    </div>
+				</form> <!-- search-wrap .end// -->
+			</div> <!-- col.// -->
+			<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					<div class="widget-header dropdown">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle" data-offset="20,10" aria-expanded="false">
+						<div class="icon icon-sm rounded-circle border ">
+							<i class="fa fa-user"></i>
+						</div>
+						<span class="sr-only">Profile actions</span>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(65px, 46px, 0px);">
+						<a class="dropdown-item" href="#">My Profile</a>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item" href="#">Login &amp; Security</a>
+						<a class="dropdown-item" href="#">Language Preference</a>
+						<hr class="dropdown-divider">
+						<a class="dropdown-item" href="#">Log out</a>
+					</div> <!--  dropdown-menu .// -->
+					</div>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+		</div> <!-- row.// -->
+	</div> <!-- container.// -->
+	</section> <!-- header-main .// -->
+	
+	<!-- ========================= SECTION PAGETOP ========================= -->
+	<section class="section-pagetop bg">
+	<div class="container">
+		<h2 class="title-page">Admin Portal</h2>
+		<nav>
+		<ol class="breadcrumb text-white">
+			<li class="breadcrumb-item"><a th:href="@{/showAdminDashboard}">Home</a></li>
+		</ol>  
+		</nav>
+	</div> <!-- container //  -->
+	</section>
+	<!-- ========================= SECTION INTRO END// ========================= -->
+
+</header> <!-- section-header.// -->
+
+
+<section class="section-content padding-y">
+<div class="container">
+
+<!-- =========================  COMPONENT MYORDER 1 ========================= --> 
+<div class="row">
+	<aside class="col-md-3">
+		<!--   SIDEBAR   -->
+		<ul class="list-group">
+			<a class="list-group-item active" href=""> Manage Books </a>
+			<a class="list-group-item" href=""> Manage Users </a>
+			<a class="list-group-item" th:href="@{/showManagePromo}"> Manage Promotions </a>
+		</ul>
+		<br>
+		<a class="btn btn-light btn-block" th:href="@{/showMyLoginPage}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+		<!--   SIDEBAR .//END   -->
+	</aside>
+	<main class="col-md-9">
+		<article class="card">
+		<header class="card-header">
+			<strong class="d-inline-block mr-3">Manage Books</strong>
+			<a th:href="@{/admin/showAddBookPage}" class="btn btn-outline-primary">Add New Book</a>
+		</header>
+		<div class="table-responsive">
+		<table class="table table-hover">
+			<tr th:each="book : ${bookInventory}">
+				<td width="65">
+					<img src="images/items/book1.jpeg" th:src="@{'data:image/png;base64, '+${book.cover_picture}}" class="img-xs border">
+				</td>
+				<td> 
+					<p class="title mb-0"><b th:text="${book.title}">Book Title</b> </p>
+					<var class="price text-muted" th:text="${book.isbn}"> ISBN</var>
+				</td>
+				<td> Author <br> Category </td>
+				<td> Edition <br> Quantity </td>
+				<td> Buying Price <br> Selling Price </td>
+
+				<td width="250"> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/items/book7.jpg" class="img-xs border">
+				</td>
+				<td> 
+					<p class="title mb-0"><b>Book Title</b>  </p>
+					<var class="price text-muted">ISBN</var>
+				</td>
+				<td> Author <br> Category </td>
+				<td> Edition <br> Quantity </td>
+				<td> Buying Price <br> Selling Price </td>
+				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/items/book10.jpg" class="img-xs border">
+				</td>
+				<td> 
+					<p class="title mb-0"><b>Book Title</b>  </p>
+					<var class="price text-muted">ISBN</var>
+				</td>
+				<td> Author <br> Category </td>
+				<td> Edition <br> Quantity </td>
+				<td> Buying Price <br> Selling Price </td>
+				
+				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/items/book7.jpg" class="img-xs border">
+				</td>
+				<td> 
+					<p class="title mb-0"><b>Book Title</b>  </p>
+					<var class="price text-muted">ISBN</var>
+				</td>
+				<td> Author <br> Category </td>
+				<td> Edition <br> Quantity </td>
+				<td> Buying Price <br> Selling Price </td>
+				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
+			</tr>
+			<tr>
+				<td>
+					<img src="images/items/book8.jpg" class="img-xs border">
+				</td>
+				<td> 
+					<p class="title mb-0"><b>Book Title</b> </p>
+					<var class="price text-muted">ISBN</var>
+				</td>
+				<td> Author <br> Category </td>
+				<td> Edition <br> Quantity </td>
+				<td> Buying Price <br> Selling Price </td>
+				<td> <a href="forwords-edit-book.html" class="btn btn-outline-primary">Edit </a> <a href="#" class="btn btn-light"> Remove </a> </td>
+			</tr>
+		</table>
+		</div> <!-- table-responsive .end// -->
+		<nav class="mt-4" aria-label="Page navigation sample">
+			<ul class="pagination">
+			  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+			  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+			  <li class="page-item"><a class="page-link" href="#">2</a></li>
+			  <li class="page-item"><a class="page-link" href="#">3</a></li>
+			  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+			</ul>
+		  </nav>
+		</article> <!-- order-group.// --> 
+
+		
+	</main>
+</div> <!-- row.// -->
+<!-- =========================  COMPONENT MYORDER 1 END.// ========================= --> 
+
+<br> <br>
+
+<!-- =========================  COMPONENT MYORDER 2 ========================= --> 
+
+
+<br> <br>
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+
+
+</body>
+</html>

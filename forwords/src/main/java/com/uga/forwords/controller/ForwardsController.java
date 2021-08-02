@@ -1,5 +1,6 @@
 package com.uga.forwords.controller;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +22,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
@@ -50,6 +55,7 @@ import com.uga.forwords.response.PromotionInfoResponse;
 import com.uga.forwords.response.SearchBookResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.service.ActiveUserRepository;
+import com.uga.forwords.service.BookRepository;
 import com.uga.forwords.service.ConfigRepository;
 import com.uga.forwords.util.BooksBase64Encoder;
 
@@ -732,7 +738,121 @@ public class ForwardsController {
 		
 	}
 	
+	/** ------------------------------------------------- Book Management --------------------------------------------------------------*/
+	@GetMapping("/admin/viewBookInventory")
+	public String viewBookInventory(Model model) {
+		
+		// Fetch book list using book_catalog_service (don't need images)
+		ResponseEntity<CatalogResponse> catalogResponse = restTemplate.getForEntity("http://book-catalog-service/showCatalog", CatalogResponse.class);
+		
+		List<Base64EncodedBook> inventory = new ArrayList<Base64EncodedBook>();
+		
+		// Initializes inventory list
+		for(Book book : catalogResponse.getBody().getBooks()) {
+			inventory.add(BooksBase64Encoder.getBase64Encoded(book));
+		}
+		
+		model.addAttribute("bookInventory", inventory);
+		
+		return "admin-dashboard";	
+	}
 	
+	@GetMapping("/admin/showAddBookPage")
+	public String showAddBookPage(Model model) {
+		return "admin-add-book";
+	}
+	
+//	@GetMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+//	public String addBook(MultipartHttpServletRequest request) {
+//			
+//		// If encountering issues, try XMLHttpRequest and/or constructing a FormData object in the frontend
+//		
+//		// Attempt with RequestDispatcher
+////		RequestDispatcher dispatcher = request.getServletContext().getContext("http://book-manage-service/updateBook").getRequestDispatcher("http://book-manage-service/updateBook");
+//		
+//		// Forward request to backend service
+//		ResponseEntity<BookResponse> bookResponse = restTemplate.postForEntity("http://book-manage-service/updateBook", request, BookResponse.class);
+//		
+//		return "redirect:/admin-dashboard";
+//	}
+	
+	@Autowired BookRepository bookRepository;
+	
+	@PostMapping(value = "/admin/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
+	public String updateBook(
+			@RequestParam String title,
+			@RequestParam String isbn,
+			@RequestParam String author,
+			@RequestParam String category,
+			@RequestParam String description,
+			@RequestPart(value="coverPicture") MultipartFile coverPicture,
+			@RequestParam Long publicationYear,
+			@RequestParam String edition,
+			@RequestParam String publisher,
+			@RequestParam Long quantity,
+			@RequestParam Long minThreshold,
+			@RequestParam Double price
+			) throws IOException, Exception{
+		
+		/* Cannot get the above validations to work */
+		// Check validity of parameters
+		if(title == null || isbn == null || author == null || category == null || publicationYear == null || description == null || 
+				coverPicture == null || publisher == null || quantity == null || minThreshold == null
+				|| price == null /* || subCategory == null */)
+			throw new Exception("No values can be null. Some String values can be empty, but never null.");
+		
+		if(title.isEmpty() || isbn.isEmpty() || author.isEmpty() || category.isEmpty() || publisher.isEmpty() || price.toString().isEmpty() 
+				|| quantity.toString().isEmpty() || minThreshold.toString().isEmpty() || publicationYear.toString().isEmpty() || coverPicture.isEmpty())
+			throw new Exception("One or more mandatory fields is empty. Review your submission and make sure no required values are left blank.");
+		
+		// Calculate status
+		String book_status;
+		if(quantity > 0)
+			book_status = "AVAILABLE";
+		else if(quantity < 0) {
+			quantity = 0L;
+			book_status = "UNAVAILABLE";
+		}
+		else
+			book_status = "UNAVAILABLE";
+		
+		// Convert image to byte[]
+		byte[] img;
+		try {
+			img = coverPicture.getBytes();
+		}
+		catch(IOException e) {
+			throw new Exception("Problem encountered while converting image to bit[] for database storage");
+		}
+		
+		// Convert byte[] to Byte[]
+		Byte[] convertedImg = new Byte[img.length];
+		for(int i = 0; i < img.length; i++)
+			convertedImg[i] = img[i];
+		
+		Book newBook = new Book(
+				title, 
+				isbn, 
+				author,
+				category, 
+				description, 
+				convertedImg,
+				publicationYear, 
+				edition, 
+				publisher,
+				book_status, 
+				quantity, 
+				minThreshold, 
+				price,
+				""
+				);
+		
+		// Add to DB
+		bookRepository.save(newBook);
+		
+		// Return response
+		return "redirect:/admin/viewBookInventory";
+	}
 	
 	
 	

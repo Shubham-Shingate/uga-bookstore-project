@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="author" content="Bootstrap-ecommerce by Vosidiy M." />
+
+    <title>Forwords</title>
+
+    <!-- jQuery -->
+    <script th:src="@{/js/jquery-2.0.0.min.js}" type="text/javascript"></script>
+
+    <!-- Bootstrap4 files-->
+    <script
+      th:src="@{/js/bootstrap.bundle.min.js}"
+      type="text/javascript"
+    ></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" />
+
+    <!-- Fonticons -->
+    <link
+      th:href="@{/fonts/fontawesome/css/all.min.css}"
+      type="text/css"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/fonts/feathericons/css/iconfont.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      th:href="@{/fonts/material-icons/css/materialdesignicons.css}"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <!-- custom style -->
+    <link th:href="@{/css/ui.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/responsive.css}" rel="stylesheet" />
+
+    <!-- custom javascript -->
+    <script th:src="@{/js/script.js}" type="text/javascript"></script>
+  </head>
+  <body>
+    <header class="section-header">
+      <section class="header-main border-bottom">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-3 col-sm-4 col-md-4 col-5">
+              <a href="" class="brand-wrap">forWORDS</a>
+              <!-- brand-wrap.// -->
+            </div>
+            <div
+              class="col-lg-4 col-xl-5 col-sm-8 col-md-4 d-none d-md-block"
+            ></div>
+            <!-- col.// -->
+            <div class="col-lg-5 col-xl-4 col-sm-8 col-md-4 col-7">
+              <div class="d-flex justify-content-end">
+                <div class="widget-header dropdown">
+                  <a
+                    href="#"
+                    data-toggle="dropdown"
+                    class="dropdown-toggle"
+                    data-offset="20,10"
+                  >
+                    <div class="icon icon-sm rounded-circle border">
+                      <i class="fa fa-user"></i>
+                    </div>
+                    <span class="sr-only">Profile actions</span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="#">My Profile</a>
+                    <hr class="dropdown-divider" />
+                    <a class="dropdown-item" href="#">Login & Security</a>
+                    <a class="dropdown-item" href="#">Language Preference</a>
+                    <hr class="dropdown-divider" />
+                    <a class="dropdown-item" href="#">Log out</a>
+                  </div>
+                  <!--  dropdown-menu .// -->
+                </div>
+                <!-- widget-header .// -->
+              </div>
+              <!-- widgets-wrap.// -->
+            </div>
+            <!-- col.// -->
+          </div>
+          <!-- row.// -->
+        </div>
+        <!-- container.// -->
+      </section>
+      <!-- header-main .// -->
+
+      <!-- ========================= SECTION PAGETOP ========================= -->
+      <section class="section-pagetop bg">
+        <div class="container">
+          <h2 class="title-page">Admin Portal</h2>
+          <nav>
+            <ol class="breadcrumb text-white">
+              <li class="breadcrumb-item">
+                <a th:href="@{/showAdminDashboard}">Home</a>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Add Book
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <!-- container //  -->
+      </section>
+      <!-- ========================= SECTION INTRO END// ========================= -->
+    </header>
+    <!-- section-header.// -->
+
+    <section class="section-content padding-y">
+      <div class="container">
+        <!-- ============================ COMPONENT 2 ================================= -->
+        <div class="row">
+          <main class="col-md-8">
+            <article class="card mb-4">
+              <div class="card-body">
+                <h4 class="card-title mb-4">Add New Book</h4>
+                <form th:action="@{/admin/updateBook}" enctype="multipart/form-data" method="post">
+                  <div class="row">
+                    <div class="form-group col-sm-5">
+                      <label>ISBN</label>
+                      <input
+                        type="text"
+                        name="isbn"
+                        placeholder="Type here"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Category</label>
+                      <select name="category" class="form-control">
+                        <option value="Any">Any</option>
+                        <option value="Mystery">Mystery</option>
+                        <option value="Thriller">Thriller</option>
+                        <option value="Fiction">Fiction</option>
+                      </select>
+                    </div>
+                  </div>
+                  <!-- row.// -->
+
+                  <div class="row">
+                    <div class="form-group col-sm-5">
+                      <label>Description</label>
+                      <input
+                        type="text"
+                        name="description"
+                        class="form-control"
+                      />
+                      <label>Author(s)</label>
+                      <input
+                        type="text"
+                        name="author"
+                        placeholder="Type here"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        placeholder="Type here"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Edition</label>
+                      <input
+                        type="text"
+                        name="edition"
+                        placeholder="Type here"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Publisher</label>
+                      <input
+                        type="text"
+                        name="publisher"
+                        placeholder="Type here"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Publication Year</label>
+                      <input
+                        type="text"
+                        name="publicationYear"
+                        placeholder="XXXX"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <!-- row.// -->
+                  <div class="row">
+                    <div class="form-group col-sm-5">
+                      <label>Quantity in stock</label>
+                      <input
+                        type="number"
+                        id="quantity"
+                        name="quantity"
+                        min="1"
+                        max="100"
+                        required
+                      />
+                    </div>
+                    <div class="form-group col-sm-5">
+                      <label>Minimum Threshold</label>
+                      <input
+                        type="number"
+                        id="minThreshold"
+                        name="minThreshold"
+                        min="1"
+                        max="100"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-5">
+                      <label>Selling Price</label>
+                      <input
+                        type="text"
+                        name="price"
+                        placeholder="$00.00"
+                        class="form-control"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group col-sm-4">
+                      <label for="exampleFormControlFile1"></label>
+                      <label>Add book cover</label>
+                      <input type="file" name="coverPicture" class="form-control-file" />
+                    </div>
+                  </div>
+
+                  <button class="btn btn-primary btn">Submit</button>
+                  <button class="btn btn-primary">Cancel</button>
+                </form>
+              </div>
+              <!-- card-body.// -->
+            </article>
+            <!-- card.// -->
+          </main>
+          <!-- col.// -->
+        </div>
+        <!-- row.// -->
+
+        <!-- ============================ COMPONENT 2 END//  ================================= -->
+      </div>
+      <!-- container .//  -->
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+  </body>
+</html>
