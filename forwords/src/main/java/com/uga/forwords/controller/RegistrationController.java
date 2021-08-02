@@ -3,6 +3,7 @@ package com.uga.forwords.controller;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -32,6 +33,8 @@ import com.uga.forwords.model.VerificationToken;
 import com.uga.forwords.request.AddPaymentDetailsRequest;
 import com.uga.forwords.request.CreateAccountRequest;
 import com.uga.forwords.request.EmailRequest;
+import com.uga.forwords.request.ForgotPasswordRequest;
+import com.uga.forwords.request.ResetPasswordRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.ValidateTokenRequest;
 import com.uga.forwords.response.EmailResponse;
@@ -185,8 +188,12 @@ public class RegistrationController {
 			
 			VerificationToken verificationTokenEntity = new VerificationToken(null, verificationToken, now, expDate, accountId, "ACTIVE");
 			verificationRepository.save(verificationTokenEntity);
+			return "registration-confirmation";
+		} else {
+			theModel.addAttribute("registrationError", "Failed to send verfication email");
+			theModel.addAttribute("createAccountRequest", new CreateAccountRequest());
+			return "sign-up";
 		}
-		return "registration-confirmation";
 	}
 	
 	
@@ -242,13 +249,107 @@ public class RegistrationController {
 	}
 	
 	
+	/** -----------------------------------Service Endpoints for Forgot Password Process and Verification----------------------------------- */
+	
+	@GetMapping("/forgotPassword")
+	public String forgotPassword (Model theModel) {
+		
+		theModel.addAttribute("forgotPasswordReq", new ForgotPasswordRequest());
+		return "forgot-password"; // NOTE: Show the email ID enter form here
+	}
 	
 	
+	@PostMapping("/processForgotPasswordForm")
+	public String processForgotPasswordForm(@Valid @ModelAttribute("forgotPasswordReq") ForgotPasswordRequest forgotPasswordRequest, BindingResult theBindingResult,
+			 Model theModel) {
+		
+		// Check if Field generates any validation error
+		if (theBindingResult.hasErrors()) {
+			return "forgot-password";
+		}
+		
+		//Check if the emailId given is a registered and verified user 
+		ActiveUser existingUser = activeUserRepository.findByEmailId(forgotPasswordRequest.getEmailId());
+		
+		if (existingUser == null) {
+			theModel.addAttribute("forgotPasswordReq", new ForgotPasswordRequest());
+			theModel.addAttribute("forgotPassError", "User name/Email ID is not registered with us.");
+			return "forgot-password";
+		}
+		
+		// Create a verification SHA-256 token
+		String verificationToken = SHAFactory.getSHAEncryptedString(existingUser.getAccountId() + System.currentTimeMillis(),
+				applicationConfig.get("SHA256_SALT").getBytes(), "SHA-256");
+		
+		EmailRequest emailRequest = new EmailRequest("FORGOT PASSWORD VERIFICATION LINK",
+				applicationConfig.get("FORGOT_PASSWORD_VERIFICATION_EMAIL") 
+				+ applicationConfig.get("FORGOT_PASSWORD_VERIFICATION_LINK")
+				+"?verificationToken="+verificationToken+"&accountId="+existingUser.getAccountId(),
+				existingUser.getEmailId());
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		
+		HttpEntity<EmailRequest> entity = new HttpEntity<EmailRequest>(emailRequest, headers);
+		ResponseEntity<EmailResponse> emailServiceResponse = restTemplate.postForEntity("http://email-service/emailService", entity, EmailResponse.class);
+		
+		if (emailServiceResponse.getStatusCode().equals(HttpStatus.OK) && emailServiceResponse.getBody().getMessage().equals("Success")) {
+			
+			Date now = new Date(System.currentTimeMillis());
+			Long tokenExp = System.currentTimeMillis() + (Long.parseLong(applicationConfig.get("FORGOT_PASSWORD_VERIFICATION_TOKEN_VALIDITY_MINS"))*60000); 
+			Date expDate = new Date(tokenExp);
+			
+			VerificationToken verificationTokenEntity = new VerificationToken(null, verificationToken, now, expDate, existingUser.getAccountId(), "ACTIVE");
+			verificationRepository.save(verificationTokenEntity);
+			return "email-sent-confirmation";
+		} else {
+			theModel.addAttribute("forgotPasswordReq", new ForgotPasswordRequest());
+			theModel.addAttribute("forgotPassError", "Failed to send verification email.");
+			return "forgot-password";
+		}	
+	}
+	
+	@GetMapping("/forgotPasswordVerification")
+	public String forgotPasswordVerification (@RequestParam String verificationToken, @RequestParam String accountId, Model theModel) {
+		
+		// API call to the validate_token_service
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", accountId);
+		
+		ValidateTokenRequest validateTokenRequest = new ValidateTokenRequest(verificationToken);
+		HttpEntity<ValidateTokenRequest> entity = new HttpEntity<ValidateTokenRequest>(validateTokenRequest, headers);
+		
+		ResponseEntity<ValidateTokenResponse> validateTokenServiceResponse = restTemplate.postForEntity("http://validate-token-service/validateToken", entity, ValidateTokenResponse.class);
+		
+		if (validateTokenServiceResponse.getStatusCode().equals(HttpStatus.OK) && validateTokenServiceResponse.getBody().getMessage().equals("Success")) {
+			
+			theModel.addAttribute("resetPasswordReq", new ResetPasswordRequest());
+			theModel.addAttribute("accountId", accountId); 
+			return "reset-password-form";  //Note reset-password-form shows 2 fields -new password, re-enter new password. (both should be checked at frontend)
+		} else {
+			theModel.addAttribute("tokenVerificationError", ((LinkedHashMap<?, ?>) validateTokenServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/register/forgotPassword";
+		}
+		
+	}
 	
 	
+	@PostMapping("/processResetPasswordForm")
+	public String processResetPasswordForm(@Valid @ModelAttribute("resetPasswordReq") ResetPasswordRequest resetPasswordReq,
+											BindingResult theBindingResult, Model theModel) {
+		
+		if (theBindingResult.hasErrors()) {
+			return "reset-password-form";
+		}	
+		//Save the new password against the given account ID
+		ActiveUser activeUser = activeUserRepository.findByAccountId(resetPasswordReq.getAccountId());
+		activeUser.setPassword(bcryptPasswordEncoder.encode(resetPasswordReq.getNewPassword()));
+		activeUserRepository.save(activeUser);
+		
+		return "reset-password-confirmation";
+	}
+
 	
-	
-	
-	
-	
+
 }
