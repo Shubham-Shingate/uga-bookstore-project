@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
@@ -229,6 +231,32 @@ public class ForwardsController {
 		model.addAttribute("searchedBooks", searchedBooks);		
 		return "search";
 	}
+/** -----------------------------------Services for Customer Account  Overview----------------------------------- */
+	
+	@GetMapping("/customer/getAccountOverview")
+	public String showAccountOverviewPage(Principal principal, Model model) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		headers.add("accountId", principal.getName());
+		
+		// Make Request to backend service for profile information
+		HttpEntity<Object> profileEntity = new HttpEntity<Object>(headers);
+		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.exchange("http://profile-detail-service/getPersonalDetails",
+				HttpMethod.GET, profileEntity, PersonalDetailsResponse.class);
+	
+		
+		// Make Request to backend service for address details
+		HttpEntity<Object> shippingEntity = new HttpEntity<Object>(headers);
+		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
+																						HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);		
+		
+		// Add information to model
+		model.addAttribute("activeUserDetails", profileDetailsServiceResponse.getBody().getUserDetails());
+		model.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
+		return "customer-account-overview";
+		
+	}
+	
 	
 	/** -----------------------------------Services for showing/managing Profile Settings and related services (calls go to profile_detail_service)----------------------------------- */
 	
@@ -279,7 +307,7 @@ public class ForwardsController {
 	}
 	
 	@PostMapping("/customer/changePassword")
-	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
+	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model, RedirectAttributes redirectAttributes) {
 				
 		//Fetch old password
 		ActiveUser activeUser = activeUserRepository.findByAccountId(principal.getName());
@@ -301,7 +329,7 @@ public class ForwardsController {
 			
 			return "redirect:/customer/showSettingsPage";
 		} else {
-			model.addAttribute("changePasswordError", "Old password provided was incorrect");
+			redirectAttributes.addFlashAttribute("changePasswordError", "Old password provided was incorrect");
 			return "redirect:/customer/showSettingsPage";
 		}
 		
