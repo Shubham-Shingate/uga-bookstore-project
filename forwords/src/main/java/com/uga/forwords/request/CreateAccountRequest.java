@@ -1,8 +1,6 @@
 package com.uga.forwords.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
 import com.uga.forwords.validator.FieldMatch;
 import com.uga.forwords.validator.ValidEmail;
 

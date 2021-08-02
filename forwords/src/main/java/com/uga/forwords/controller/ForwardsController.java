@@ -116,6 +116,7 @@ public class ForwardsController {
 		}
 		model.addAttribute("featuredBooks", featuredBooks);
 		model.addAttribute("topSellerBooks", topSellerBooks);
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
 		return "landing";
 	}
 	
