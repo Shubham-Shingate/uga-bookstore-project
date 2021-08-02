@@ -184,6 +184,41 @@ public class Book {
 		this.sub_category = sub_category;
 	}
 
+	/**
+	 * @param title
+	 * @param isbn
+	 * @param author
+	 * @param category
+	 * @param description
+	 * @param cover_picture
+	 * @param publication_year
+	 * @param edition
+	 * @param publisher
+	 * @param book_status
+	 * @param quantity_in_stock
+	 * @param minimum_threshold
+	 * @param price
+	 * @param sub_category
+	 */
+	public Book(String title, String isbn, String author, String category, String description, Byte[] cover_picture,
+			Long publication_year, String edition, String publisher, String book_status, Long quantity_in_stock,
+			Long minimum_threshold, Double price, String sub_category) {
+		this.title = title;
+		this.isbn = isbn;
+		this.author = author;
+		this.category = category;
+		this.description = description;
+		this.cover_picture = cover_picture;
+		this.publication_year = publication_year;
+		this.edition = edition;
+		this.publisher = publisher;
+		this.book_status = book_status;
+		this.quantity_in_stock = quantity_in_stock;
+		this.minimum_threshold = minimum_threshold;
+		this.price = price;
+		this.sub_category = sub_category;
+	}
+
 	public Book() {
 		
 	}
