@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
@@ -38,6 +36,7 @@ import com.uga.forwords.request.DeletePaymentDetailsRequest;
 import com.uga.forwords.request.DeleteShipppingDetailsRequest;
 import com.uga.forwords.request.EmailRequest;
 import com.uga.forwords.request.OrderRequest;
+import com.uga.forwords.request.PromotionInfoRequest;
 import com.uga.forwords.request.ShippingInfoRequest;
 import com.uga.forwords.request.UpdatePaymentDetailsRequest;
 import com.uga.forwords.request.UpdateProfileDetailsRequest;
@@ -47,6 +46,7 @@ import com.uga.forwords.response.EmailResponse;
 import com.uga.forwords.response.OrderResponse;
 import com.uga.forwords.response.PaymentDetailsResponse;
 import com.uga.forwords.response.PersonalDetailsResponse;
+import com.uga.forwords.response.PromotionInfoResponse;
 import com.uga.forwords.response.SearchBookResponse;
 import com.uga.forwords.response.ShippingInfoResponse;
 import com.uga.forwords.service.ActiveUserRepository;
@@ -116,6 +116,7 @@ public class ForwardsController {
 		}
 		model.addAttribute("featuredBooks", featuredBooks);
 		model.addAttribute("topSellerBooks", topSellerBooks);
+		model.addAttribute("updateCartDetails", new CartUpdateRequest());
 		return "landing";
 	}
 	
@@ -229,32 +230,6 @@ public class ForwardsController {
 		return "search";
 	}
 	
-	/** -----------------------------------Services for Customer Account  Overview----------------------------------- */
-	
-	@GetMapping("/customer/getAccountOverview")
-	public String showAccountOverviewPage(Principal principal, Model model) {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		headers.add("accountId", principal.getName());
-		
-		// Make Request to backend service for profile information
-		HttpEntity<Object> profileEntity = new HttpEntity<Object>(headers);
-		ResponseEntity<PersonalDetailsResponse> profileDetailsServiceResponse = restTemplate.exchange("http://profile-detail-service/getPersonalDetails",
-				HttpMethod.GET, profileEntity, PersonalDetailsResponse.class);
-	
-		
-		// Make Request to backend service for address details
-		HttpEntity<Object> shippingEntity = new HttpEntity<Object>(headers);
-		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
-																						HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);		
-		
-		// Add information to model
-		model.addAttribute("activeUserDetails", profileDetailsServiceResponse.getBody().getUserDetails());
-		model.addAttribute("currentShippingInfo", shippingDetailsServiceResponse.getBody().getAddresses());
-		return "customer-account-overview";
-		
-	}
-	
 	/** -----------------------------------Services for showing/managing Profile Settings and related services (calls go to profile_detail_service)----------------------------------- */
 	
 	@GetMapping("/customer/showSettingsPage")
@@ -304,7 +279,7 @@ public class ForwardsController {
 	}
 	
 	@PostMapping("/customer/changePassword")
-	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model, RedirectAttributes redirectAttributes) {
+	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
 				
 		//Fetch old password
 		ActiveUser activeUser = activeUserRepository.findByAccountId(principal.getName());
@@ -326,7 +301,7 @@ public class ForwardsController {
 			
 			return "redirect:/customer/showSettingsPage";
 		} else {
-			redirectAttributes.addFlashAttribute("changePasswordError", "Old password provided was incorrect");
+			model.addAttribute("changePasswordError", "Old password provided was incorrect");
 			return "redirect:/customer/showSettingsPage";
 		}
 		
@@ -712,5 +687,73 @@ public class ForwardsController {
 		}
 		
 	}
+	
+	/** -----------------------------------Manage Promotions Related Services (calls go to promotion_manage_service)----------------------------------- */
+	
+	@GetMapping("/admin/viewPromotions")
+	public String viewPromotions(Model model) {
+		
+		// Obtain promotions list
+		ResponseEntity<PromotionInfoResponse> allPromotions = restTemplate.getForEntity("http://promotion-manage-service/fetchAllPromotions", PromotionInfoResponse.class);
+		
+		if (allPromotions.getStatusCode().equals(HttpStatus.OK) && allPromotions.getBody().getMessage().equals("Success")) {
+			// Add list to model
+			model.addAttribute("promotionsList", allPromotions.getBody().getPromotions());
+			return "admin-manage-promotions";
+		} else {
+			model.addAttribute("viewPromosError", ((LinkedHashMap<?, ?>) allPromotions.getBody().getApiError()).get("message"));
+			return "admin-manage-promotions";
+		}
+		
+	}
+	
+	@GetMapping("/admin/showAddPromoPage")
+	public String showAddPromoPage(Model model) {
+		model.addAttribute("addPromotionRequest", new PromotionInfoRequest());
+		
+		return "admin-add-promotion"; 
+	}
+		
+	@PostMapping("/admin/processPromotionAddition")
+	public String processPromotionAddition(Model model, @ModelAttribute("addPromotionRequest") PromotionInfoRequest promotionRequest) {
+		
+		// Set up Http entity with request body
+		HttpEntity<PromotionInfoRequest> entity = new HttpEntity<PromotionInfoRequest>(promotionRequest);
+		
+		// Send request to backend service
+		ResponseEntity<PromotionInfoResponse> promotionServiceResponse = restTemplate.postForEntity("http://promotion-manage-service/createPromotion", entity, PromotionInfoResponse.class);
+		
+		if (promotionServiceResponse.getStatusCode().equals(HttpStatus.OK) && promotionServiceResponse.getBody().getMessage().equals("Success")) {
+			return "redirect:/admin/viewPromotions";
+		} else {
+			model.addAttribute("addPromosError", ((LinkedHashMap<?, ?>) promotionServiceResponse.getBody().getApiError()).get("message"));
+			return "redirect:/admin/viewPromotions";
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

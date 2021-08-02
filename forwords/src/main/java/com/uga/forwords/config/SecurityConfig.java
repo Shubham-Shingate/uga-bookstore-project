@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests()
 		 .antMatchers("/customer/**").hasRole("CUSTOMER") // allow authenticated access to customer pages
-		 .antMatchers("/administrator/**").hasRole("ADMIN")
+		 .antMatchers("/admin/**").hasRole("ADMIN")
 		 .anyRequest().permitAll() //allow public access to all other pages
 		 .and()
 			.formLogin()
