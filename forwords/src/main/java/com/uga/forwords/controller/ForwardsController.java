@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.uga.forwords.model.ActiveUser;
 import com.uga.forwords.model.Base64EncodedBook;
 import com.uga.forwords.model.Book;
@@ -302,7 +304,7 @@ public class ForwardsController {
 	}
 	
 	@PostMapping("/customer/changePassword")
-	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model) {
+	public String changePassword(@ModelAttribute("changePassword") ChangePasswordRequest changePasswordRequest, Principal principal, Model model, RedirectAttributes redirectAttributes) {
 				
 		//Fetch old password
 		ActiveUser activeUser = activeUserRepository.findByAccountId(principal.getName());
@@ -324,7 +326,7 @@ public class ForwardsController {
 			
 			return "redirect:/customer/showSettingsPage";
 		} else {
-			model.addAttribute("changePasswordError", "Old password provided was incorrect");
+			redirectAttributes.addFlashAttribute("changePasswordError", "Old password provided was incorrect");
 			return "redirect:/customer/showSettingsPage";
 		}
 		

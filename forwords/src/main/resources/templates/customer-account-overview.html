@@ -86,10 +86,11 @@
 								<span class="sr-only">Profile actions</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="#">My Profile</a>
-								<a class="dropdown-item" href="#">Shipping</a>
-								<a class="dropdown-item" href="#">Payment</a>
-								<a class="dropdown-item" href="#">Order History</a>
+								<a class="dropdown-item" th:href="@{/customer/getAccountOverview}">My Profile</a>
+								<a class="dropdown-item" th:href="@{/customer/getShippingDetails}">Shipping</a>
+								<a class="dropdown-item" th:href="@{/customer/getPaymentDetails}">Payment</a>
+								<a class="dropdown-item" th:href="@{/customer/getOrderHistory}">Order History</a>
+								<a class="dropdown-item" th:href="@{/customer/showSettingsPage}"> Settings </a>
 								<hr class="dropdown-divider">
 								<form th:action="@{/logout}" method="POST">
 									<input type="submit" class="dropdown-item" value="Logout">
@@ -165,9 +166,6 @@
 				<a class="list-group-item" th:href="@{/customer/getOrderHistory}"> My Orders </a>
 				<a class="list-group-item" th:href="@{/customer/getPaymentDetails}"> Payment Info </a>
 				<a class="list-group-item" th:href="@{/customer/showSettingsPage}"> Settings </a>
-				<form th:action="@{/logout}" method="POST">
-					<input type="submit" class="dropdown-item" value="Logout">
-				</form>	
 			</nav>
 		</aside> <!-- col.// -->
           <!-- col.// -->
@@ -176,7 +174,7 @@
               <div class="card-body">
                 <figure class="icontext">
                   <div class="icon">
-                    <img class="rounded-circle img-sm border" src="" />
+                    <img class="rounded-circle img-sm border" th:src="@{/images/avatars/avatar1.jpg}" />
                   </div>
                   <div  th:object="${activeUserDetails}" class="text">
                     <strong th:text="*{fullName}"> Mr. Jackson Someone </strong> <br />

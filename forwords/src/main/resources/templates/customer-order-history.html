@@ -86,10 +86,11 @@
 								<span class="sr-only">Profile actions</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="#">My Profile</a>
-								<a class="dropdown-item" href="#">Shipping</a>
-								<a class="dropdown-item" href="#">Payment</a>
-								<a class="dropdown-item" href="#">Order History</a>
+								<a class="dropdown-item" th:href="@{/customer/getAccountOverview}">My Profile</a>
+								<a class="dropdown-item" th:href="@{/customer/getShippingDetails}">Shipping</a>
+								<a class="dropdown-item" th:href="@{/customer/getPaymentDetails}">Payment</a>
+								<a class="dropdown-item" th:href="@{/customer/getOrderHistory}">Order History</a>
+								<a class="dropdown-item" th:href="@{/customer/showSettingsPage}"> Settings </a>
 								<hr class="dropdown-divider">
 								<form th:action="@{/logout}" method="POST">
 									<input type="submit" class="dropdown-item" value="Logout">
@@ -141,7 +142,7 @@
 			<nav>
 			<ol class="breadcrumb text-white">
 				<li class="breadcrumb-item"><a th:href="@{/customer/landingPage}">Home</a></li>
-				<li class="breadcrumb-item active" aria-current="page"><a th:href="@{/customer/showSettingsPage}">Settings</a></li>
+				<li class="breadcrumb-item active" aria-current="page"><a th:href="@{/customer/showSettingsPage}">Orders</a></li>
 			</ol>  
 			</nav>
 		</div> <!-- container //  -->
@@ -161,9 +162,6 @@
 				<a class="list-group-item active" th:href="@{/customer/getOrderHistory}"> My Orders </a>
 				<a class="list-group-item" th:href="@{/customer/getPaymentDetails}"> Payment Info </a>
 				<a class="list-group-item" th:href="@{/customer/showSettingsPage}"> Settings </a>
-				<form th:action="@{/logout}" method="POST">
-					<input type="submit" class="dropdown-item" value="Logout">
-				</form>	
 			</nav>
 		</aside> 
 		<main class="col-md-9">
