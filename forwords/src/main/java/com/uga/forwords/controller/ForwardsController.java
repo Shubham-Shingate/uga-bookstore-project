@@ -248,7 +248,17 @@ public class ForwardsController {
 		// Make Request to backend service for address details
 		HttpEntity<Object> shippingEntity = new HttpEntity<Object>(headers);
 		ResponseEntity<ShippingInfoResponse> shippingDetailsServiceResponse = restTemplate.exchange("http://shipping-detail-service/getShippingDetails",
-																						HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);		
+				HttpMethod.GET, shippingEntity, ShippingInfoResponse.class);	
+		
+		// Make Request to backend service cart-manage-service
+		HttpEntity<Object> orderEntity = new HttpEntity<Object>(headers);
+		ResponseEntity<OrderResponse> orderManageServiceResponse = restTemplate.exchange("http://order-manage-service/getOrderHistory", HttpMethod.GET, orderEntity, OrderResponse.class);	
+		
+		if (orderManageServiceResponse.getStatusCode().equals(HttpStatus.OK) && orderManageServiceResponse.getBody().getMessage().equals("Success")) {
+			model.addAttribute("pastOrders", orderManageServiceResponse.getBody().getOrders());
+		} else {
+			model.addAttribute("orderHistoryError", ((LinkedHashMap<?, ?>) orderManageServiceResponse.getBody().getApiError()).get("message"));
+		}
 		
 		// Add information to model
 		model.addAttribute("activeUserDetails", profileDetailsServiceResponse.getBody().getUserDetails());

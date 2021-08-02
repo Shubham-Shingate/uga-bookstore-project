@@ -36,11 +36,6 @@
 
 <!-- custom javascript -->
 <script th:src="@{/js/script.js}" type="text/javascript"></script>
-<script>
-	function changePassword() {
-        document.getElementById('changePasswordCard').style.display = 'block';
-}
-</script>
 </head>
 <body>
 
@@ -188,36 +183,11 @@
 		                  <i class="fa fa-map-marker text-muted"></i> &nbsp; My address:
 		                  <br />
 		                  <p th:text="*{address.street} + ', '  + *{address.city} + ', ' + *{address.state} + ' - ' + *{address.zipCode}">Tashkent city, Street name, Building 123, House 321 &nbsp</p>
-		                  <a href="#" class="btn btn-light btn-link btn-sm">Edit</a>
+		                  <a th:href="@{/customer/getShippingDetails}" class="btn btn-light btn-link btn-sm">Edit</a>
 	                  </div>
 	                </div>
 
-                <article class="card-group card-stat">
-                  <figure class="card bg">
-                    <div class="p-3">
-                      <h4 class="title">38</h4>
-                      <span>Orders</span>
-                    </div>
-                  </figure>
-                  <figure class="card bg">
-                    <div class="p-3">
-                      <h4 class="title">5</h4>
-                      <span>Wishlists</span>
-                    </div>
-                  </figure>
-                  <figure class="card bg">
-                    <div class="p-3">
-                      <h4 class="title">12</h4>
-                      <span>Awaiting delivery</span>
-                    </div>
-                  </figure>
-                  <figure class="card bg">
-                    <div class="p-3">
-                      <h4 class="title">50</h4>
-                      <span>Delivered items</span>
-                    </div>
-                  </figure>
-                </article>
+                
               </div>
               <!-- card-body .// -->
             </article>
@@ -226,59 +196,30 @@
             <article class="card mb-3">
               <div class="card-body">
                 <h5 class="card-title mb-4">Recent orders</h5>
-
-                <div class="row">
-                  <div class="col-md-6">
-                    <figure class="itemside mb-3">
-                      <div class="aside">
-                        <img src="" class="border img-sm" />
-                      </div>
-                      <figcaption class="info">
-                        <time class="text-muted"
-                          ><i class="fa fa-calendar-alt"></i> 12.09.2019</time
-                        >
-                        <p>Great book name goes here</p>
-                        <span class="text-success">Order confirmed </span>
-                      </figcaption>
-                    </figure>
-                  </div>
-                  <!-- col.// -->
-                  <div class="col-md-6">
-                    <figure class="itemside mb-3">
-                      <div class="aside">
-                        <img src="" class="border img-sm" />
-                      </div>
-                      <figcaption class="info">
-                        <time class="text-muted"
-                          ><i class="fa fa-calendar-alt"></i> 12.09.2019</time
-                        >
-                        <p>How to be rich</p>
-                        <span class="text-success">Departured</span>
-                      </figcaption>
-                    </figure>
-                  </div>
-                  <!-- col.// -->
-                  <div class="col-md-6">
-                    <figure class="itemside mb-3">
-                      <div class="aside">
-                        <img src="" class="border img-sm" />
-                      </div>
-                      <figcaption class="info">
-                        <time class="text-muted"
-                          ><i class="fa fa-calendar-alt"></i> 12.09.2019</time
-                        >
-                        <p>Harry Potter book</p>
-                        <span class="text-success">Shipped </span>
-                      </figcaption>
-                    </figure>
-                  </div>
-                  <!-- col.// -->
+				<div th:if="${pastOrders}" th:each="order : ${pastOrders}">
+	                <div th:each="bookOrder : ${order.books}" class="row">
+	                  <div class="col-md-6">
+	                    <figure class="itemside mb-3">
+	                      <div class="aside">
+	                        <img src="" class="border img-sm" />
+	                      </div>
+	                      <figcaption class="info">
+	                        <time th:text="*{order.orderDate}" class="text-muted"
+	                          ><i class="fa fa-calendar-alt"></i> 12.09.2019</time
+	                        >
+	                        <p th:text="*{bookOrder.title}">Great book name goes here</p>
+	                        <span class="text-success">Order confirmed </span>
+	                      </figcaption>
+	                    </figure>
+	                  </div>
+	                  <!-- col.// -->
+	                </div>
+                </div>
+                <div th:if="${orderHistoryError}">
+                	<h6 class="text-muted">No recent Orders yet !!</h6>
                 </div>
                 <!-- row.// -->
 
-                <a href="#" class="btn btn-outline-primary btn-block">
-                  See all orders <i class="fa fa-chevron-down"></i>
-                </a>
               </div>
               <!-- card-body .// -->
             </article>
