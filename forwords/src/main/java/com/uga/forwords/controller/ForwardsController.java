@@ -778,7 +778,7 @@ public class ForwardsController {
 	
 	@Autowired BookRepository bookRepository;
 	
-	@PostMapping(value = "/admin/updateBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
+	@PostMapping(value = "/admin/addBook", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE} )
 	public String updateBook(
 			@RequestParam String title,
 			@RequestParam String isbn,
