@@ -1415,4 +1415,49 @@ a[class*=card]:hover .title {
   display: block;
 }
 
+/* ========================= SEARCH ====================== */
+ /* ========================= landing ===================== */
+
+ .suggestions {
+   display: block;
+   width: 60%;
+ }
+
+ .suggestion-box {
+   display: block;
+   position: absolute;
+   width: 60%;
+   background-color: #fdfdfd;
+   border: thin solid #ced4d9;
+   z-index: 10;
+ }
+
+ .suggestion-box a li {
+   list-style: none;
+   padding: 8px 12px;
+   width: 100%;
+   cursor: pointer;
+ }
+
+ .suggestion-box a {
+   text-decoration: none;
+   color: black;
+ }
+
+ .suggestion-box a :hover {
+   color: #3268eB;
+ }
+
+ .suggestion-box a li :hover {
+   background-color: #efefef;
+   color: #3268eB;
+ }
+
+ .suggestion-box p {
+   list-style: none;
+   padding: 8px 12px;
+   width: 100%;
+   cursor: default;
+ }
+
 /*# sourceMappingURL=ui.css.map */
