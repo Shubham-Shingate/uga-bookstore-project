@@ -8,6 +8,24 @@ function validate() {
   else return true;
 }
 
+function validateChangePassword() {
+  var f = document.getElementById('changePasswordForm');
+
+  var hasChangePasswordError = changePasswordValidate(f);
+
+  if (!hasChangePasswordError) return false;
+  else return true;
+}
+
+function validateResetPassword() {
+  var f = document.getElementById('resetPasswordForm');
+
+  var hasResetPasswordError = resetPasswordValidate(f);
+
+  if (!hasResetPasswordError) return false;
+  else return true;
+}
+
 function paymentValidate(form) {
   var error = document.getElementById('paymentError');
 
@@ -62,3 +80,41 @@ function addressValidate(form) {
     return false;
   }
 }
+
+function changePasswordValidate(form) {
+  var error = document.getElementById('changePasswordError');
+
+  var oldPassword = form['oldPassword'].value;
+  var newPassword = form['newPassword'].value;
+
+  if (
+    (oldPassword.length > 0 &&
+      newPassword.length > 0)
+  ) {
+    return true;
+  } else {
+    error.innerHTML =
+      'Please fill out both fields!';
+    return false;
+  }
+}
+
+function resetPasswordValidate(form) {
+  var error = document.getElementById('resetPasswordError');
+
+  var newPassword = form['newPassword'].value;
+  var confirmNewPassword = form['confirmNewPassword'].value;
+
+  if (
+    (newPassword ==
+      confirmNewPassword)
+  ) {
+    return true;
+  } else {
+    error.innerHTML =
+      'Confirm Password do not match!';
+    return false;
+  }
+}
+
+

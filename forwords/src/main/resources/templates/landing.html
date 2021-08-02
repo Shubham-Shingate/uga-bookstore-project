@@ -38,13 +38,115 @@
 <!-- custom javascript -->
 <script th:src="@{/js/script.js}" type="text/javascript"></script>
 
-<script type="text/javascript">
+<script th:inline="javascript" type="text/javascript">
 	/// some script
 	
 	// jquery ready start
 	$(document).ready(function() {
 		// jQuery code
 	
+		/* ======================= Search suggestions ============================== */
+ 		// Books data
+ 		/*<![CDATA[*/
+ 		const featuredBooks = /*[[${featuredBooks}]]*/ [];
+ 		const topSellerBooks = /*[[${topSellerBooks}]]*/ [];
+ 		/*]]>*/
+
+ 		const allBooks = featuredBooks.concat(topSellerBooks);
+
+ 		// Helper functions
+ 		function searchText(text, pat) {
+ 			return text.toLocaleLowerCase().startsWith(pat.toLocaleLowerCase());
+ 		}
+
+ 		function matchBook(book, inputData, type) {
+ 			inputData = inputData.toString();
+ 			const searchTypes = ['isbn', 'author', 'title', 'category']
+ 			let searchResult = searchTypes.map(searchType => {
+ 				if (type === 'all' || type === searchType) {
+ 					return searchText(book[searchType], inputData);
+ 				} else {
+ 					return false;
+ 				}
+ 			})
+ 			return searchResult.includes(true);
+ 		}
+
+ 		function suggestBook(inputData) {
+ 			const suggestionBox = $('.suggestion-box')
+ 			const searchType = $('#search-type')
+ 			suggestionBox.empty();
+
+ 			if (inputData) {
+ 				let filteredList = allBooks.filter((book) => {
+ 					return matchBook(book, inputData, searchType.val());
+ 				})
+ 				filteredList = filteredList.slice(0, Math.min(5, filteredList.length))
+
+ 				if (filteredList.length) {
+ 					filteredList.map((book) => {
+ 						suggestionBox.append(`<a href="/viewBookDetails/${book.book_id}"><li>${book.title}</li></a>`);
+ 					})
+ 				} else {
+ 					suggestionBox.append(`<p>No Books Found</p>`)
+ 				}
+ 				suggestionBox.show();
+ 				$('#search-btn').prop('disabled', false)
+ 			} else {
+ 				suggestionBox.hide();
+ 				$('#search-btn').prop('disabled', true)
+ 			}
+ 		}
+
+ 		// Closing search suggestions on outside click
+ 		$(document).on('click', () => {
+ 			const suggestionBox = $('.suggestion-box')
+ 			suggestionBox.hide();
+ 		})
+
+ 		// Event listeners for search input and search type
+
+ 		if ($('#search-input').length > 0) {  // check if element exists
+ 			const searchBox = $('#search-input');
+
+ 			searchBox.on('keyup', (event) => {
+ 				const inputData = event.target.value;
+ 				return suggestBook(inputData)
+ 			})
+
+ 			if ($('#search-type').length > 0) {  // check if element exists
+ 				const searchType = $('#search-type');
+
+ 				searchType.on('change', (event) => {
+ 					return suggestBook($('#search-input').val())
+ 				})
+ 			}
+ 		}
+
+ 		// Event listener for search button
+
+ 		if ($('#search-form').length > 0) {  // check if element exists
+ 			const searchForm = $('#search-form');
+
+ 			searchForm.submit((event) => {
+ 				event.preventDefault();
+
+ 				const searchLink = {
+ 					'title': '/searchBooksByTitle/$',
+ 					'isbn': '/searchBooksByISBN/$',
+ 					'author': '/searchBooksByAuthor/$',
+ 					'category': '/searchBooksByCategory/$',
+ 				}
+ 				let type = $('#search-type').val()
+ 				if (type === 'all') {
+ 					type = 'title';
+ 				}
+ 				const inputData = $('#search-input').val()
+
+ 				$(location).attr('href', searchLink[type].replace('$', inputData))
+ 			})
+ 		}
+
 	
 	
 	
@@ -143,20 +245,25 @@
 				<a th:href="@{/landingPage}" class="brand-wrap" style="font-family: 'Exo 2', sans-serif; font-size: xx-large;">FORWORDS</a> <!-- brand-wrap.// -->
 			</div>
 			<div class="col-lg-6 col-sm-12 order-3 order-lg-2">
-				<form action="#" class="search">
+				<form id="search-form" action="#" class="search" autocomplete="off" >
 					<div class="input-group w-100">
-						<select class="custom-select"  name="category_name">
-								<option value="">All Types</option>
-								<option value="comments">ISBN</option>
-								<option value="content">Author</option>
-								<option value="content">Title</option>
-								<option value="content">Category</option>
+						<select id="search-type" class="custom-select"  name="category_name">
+ 								<option value="all">All Types</option>
+ 								<option value="isbn">ISBN</option>
+ 								<option value="author">Author</option>
+ 								<option value="title">Title</option>
+ 								<option value="category">Category</option>
 
 						</select>
-					    <input type="text" class="form-control" style="width:60%;" placeholder="Search">
+					    <div class="suggestions">
+ 							<input id='search-input' type="text" class="form-control" style="width:100%;" placeholder="Search">
+ 							<div class="suggestion-box">
+ 								<!-- here list are inserted from javascript -->
+ 							</div>
+ 						</div>
 					    
 					    <div class="input-group-append">
-					      <button class="btn btn-primary" type="submit">
+					      <button id="search-btn" class="btn btn-primary" type="submit" disabled>
 					        <i class="fa fa-search"></i>
 					      </button>
 					    </div>
@@ -192,11 +299,12 @@
 							<span class="sr-only">Profile actions</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right">
-							<a class="dropdown-item" href="#">My Profile</a>
-							<a class="dropdown-item" href="#">Shipping</a>
-							<a class="dropdown-item" href="#">Payment</a>
-							<a class="dropdown-item" href="#">Order History</a>
-							<hr class="dropdown-divider">
+							<a class="dropdown-item" th:href="@{/customer/getAccountOverview}">My Profile</a>
+								<a class="dropdown-item" th:href="@{/customer/getShippingDetails}">Shipping</a>
+								<a class="dropdown-item" th:href="@{/customer/getPaymentDetails}">Payment</a>
+								<a class="dropdown-item" th:href="@{/customer/getOrderHistory}">Order History</a>
+								<a class="dropdown-item" th:href="@{/customer/showSettingsPage}"> Settings </a>
+								<hr class="dropdown-divider">
 							<form th:action="@{/logout}" method="POST">
 								<input type="submit" class="dropdown-item" value="Logout">
 							</form>	
@@ -262,15 +370,36 @@
 		<div class="slider-items-slick row" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
 			<div th:each="featuredBook : ${featuredBooks}" class="col-md-4">
 				<figure class="card card-product-grid">
-					<a th:href="@{/viewBookDetails/+${featuredBook.book_id}}" class="img-wrap"> 
+					<a th:href="@{'/viewBookDetails/'+${featuredBook.book_id}}" class="img-wrap"> 
 						<img  th:src="@{'data:image/png;base64,'+${featuredBook.cover_picture}}" />
 					</a>
 					<figcaption class="info-wrap">
-						<a th:text="${featuredBook.title}" th:href="@{/viewBookDetails/+${featuredBook.book_id}}" class="title"></a>
+						<a th:text="${featuredBook.title}" th:href="@{'/viewBookDetails/'+${featuredBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${featuredBook.price}" class="price"></var> <!-- price-wrap.// -->
-							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
-						</div> <!-- action-wrap.end -->
+							<div sec:authorize="isAuthenticated()">
+								<form
+												th:action="@{/customer/addUpdateBookInCart}"
+												th:object="${updateCartDetails}"
+												method="POST"
+								>
+									<input hidden
+												 name="qty"
+												 type="number"
+												 th:attr="name='qty'"
+												 th:value="1"/>
+
+									<input hidden
+												 name="bookId"
+												 type="number"
+												 th:attr="name='bookId'"
+												 th:value="${featuredBook.book_id}"/>
+									<button type="submit" class="btn btn-sm btn-outline-primary float-right">
+										Add to cart <i class="fa fa-shopping-cart"></i>
+									</button>
+								</form>
+							</div>
+							</div> <!-- action-wrap.end -->
 					</figcaption>
 				</figure> <!-- card // -->
 			</div> <!-- col.// -->
@@ -284,15 +413,35 @@
 		<div class="slider-items-slick row" data-slick='{"slidesToShow": 4, "slidesToScroll": 1}'>
 			<div th:each="topSellerBook : ${topSellerBooks}" class="col-md-4">
 				<figure class="card card-product-grid">
-					<a th:href="@{/viewBookDetails/+${topSellerBook.book_id}}" class="img-wrap"> 
+					<a th:href="@{'/viewBookDetails/'+${topSellerBook.book_id}}" class="img-wrap"> 
 						<img  th:src="@{'data:image/png;base64,'+${topSellerBook.cover_picture}}" />
 					</a>
 					<figcaption class="info-wrap">
-						<a th:text="${topSellerBook.title}" th:href="@{/viewBookDetails/+${topSellerBook.book_id}}" class="title"></a>
+						<a th:text="${topSellerBook.title}" th:href="@{'/viewBookDetails/'+${topSellerBook.book_id}}" class="title"></a>
 						<div class="mt-2">
 							<var th:text="${topSellerBook.price}" class="price"></var> <!-- price-wrap.// -->
-							<a href="#" class="btn btn-sm btn-outline-primary float-right">Add to cart <i class="fa fa-shopping-cart"></i></a>
-						</div> <!-- action-wrap.end -->
+							<div sec:authorize="isAuthenticated()">
+								<form
+												th:action="@{/customer/addUpdateBookInCart}"
+												th:object="${updateCartDetails}"
+												method="POST"
+								>
+									<input hidden
+												 name="qty"
+												 type="number"
+												 th:attr="name='qty'"
+												 th:value="1"/>
+
+									<input hidden
+												 name="bookId"
+												 type="number"
+												 th:attr="name='bookId'"
+												 th:value="${topSellerBook.book_id}"/>
+									<button type="submit" class="btn btn-sm btn-outline-primary float-right">
+										Add to cart <i class="fa fa-shopping-cart"></i>
+									</button>
+								</form>						
+								</div> <!-- action-wrap.end -->
 					</figcaption>
 				</figure> <!-- card // -->
 			</div> <!-- col.// -->
